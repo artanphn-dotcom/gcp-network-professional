@@ -7,6 +7,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="icon" type="image/svg+xml" href="../favicon.svg" />
     <link rel="stylesheet" href="../styles.css" />
   </head>
   <body>
@@ -385,6 +386,125 @@
                 <li>Builds the architectural mindset needed for advanced network engineering exam scenarios.</li>
               </ul>
             </article>
+
+            <article class="lab-card advanced-card">
+              <span class="topic-tag">Routing</span>
+              <span class="difficulty-badge difficulty-advanced">Difficulty: Advanced</span>
+              <h2>5. BGP route filtering and prefix-list lab</h2>
+              <h3>What to do</h3>
+              <ol>
+                <li>Set up a Cloud Router with a BGP session toward an on-prem or simulated peer.</li>
+                <li>Advertise several prefixes and then create route filters to allow only selected routes.</li>
+                <li>Test which prefixes are accepted, rejected, or withdrawn.</li>
+                <li>Review route propagation and verify the impact on traffic flow.</li>
+              </ol>
+              <h3>What it does after implementation</h3>
+              <ul>
+                <li>Shows how BGP route policy controls what traffic is learned and announced.</li>
+                <li>Helps explain prefix lists, route advertisement control, and route filtering logic.</li>
+                <li>Builds the practical knowledge needed for hybrid connectivity and enterprise routing design questions.</li>
+              </ul>
+            </article>
+
+            <article class="lab-card advanced-card">
+              <span class="topic-tag">Policy</span>
+              <span class="difficulty-badge difficulty-advanced">Difficulty: Advanced</span>
+              <h2>6. Policy-based routing and firewall segmentation lab</h2>
+              <h3>What to do</h3>
+              <ol>
+                <li>Create multiple subnets for different workloads such as app, admin, and shared services.</li>
+                <li>Apply destination-based routing so some traffic takes a preferred next hop.</li>
+                <li>Use firewall rules to restrict only the intended traffic between segments.</li>
+                <li>Validate which traffic follows the custom path and which traffic is denied.</li>
+              </ol>
+              <h3>What it does after implementation</h3>
+              <ul>
+                <li>Demonstrates how routing decisions can be used alongside firewall policy to enforce segmentation.</li>
+                <li>Highlights the difference between control-plane policy and data-plane filtering.</li>
+                <li>Prepares you for exam scenarios involving traffic steering, segmentation, and enforcement design.</li>
+              </ul>
+            </article>
+
+            <article class="lab-card advanced-card">
+              <span class="topic-tag">Security</span>
+              <span class="difficulty-badge difficulty-expert">Difficulty: Expert</span>
+              <h2>7. Advanced firewall policy and east-west filtering lab</h2>
+              <h3>What to do</h3>
+              <ol>
+                <li>Build an environment with app servers, database tiers, and admin hosts across separate subnets.</li>
+                <li>Use deny-by-default rules and selective allow rules to control east-west communication.</li>
+                <li>Add stricter policy for management access, only permitting SSH or monitoring from approved source ranges.</li>
+                <li>Attempt blocked traffic and confirm the policy prevents it while approved paths still work.</li>
+              </ol>
+              <h3>What it does after implementation</h3>
+              <ul>
+                <li>Shows how layered firewall design creates real security boundaries inside a VPC.</li>
+                <li>Helps differentiate between public exposure, east-west trust boundaries, and privileged access paths.</li>
+                <li>Connects directly to exam questions on least privilege, segmentation, and secure service design.</li>
+              </ul>
+            </article>
+
+            <article class="lab-card advanced-card">
+              <span class="topic-tag">Routing</span>
+              <span class="difficulty-badge difficulty-expert">Difficulty: Expert</span>
+              <h2>8. Route leak prevention and blackhole scenario lab</h2>
+              <h3>What to do</h3>
+              <ol>
+                <li>Create multiple connected networks with overlapping or conflicting route advertisements.</li>
+                <li>Introduce an overly broad or unintended route announcement.</li>
+                <li>Use route filters or policy controls to stop bad propagation.</li>
+                <li>Observe how traffic is redirected or dropped when a route is removed or blackholed.</li>
+              </ol>
+              <h3>What it does after implementation</h3>
+              <ul>
+                <li>Shows how route leaks can create outages, path confusion, or unintended traffic redirection.</li>
+                <li>Introduces route hygiene and policy enforcement as a core operational skill.</li>
+                <li>Provides a realistic advanced architecture challenge for BGP and hybrid connectivity design.</li>
+              </ul>
+            </article>
+
+            <article class="lab-card advanced-card">
+              <span class="topic-tag">Traffic Engineering</span>
+              <span class="difficulty-badge difficulty-expert">Difficulty: Expert</span>
+              <h2>9. Multi-region traffic engineering and failback lab</h2>
+              <h3>What to do</h3>
+              <ol>
+                <li>Deploy the same application across two regions with separate backends and health checks.</li>
+                <li>Configure the preferred path for users from one geography to a primary region and a secondary path for failover.</li>
+                <li>Simulate a failure or degraded health in the primary region, then trigger failback after recovery.</li>
+                <li>Monitor traffic behavior, compare latency, and explain why one route is preferred over another.</li>
+              </ol>
+              <h3>What it does after implementation</h3>
+              <ul>
+                <li>Shows how global routing, health checks, and failover policies shape user experience under real conditions.</li>
+                <li>Helps you understand traffic steering for resilience, latency optimization, and disaster recovery.</li>
+                <li>Prepares you for advanced scenarios involving multi-region design, failover, and service continuity.</li>
+              </ul>
+            </article>
+          </section>
+
+          <section class="topic-box">
+            <h3>Best next labs for exam prep</h3>
+            <p>If you are actively preparing for the cert, prioritize these in order:</p>
+            <ol>
+              <li>VPC segmentation and firewall lab</li>
+              <li>Private Google Access and Cloud NAT lab</li>
+              <li>HA VPN and Cloud Router lab</li>
+              <li>Load balancer failover lab</li>
+              <li>BGP route filtering and prefix-list lab</li>
+              <li>Cloud Armor WAF policy lab</li>
+              <li>Multi-region traffic engineering and failback lab</li>
+            </ol>
+          </section>
+
+          <section class="topic-box">
+            <h3>Study milestones</h3>
+            <ul>
+              <li><strong>Foundation:</strong> VPC segmentation, firewall, Private Google Access, Cloud NAT, basic troubleshooting</li>
+              <li><strong>Intermediate:</strong> HA VPN, Cloud Router, load balancer failover, DNS, shared VPC, hybrid connectivity</li>
+              <li><strong>Advanced:</strong> BGP route filtering, policy-based routing, Cloud Armor, CDN, NCC, route leak prevention</li>
+              <li><strong>Exam week:</strong> Repeat the highest-value labs: failover, route policy, load balancing, firewall segmentation, and multi-region traffic engineering</li>
+            </ul>
           </section>
         </article>
       </div>
