@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Load Balancing and DNS</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../styles.css" />
+  </head>
+  <body>
+    <div class="topic-page">
+      <div class="topic-shell">
+        <header class="topic-header">
+          <nav class="topbar">
+            <div class="brand">GCP Study Hub</div>
+            <div class="nav-actions">
+              <button id="themeToggle" class="theme-toggle" type="button" aria-label="Toggle dark mode">🌙</button>
+              <a href="../index.html">Back to dashboard</a>
+            </div>
+          </nav>
+          <h1>Load Balancing and DNS</h1>
+          <p>Load balancing ensures traffic is distributed across healthy backends, while DNS routes users to the right service or region. Together, they help keep services available, fast, and resilient.</p>
+          <div class="topic-nav">
+            <a href="../index.html">Home</a>
+            <a href="vpc-fundamentals.html">VPC</a>
+            <a href="cidr-subnet-design.html">CIDR</a>
+            <a href="routing-firewall.html">Routing</a>
+            <a href="hybrid-connectivity.html">Hybrid</a>
+            <a href="security-monitoring.html">Security</a>
+          </div>
+        </header>
+
+        <article class="topic-content">
+          <section>
+            <h2>Load balancing in GCP</h2>
+            <p>Google Cloud offers several load balancer types for different traffic layers, such as HTTP(S), TCP/SSL, and UDP. The decision depends on whether the workload is internet-facing, internal-only, or needs global reach across regions.</p>
+          </section>
+
+          <section>
+            <h2>Why health checks matter</h2>
+            <ul>
+              <li>Health checks determine whether a backend is healthy and can receive traffic.</li>
+              <li>Load balancers remove unhealthy backends automatically.</li>
+              <li>Traffic can be distributed by region, session affinity, or traffic splitting for gradual deployment.</li>
+            </ul>
+          </section>
+
+          <section>
+            <h2>DNS and traffic management</h2>
+            <p>DNS allows you to map service names to IPs and often plays a role in global routing. For multi-region systems, you may combine DNS records with health checks and failover patterns to steer traffic to healthy endpoints.</p>
+            <div class="topic-box">
+              <h3>Exam perspective</h3>
+              <p>Many architecture questions are really about choosing between global load balancing, regional load balancing, and direct service routing based on latency and resilience requirements.</p>
+            </div>
+          </section>
+        </article>
+      </div>
+    </div>
+
+    <script src="../script.js"></script>
+  </body>
+</html>

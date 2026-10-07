@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Shared VPC</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../styles.css" />
+  </head>
+  <body>
+    <div class="topic-page">
+      <div class="topic-shell">
+        <header class="topic-header">
+          <nav class="topbar">
+            <div class="brand">GCP Study Hub</div>
+            <div class="nav-actions">
+              <button id="themeToggle" class="theme-toggle" type="button" aria-label="Toggle dark mode">🌙</button>
+              <a href="../index.html">Back to dashboard</a>
+            </div>
+          </nav>
+          <h1>Shared VPC</h1>
+          <p>Shared VPC lets one host project share a VPC network with multiple service projects. It is a common design for enterprise teams that want centralized networking while keeping workloads isolated by project.</p>
+          <div class="topic-nav">
+            <a href="../index.html">Home</a>
+            <a href="vpc-fundamentals.html">VPC</a>
+            <a href="network-deep-dives.html">Deep dives</a>
+          </div>
+        </header>
+
+        <article class="topic-content">
+          <section>
+            <h2>What it is</h2>
+            <p>A Shared VPC network is created in a host project and attached to service projects. The host project owns the shared network and its subnets, while service projects consume those networks for their instances, GKE clusters, and managed services.</p>
+          </section>
+
+          <section>
+            <h2>Why it matters</h2>
+            <ul>
+              <li>Centralizes network design and firewall controls.</li>
+              <li>Allows multiple teams to use the same network without duplicating VPCs.</li>
+              <li>Supports common security boundaries and route control.</li>
+            </ul>
+          </section>
+
+          <section>
+            <h2>What to remember</h2>
+            <div class="topic-box">
+              <h3>Memory hook</h3>
+              <p><strong>Shared VPC = one network, many teams.</strong> The host project owns the shared network; service projects attach workloads and consume the common design.</p>
+            </div>
+            <ul>
+              <li>Common choice when many apps need the same internal network standards.</li>
+              <li>Good for centralized policy, route control, and service segmentation.</li>
+              <li>Best when project boundaries matter but the network should remain common.</li>
+            </ul>
+          </section>
+
+          <section>
+            <h2>Exam mindset</h2>
+            <div class="topic-box">
+              <h3>Key design decision</h3>
+              <p>Use Shared VPC when you need a consistent internal network architecture across several projects, but you still want each project to remain logically separate for ownership and billing.</p>
+            </div>
+            <ul>
+              <li>Host project = network owner and admin.</li>
+              <li>Service project = workloads and resources using the shared network.</li>
+              <li>Firewall, routing, and connectivity rules usually live in the host project’s network design.</li>
+            </ul>
+          </section>
+
+          <section>
+            <h2>Typical exam cues</h2>
+            <ul>
+              <li>“Multiple teams need a common VPC without creating separate networks.”</li>
+              <li>“We need centralized firewall and routing across many projects.”</li>
+              <li>“The environment has lots of service projects but one common network design.”</li>
+            </ul>
+          </section>
+        </article>
+      </div>
+    </div>
+
+    <script src="../script.js"></script>
+  </body>
+</html>

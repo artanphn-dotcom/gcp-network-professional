@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>VPC Fundamentals</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../styles.css" />
+  </head>
+  <body>
+    <div class="topic-page">
+      <div class="topic-shell">
+        <header class="topic-header">
+          <nav class="topbar">
+            <div class="brand">GCP Study Hub</div>
+            <div class="nav-actions">
+              <button id="themeToggle" class="theme-toggle" type="button" aria-label="Toggle dark mode">🌙</button>
+              <a href="../index.html">Back to dashboard</a>
+            </div>
+          </nav>
+          <h1>VPC Fundamentals</h1>
+          <p>A VPC is the foundation of Google Cloud networking. It is a global virtual network that lets you segment resources, define private IP space, control traffic with firewall rules, and connect services securely within a project or across projects.</p>
+          <div class="topic-nav">
+            <a href="../index.html">Home</a>
+            <a href="cidr-subnet-design.html">CIDR</a>
+            <a href="routing-firewall.html">Routing</a>
+            <a href="hybrid-connectivity.html">Hybrid</a>
+            <a href="load-balancing-dns.html">LB & DNS</a>
+            <a href="security-monitoring.html">Security</a>
+          </div>
+        </header>
+
+        <article class="topic-content">
+          <section>
+            <h2>What a VPC really is</h2>
+            <p>In Google Cloud, a VPC network is a global resource, while subnets live in a specific region. This means you can create one VPC and then place regional subnets within it to support workloads in multiple locations without changing the design of the network itself.</p>
+            <div class="topic-box">
+              <h3>Key idea</h3>
+              <p>Think of the VPC as the network boundary, and subnets as the regional building blocks inside that boundary. Firewalls and routes are what shape how traffic can move between those resources.</p>
+            </div>
+          </section>
+
+          <section>
+            <h2>Core concepts</h2>
+            <ul>
+              <li><strong>Global network:</strong> One VPC can span multiple regions.</li>
+              <li><strong>Regional subnets:</strong> Each subnet belongs to one region and has a CIDR block.</li>
+              <li><strong>Firewall controls:</strong> Ingress and egress rules determine which traffic is allowed.</li>
+              <li><strong>Routes:</strong> GCP automatically creates system routes, and custom routes can be added for special traffic patterns.</li>
+            </ul>
+          </section>
+
+          <section>
+            <h2>Why this matters for the exam</h2>
+            <p>Most networking questions are really about choosing the right architecture pattern: private-only access, isolation by segment, east-west traffic control, and hybrid connectivity. A good VPC design makes route tables, firewall policies, and service access predictable and secure.</p>
+          </section>
+
+          <section>
+            <h2>Exam traps to avoid</h2>
+            <ul>
+              <li>Confusing a VPC being global with a subnet being global. Subnets are regional.</li>
+              <li>Assuming all traffic is allowed by default. Firewall rules are the main access control mechanism.</li>
+              <li>Forgetting that communication within a VPC may still require correct firewall and routing behavior.</li>
+            </ul>
+          </section>
+        </article>
+      </div>
+    </div>
+
+    <script src="../script.js"></script>
+  </body>
+</html>

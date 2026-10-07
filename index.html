@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Google Cloud Network Engineer Study Hub</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header class="hero">
+      <nav class="topbar">
+        <div class="brand">GCP Study Hub</div>
+        <div class="nav-actions">
+          <button id="themeToggle" class="theme-toggle" type="button" aria-label="Toggle dark mode">🌙</button>
+          <a href="professional-cloud-network-engineer.md">Source list</a>
+        </div>
+      </nav>
+
+      <div class="hero-inner">
+        <div class="hero-copy">
+          <span class="eyebrow">Professional Certification</span>
+          <h1>Google Cloud Professional Network Engineer</h1>
+          <p>
+            Learn faster with a structured study plan, curated references, and a built-in practice exam bank for
+            VPC, hybrid connectivity, routing, security, and troubleshooting.
+          </p>
+          <div class="hero-actions">
+            <a class="button primary" href="https://cloud.google.com/certification/cloud-network-engineer/" target="_blank" rel="noreferrer">Official exam page</a>
+            <a class="button secondary" href="https://medium.com/google-cloud/prepare-for-the-google-professional-cloud-network-engineer-exam-2026-prep-sheet-2c7bc591f3ff" target="_blank" rel="noreferrer">2026 prep sheet</a>
+          </div>
+        </div>
+
+        <aside class="hero-card">
+          <h3>Exam at a glance</h3>
+          <ul>
+            <li><strong>Length:</strong> 2 hours</li>
+            <li><strong>Questions:</strong> ~50</li>
+            <li><strong>Level:</strong> Professional</li>
+            <li><strong>Type:</strong> Specialization</li>
+          </ul>
+          <a class="link-button" href="https://cloud.google.com/certification/practice-exam/cloud-network-engineer" target="_blank" rel="noreferrer">Official practice test</a>
+        </aside>
+      </div>
+    </header>
+
+    <main class="container">
+      <section class="section dashboard-grid">
+        <div class="summary-panel card">
+          <div class="section-title compact">
+            <span class="small-tag">Progress</span>
+            <h2>Study tracker</h2>
+          </div>
+          <div class="progress-ring-wrap">
+            <div class="progress-ring">
+              <span id="progressPercent">0%</span>
+            </div>
+          </div>
+          <div class="stat-row">
+            <div>
+              <strong id="checkedCount">0</strong>
+              <span>Topics complete</span>
+            </div>
+            <div>
+              <strong id="totalTopics">0</strong>
+              <span>Total topics</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="summary-panel card">
+          <div class="section-title compact">
+            <span class="small-tag">Practice</span>
+            <h2>Question bank</h2>
+          </div>
+          <div class="question-bank-meta">
+            <div>
+              <strong id="bankCount">150</strong>
+              <span>Total questions</span>
+            </div>
+            <div>
+              <strong id="examModeLabel">30 Q</strong>
+              <span>Simulation size</span>
+            </div>
+          </div>
+          <div class="exam-actions">
+            <button class="button primary small" id="generate30Btn" type="button">Generate 30Q</button>
+            <button class="button secondary small" id="generate50Btn" type="button">Generate 50Q</button>
+          </div>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="section-title">
+          <span class="small-tag">Study path</span>
+          <h2>What to learn first</h2>
+        </div>
+
+        <div class="roadmap-grid">
+          <article class="card roadmap">
+            <span>01</span>
+            <h3>Networking fundamentals</h3>
+            <p>IP addressing, CIDR, subnet design, routing, NAT, private/public access, and Google Cloud networking concepts.</p>
+          </article>
+
+          <article class="card roadmap">
+            <span>02</span>
+            <h3>VPC and connectivity</h3>
+            <p>VPC design, shared VPC, firewall rules, service networking, peering, and interconnects.</p>
+          </article>
+
+          <article class="card roadmap">
+            <span>03</span>
+            <h3>Hybrid networking</h3>
+            <p>VPN, Cloud Interconnect, NCC, private connectivity, and deciding when to use each pattern.</p>
+          </article>
+
+          <article class="card roadmap">
+            <span>04</span>
+            <h3>Load balancing and DNS</h3>
+            <p>HTTP(S), TCP/UDP balancing, global vs regional, health checks, CDN, and DNS architecture.</p>
+          </article>
+
+          <article class="card roadmap">
+            <span>05</span>
+            <h3>Security and operations</h3>
+            <p>IAP, firewall best practices, identity boundaries, logging, monitoring, and incident troubleshooting.</p>
+          </article>
+
+          <article class="card roadmap">
+            <span>06</span>
+            <h3>Hands-on practice</h3>
+            <p>Use labs and timed simulation tests to validate traffic flow, architecture decisions, and resilience planning.</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="section-title">
+          <span class="small-tag">Checklist</span>
+          <h2>Learning checklist</h2>
+        </div>
+
+        <div id="topicChecklist" class="checklist"></div>
+      </section>
+
+      <section class="section">
+        <div class="section-title">
+          <span class="small-tag">Exam flow</span>
+          <h2>Study flow by stage</h2>
+        </div>
+
+        <div class="study-flow">
+          <article class="flow-card">
+            <span>01</span>
+            <h3>Learn the pattern</h3>
+            <p>Start with VPC, CIDR, routing, and firewall logic before moving to hybrid and edge topics.</p>
+          </article>
+          <article class="flow-card">
+            <span>02</span>
+            <h3>Map the design</h3>
+            <p>Compare VPN vs Interconnect, private vs public access, and regional vs global load balancing.</p>
+          </article>
+          <article class="flow-card">
+            <span>03</span>
+            <h3>Test under pressure</h3>
+            <p>Use timed exams and topic checklists to confirm your route selection, policy decision, and troubleshooting instinct.</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="section-title">
+          <span class="small-tag">Quick recall</span>
+          <h2>Exam checklist by topic</h2>
+        </div>
+
+        <div class="exam-checklist">
+          <div class="exam-checklist-item"><strong>VPC</strong><span>One global network; subnets are regional.</span></div>
+          <div class="exam-checklist-item"><strong>CIDR</strong><span>Keep ranges non-overlapping and deliberate.</span></div>
+          <div class="exam-checklist-item"><strong>Routing</strong><span>Match route behavior to traffic source and destination.</span></div>
+          <div class="exam-checklist-item"><strong>Firewall</strong><span>Ingress default deny; explicit allow rules control access.</span></div>
+          <div class="exam-checklist-item"><strong>Hybrid</strong><span>VPN for flexibility, Interconnect for scale and performance.</span></div>
+          <div class="exam-checklist-item"><strong>Cloud Router</strong><span>Dynamic route exchange via BGP.</span></div>
+          <div class="exam-checklist-item"><strong>LB</strong><span>Choose by protocol, exposure, and backend design.</span></div>
+          <div class="exam-checklist-item"><strong>DNS</strong><span>Private DNS for internal services; public DNS for internet reachability.</span></div>
+          <div class="exam-checklist-item"><strong>Security</strong><span>Layer policy at edge, VPC boundary, and service perimeter.</span></div>
+          <div class="exam-checklist-item"><strong>Monitoring</strong><span>Validate routing, latency, reachability, and health before changing scope.</span></div>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="section-title">
+          <span class="small-tag">Internal study guides</span>
+          <h2>Learn inside this repo</h2>
+        </div>
+
+        <div class="topic-grid">
+          <a class="topic-card" href="topics/vpc-fundamentals.html">
+            <span>VPC</span>
+            <strong>VPC fundamentals</strong>
+            <small>Learn networks, subnets, firewall, and segmentation.</small>
+          </a>
+          <a class="topic-card" href="topics/cidr-subnet-design.html">
+            <span>CIDR</span>
+            <strong>CIDR & subnet design</strong>
+            <small>Understand IP planning and private ranges.</small>
+          </a>
+          <a class="topic-card" href="topics/routing-firewall.html">
+            <span>Routing</span>
+            <strong>Routing & firewall</strong>
+            <small>Route matching, policy, and traffic control.</small>
+          </a>
+          <a class="topic-card" href="topics/hybrid-connectivity.html">
+            <span>Hybrid</span>
+            <strong>Hybrid connectivity</strong>
+            <small>VPN, Interconnect, and BGP decision patterns.</small>
+          </a>
+          <a class="topic-card" href="topics/load-balancing-dns.html">
+            <span>Traffic</span>
+            <strong>Load balancing & DNS</strong>
+            <small>Global traffic management and health checks.</small>
+          </a>
+          <a class="topic-card" href="topics/security-monitoring.html">
+            <span>SecOps</span>
+            <strong>Security & monitoring</strong>
+            <small>IAP, least privilege, logging and troubleshooting.</small>
+          </a>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="section-title">
+          <span class="small-tag">Deep dives</span>
+          <h2>High-value network topics</h2>
+        </div>
+
+        <div class="deep-dive-grid">
+          <a class="deep-dive-card" href="topics/shared-vpc.html">
+            <span>Shared VPC</span>
+            <strong>Shared VPC</strong>
+            <small>Understand cross-project networking and centralized design.</small>
+          </a>
+          <a class="deep-dive-card" href="topics/private-connectivity.html">
+            <span>Private access</span>
+            <strong>Private connectivity</strong>
+            <small>Private Service Access and Private Google Access patterns.</small>
+          </a>
+          <a class="deep-dive-card" href="topics/cloud-router.html">
+            <span>Routing</span>
+            <strong>Cloud Router</strong>
+            <small>Learn BGP, propagation, and route exchange.</small>
+          </a>
+          <a class="deep-dive-card" href="topics/dns-best-practices.html">
+            <span>DNS</span>
+            <strong>DNS best practices</strong>
+            <small>Find the right public and private DNS strategy.</small>
+          </a>
+          <a class="deep-dive-card" href="topics/load-balancing-dns.html">
+            <span>LB</span>
+            <strong>Load balancing & DNS</strong>
+            <small>Match traffic type to the right balancing layer.</small>
+          </a>
+          <a class="deep-dive-card" href="topics/edge-security.html">
+            <span>Security</span>
+            <strong>Edge security</strong>
+            <small>Cloud Armor, CDN, and Cloud NAT trade-offs.</small>
+          </a>
+          <a class="deep-dive-card" href="topics/network-deep-dives.html#network-intelligence-centre">
+            <span>Ops</span>
+            <strong>Network Intelligence</strong>
+            <small>Monitor health, topology, and troubleshooting signals.</small>
+          </a>
+          <a class="deep-dive-card" href="topics/network-deep-dives.html#vpc-service-controls">
+            <span>Policy</span>
+            <strong>VPC Service Controls</strong>
+            <small>Protect data and service boundaries with policy perimeters.</small>
+          </a>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="section-title">
+          <span class="small-tag">Priority resources</span>
+          <h2>Start here</h2>
+        </div>
+
+        <div class="priority-list">
+          <a class="priority-item" href="https://medium.com/google-cloud/prepare-for-the-google-professional-cloud-network-engineer-exam-2026-prep-sheet-2c7bc591f3ff" target="_blank" rel="noreferrer">
+            <span class="priority-date">2026/01</span>
+            <div>
+              <strong>Prepare for the Google Professional Cloud Network Engineer Exam — 2026+ prep sheet</strong>
+              <small>Ammett Williams</small>
+            </div>
+          </a>
+
+          <a class="priority-item" href="https://cloud.google.com/certification/practice-exam/cloud-network-engineer" target="_blank" rel="noreferrer">
+            <span class="priority-date">Practice</span>
+            <div>
+              <strong>Official Practice Test</strong>
+              <small>Google Cloud</small>
+            </div>
+          </a>
+
+          <a class="priority-item" href="https://www.coursera.org/specializations/networking-google-cloud-platform" target="_blank" rel="noreferrer">
+            <span class="priority-date">Course</span>
+            <div>
+              <strong>Networking in Google Cloud Platform Specialization</strong>
+              <small>Coursera</small>
+            </div>
+          </a>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="section-title with-actions">
+          <div>
+            <span class="small-tag">Learning resources</span>
+            <h2>Curated study library</h2>
+          </div>
+
+          <div class="filters" aria-label="Resource categories">
+            <button class="filter active" data-filter="all" type="button">All</button>
+            <button class="filter" data-filter="posts" type="button">Posts</button>
+            <button class="filter" data-filter="videos" type="button">Videos</button>
+            <button class="filter" data-filter="books" type="button">Books</button>
+            <button class="filter" data-filter="training" type="button">Training</button>
+          </div>
+        </div>
+
+        <div class="resource-grid">
+          <article class="resource-card" data-category="posts">
+            <span class="resource-type">Post</span>
+            <h3>How to Pass the Google Cloud Professional Network Engineer Certification in 2025</h3>
+            <p>Sarthak Kesarwani</p>
+            <a href="https://medium.com/google-cloud/how-to-pass-the-google-cloud-professional-network-engineer-certification-in-2025-5317ebe3b90c" target="_blank" rel="noreferrer">Open article</a>
+          </article>
+
+          <article class="resource-card" data-category="posts">
+            <span class="resource-type">Post</span>
+            <h3>Preparing for the Google Cloud Professional Network Engineer Certification</h3>
+            <p>Jamie Thompson</p>
+            <a href="https://medium.com/google-cloud/preparing-for-the-google-cloud-professional-network-engineer-certification-7c0a958208f3" target="_blank" rel="noreferrer">Open article</a>
+          </article>
+
+          <article class="resource-card" data-category="videos">
+            <span class="resource-type">Video</span>
+            <h3>Cloud OnAir: Google Cloud Networking 101</h3>
+            <p>CloudOnAir</p>
+            <a href="https://www.youtube.com/watch?v=0hN-dyOV10c" target="_blank" rel="noreferrer">Watch</a>
+          </article>
+
+          <article class="resource-card" data-category="videos">
+            <span class="resource-type">Video</span>
+            <h3>VPC Deep Dive and Best Practices</h3>
+            <p>GCP</p>
+            <a href="https://www.youtube.com/watch?v=wmP6SQe5J7g" target="_blank" rel="noreferrer">Watch</a>
+          </article>
+
+          <article class="resource-card" data-category="books">
+            <span class="resource-type">Book</span>
+            <h3>Google Cloud Platform (GCP) Professional Cloud Network Engineer Certification Companion</h3>
+            <p>Certification companion</p>
+            <a href="https://a.co/d/4icu5XX" target="_blank" rel="noreferrer">View book</a>
+          </article>
+
+          <article class="resource-card" data-category="books">
+            <span class="resource-type">Book</span>
+            <h3>Google Cloud Platform for Architects</h3>
+            <p>Architectural reference</p>
+            <a href="https://www.amazon.com/Google-Cloud-Platform-Architects-solutions/dp/1788834305/" target="_blank" rel="noreferrer">View book</a>
+          </article>
+
+          <article class="resource-card" data-category="training">
+            <span class="resource-type">Training</span>
+            <h3>Networking in the Google Cloud</h3>
+            <p>Qwiklabs</p>
+            <a href="https://google.qwiklabs.com/quests/31" target="_blank" rel="noreferrer">View lab</a>
+          </article>
+
+          <article class="resource-card" data-category="training">
+            <span class="resource-type">Training</span>
+            <h3>Network Performance and Optimization</h3>
+            <p>Qwiklabs</p>
+            <a href="https://google.qwiklabs.com/quests/46" target="_blank" rel="noreferrer">View lab</a>
+          </article>
+        </div>
+      </section>
+
+      <section class="section practice-panel card">
+        <div class="section-title">
+          <span class="small-tag">Practice exam</span>
+          <h2>Mock exam simulator</h2>
+        </div>
+
+        <div class="practice-header">
+          <div class="practice-meta">
+            <span id="practiceStatus">Ready</span>
+            <strong id="practiceTimer">0 / 0</strong>
+          </div>
+          <div class="practice-actions">
+            <button class="button primary small" id="startExamBtn" type="button">Start exam</button>
+            <button class="button secondary small" id="showAnswerBtn" type="button">Reveal answer</button>
+            <button class="button secondary small" id="resetExamBtn" type="button">Reset</button>
+          </div>
+        </div>
+
+        <div id="practiceExam" class="practice-exam hidden">
+          <div class="question-progress">
+            <div id="progressBar"></div>
+          </div>
+
+          <div id="questionCard" class="question-card"></div>
+
+          <div class="exam-nav">
+            <button class="button secondary small" id="prevBtn" type="button">Previous</button>
+            <button class="button primary small" id="nextBtn" type="button">Next</button>
+          </div>
+        </div>
+
+        <div id="examSummary" class="exam-summary hidden"></div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <p>Built for faster study and a clearer learning path.</p>
+    </footer>
+
+    <script src="script.js"></script>
+  </body>
+</html>

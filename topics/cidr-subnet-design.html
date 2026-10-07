@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CIDR and Subnet Design</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../styles.css" />
+  </head>
+  <body>
+    <div class="topic-page">
+      <div class="topic-shell">
+        <header class="topic-header">
+          <nav class="topbar">
+            <div class="brand">GCP Study Hub</div>
+            <div class="nav-actions">
+              <button id="themeToggle" class="theme-toggle" type="button" aria-label="Toggle dark mode">🌙</button>
+              <a href="../index.html">Back to dashboard</a>
+            </div>
+          </nav>
+          <h1>CIDR and Subnet Design</h1>
+          <p>CIDR is the way networks are named and sized. In real network design, the goal is to create clean, non-overlapping ranges that support scaling, segmentation, and hybrid connectivity without future conflicts.</p>
+          <div class="topic-nav">
+            <a href="../index.html">Home</a>
+            <a href="vpc-fundamentals.html">VPC</a>
+            <a href="routing-firewall.html">Routing</a>
+            <a href="hybrid-connectivity.html">Hybrid</a>
+            <a href="load-balancing-dns.html">LB & DNS</a>
+            <a href="security-monitoring.html">Security</a>
+          </div>
+        </header>
+
+        <article class="topic-content">
+          <section>
+            <h2>Why CIDR matters</h2>
+            <p>CIDR notation like 10.0.0.0/16 or 10.1.0.0/24 tells you how many bits are used for the network and how many bits remain for hosts. This determines the number of addresses available and how the network can be segmented.</p>
+            <div class="topic-box">
+              <h3>Quick examples</h3>
+              <p>/16 gives a large block with many addresses; /24 is a smaller block usually used for a logical segment or subnet. In GCP, a subnet range should be planned carefully so it does not overlap with on-premises ranges or other VPC ranges.</p>
+            </div>
+          </section>
+
+          <section>
+            <h2>Subnet design principles</h2>
+            <ul>
+              <li>Use private RFC1918 ranges when possible: 10.0.0.0/8, 172.16.0.0/12, 192.168.0.0/16.</li>
+              <li>Avoid overlapping ranges between VPCs, on-prem networks, and peered networks.</li>
+              <li>Group resources by function or environment: app tier, data tier, management, shared services.</li>
+              <li>Leave room for growth by reserving headroom rather than exhausting a subnet too early.</li>
+            </ul>
+          </section>
+
+          <section>
+            <h2>How this connects to Google Cloud</h2>
+            <p>In GCP, subnets are regional and must be part of a VPC. A common pattern is one VPC per environment or trust boundary, with multiple regional subnets inside it. This keeps routing predictable and makes firewall strategy easier to reason about.</p>
+          </section>
+
+          <section>
+            <h2>Exam pitfalls</h2>
+            <ul>
+              <li>Thinking a subnet can be global. It cannot.</li>
+              <li>Forgetting that private IP ranges are usually preferred for internal traffic.</li>
+              <li>Ignoring overlap between VPC CIDR and customer-premises ranges, which can break connectivity in hybrid designs.</li>
+            </ul>
+          </section>
+        </article>
+      </div>
+    </div>
+
+    <script src="../script.js"></script>
+  </body>
+</html>

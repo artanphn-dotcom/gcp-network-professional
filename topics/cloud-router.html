@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Cloud Router</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../styles.css" />
+  </head>
+  <body>
+    <div class="topic-page">
+      <div class="topic-shell">
+        <header class="topic-header">
+          <nav class="topbar">
+            <div class="brand">GCP Study Hub</div>
+            <div class="nav-actions">
+              <button id="themeToggle" class="theme-toggle" type="button" aria-label="Toggle dark mode">🌙</button>
+              <a href="../index.html">Back to dashboard</a>
+            </div>
+          </nav>
+          <h1>Cloud Router</h1>
+          <p>Cloud Router is the BGP-enabled routing component that lets Google Cloud exchange routes with your on-premises networks, partner networks, and VPN or Interconnect attachments.</p>
+          <div class="topic-nav">
+            <a href="../index.html">Home</a>
+            <a href="hybrid-connectivity.html">Hybrid</a>
+            <a href="network-deep-dives.html">Deep dives</a>
+          </div>
+        </header>
+
+        <article class="topic-content">
+          <section>
+            <h2>Why Cloud Router matters</h2>
+            <p>Static routes can work for simple topologies, but dynamic route exchange is the default pattern for resilient, scalable hybrid connections. Cloud Router enables BGP session management and route propagation between Google Cloud and outside networks.</p>
+          </section>
+
+          <section>
+            <h2>Exam focus</h2>
+            <ul>
+              <li>Cloud Router is usually paired with Cloud VPN or Interconnect.</li>
+              <li>BGP is the protocol used to advertise and learn routes.</li>
+              <li>It supports dynamic route exchange and is essential in hybrid connectivity designs.</li>
+            </ul>
+          </section>
+
+          <section>
+            <h2>Typical design patterns</h2>
+            <div class="topic-box">
+              <h3>Best fit</h3>
+              <p>Choose Cloud Router when you need route propagation and redundancy for private connectivity between Google Cloud and external networks.</p>
+            </div>
+            <ul>
+              <li>HA VPN with BGP for resilient site-to-cloud connectivity.</li>
+              <li>Dedicated Interconnect for high-throughput, low-latency links.</li>
+              <li>Multiple regions and edge paths require dynamic route management.</li>
+            </ul>
+          </section>
+
+          <section>
+            <h2>What to remember</h2>
+            <div class="topic-box">
+              <h3>Memory hook</h3>
+              <p><strong>Cloud Router + BGP = dynamic cloud-to-on-prem routing.</strong> It matters when your network needs a live exchange of reachable prefixes.</p>
+            </div>
+            <ul>
+              <li>Use this for route advertisement and learning across hybrid connections.</li>
+              <li>It complements VPN and Interconnect, not replace them.</li>
+              <li>In exam questions, route propagation is usually the clue.</li>
+            </ul>
+          </section>
+        </article>
+      </div>
+    </div>
+
+    <script src="../script.js"></script>
+  </body>
+</html>

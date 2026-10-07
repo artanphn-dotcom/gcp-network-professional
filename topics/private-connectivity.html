@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Private Service Access and Private Google Access</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../styles.css" />
+  </head>
+  <body>
+    <div class="topic-page">
+      <div class="topic-shell">
+        <header class="topic-header">
+          <nav class="topbar">
+            <div class="brand">GCP Study Hub</div>
+            <div class="nav-actions">
+              <button id="themeToggle" class="theme-toggle" type="button" aria-label="Toggle dark mode">🌙</button>
+              <a href="../index.html">Back to dashboard</a>
+            </div>
+          </nav>
+          <h1>Private Service Access and Private Google Access</h1>
+          <p>These technologies help workloads stay private by avoiding public exposure while still reaching managed Google services and internal applications.</p>
+          <div class="topic-nav">
+            <a href="../index.html">Home</a>
+            <a href="vpc-fundamentals.html">VPC</a>
+            <a href="network-deep-dives.html">Deep dives</a>
+          </div>
+        </header>
+
+        <article class="topic-content">
+          <section>
+            <h2>Private Google Access</h2>
+            <p>Private Google Access allows VM instances without external IPs to reach Google APIs and services over private network paths. This is critical for security and for keeping workloads out of public routing.</p>
+          </section>
+
+          <section>
+            <h2>Private Service Access</h2>
+            <p>Private Service Access creates private connectivity between consumers and Google-managed or internal services, often using allocated private IP ranges. It helps services communicate without exposing them to the public internet.</p>
+          </section>
+
+          <section>
+            <h2>Design guidance</h2>
+            <ul>
+              <li>Private Google Access is for reaching Google APIs and services from private VMs.</li>
+              <li>Private Service Access is for private connectivity to managed services or internal endpoints.</li>
+              <li>Use these patterns when security policy requires private-only communication.</li>
+            </ul>
+          </section>
+
+          <section>
+            <h2>What to remember</h2>
+            <div class="topic-box">
+              <h3>Memory hook</h3>
+              <p><strong>Private access = no public IP, still private connectivity.</strong> If the workload lacks an external IP, use private pathing to Google services or managed internal endpoints.</p>
+            </div>
+            <ul>
+              <li>Private Google Access keeps VMs private while reaching Google APIs.</li>
+              <li>Private Service Access supports private reachability to managed or internal services.</li>
+              <li>These patterns matter when business policy requires no public internet exposure.</li>
+            </ul>
+          </section>
+
+          <section>
+            <h2>Typical exam cues</h2>
+            <ul>
+              <li>“VMs do not have external IPs but must reach Google APIs.”</li>
+              <li>“Workloads need private connectivity to a managed service over RFC1918 ranges.”</li>
+              <li>“The solution must avoid public internet exposure.”</li>
+            </ul>
+          </section>
+        </article>
+      </div>
+    </div>
+
+    <script src="../script.js"></script>
+  </body>
+</html>

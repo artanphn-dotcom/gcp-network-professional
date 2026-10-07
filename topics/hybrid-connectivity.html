@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Hybrid Connectivity</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../styles.css" />
+  </head>
+  <body>
+    <div class="topic-page">
+      <div class="topic-shell">
+        <header class="topic-header">
+          <nav class="topbar">
+            <div class="brand">GCP Study Hub</div>
+            <div class="nav-actions">
+              <button id="themeToggle" class="theme-toggle" type="button" aria-label="Toggle dark mode">🌙</button>
+              <a href="../index.html">Back to dashboard</a>
+            </div>
+          </nav>
+          <h1>Hybrid Connectivity</h1>
+          <p>Hybrid connectivity is about extending private network reach between on-prem environments and Google Cloud. The choice depends on bandwidth, latency sensitivity, resilience, and operational complexity.</p>
+          <div class="topic-nav">
+            <a href="../index.html">Home</a>
+            <a href="vpc-fundamentals.html">VPC</a>
+            <a href="cidr-subnet-design.html">CIDR</a>
+            <a href="routing-firewall.html">Routing</a>
+            <a href="load-balancing-dns.html">LB & DNS</a>
+            <a href="security-monitoring.html">Security</a>
+          </div>
+        </header>
+
+        <article class="topic-content">
+          <section>
+            <h2>VPN</h2>
+            <p>Cloud VPN is a secure and flexible option that connects an on-prem network to GCP over the public internet or through a managed tunnel path. It is a good fit when you need connectivity, but do not require the highest throughput or strict SLA profiles.</p>
+          </section>
+
+          <section>
+            <h2>Cloud Interconnect</h2>
+            <p>Cloud Interconnect provides private connectivity with better performance and predictable latency. It is often selected for enterprise workloads with large data transfer needs, stricter network performance needs, or higher availability requirements.</p>
+          </section>
+
+          <section>
+            <h2>Network Connectivity Center</h2>
+            <p>NCC centralizes routing and connectivity across multiple networks. It is useful for large organizations with several on-prem or cloud environments that need central management and policy control.</p>
+          </section>
+
+          <section>
+            <h2>Decision framework</h2>
+            <ul>
+              <li>Use VPN for simplicity and lower cost.</li>
+              <li>Use Interconnect for high bandwidth and predictable performance.</li>
+              <li>Use NCC when you need a hub-and-spoke or global network architecture model.</li>
+            </ul>
+          </section>
+        </article>
+      </div>
+    </div>
+
+    <script src="../script.js"></script>
+  </body>
+</html>

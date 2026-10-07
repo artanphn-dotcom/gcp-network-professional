@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Google Cloud Network Deep Dives</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../styles.css" />
+  </head>
+  <body>
+    <div class="topic-page">
+      <div class="topic-shell">
+        <header class="topic-header">
+          <nav class="topbar">
+            <div class="brand">GCP Study Hub</div>
+            <div class="nav-actions">
+              <button id="themeToggle" class="theme-toggle" type="button" aria-label="Toggle dark mode">🌙</button>
+              <a href="../index.html">Back to dashboard</a>
+            </div>
+          </nav>
+          <h1>Network Topic Deep Dives</h1>
+          <p>These are the advanced networking topics most often tested in the Professional Cloud Network Engineer exam. Each one is a high-value area where architecture decisions, route behavior, hybrid connectivity, and security design matter.</p>
+          <div class="topic-nav">
+            <a href="../index.html">Home</a>
+            <a href="vpc-fundamentals.html">VPC</a>
+            <a href="cidr-subnet-design.html">CIDR</a>
+            <a href="routing-firewall.html">Routing</a>
+            <a href="hybrid-connectivity.html">Hybrid</a>
+            <a href="load-balancing-dns.html">LB & DNS</a>
+          </div>
+        </header>
+
+        <article class="topic-content">
+          <section>
+            <h2>High-value deep-dive topics</h2>
+            <div class="deep-dive-list">
+              <article class="deep-dive-item" id="organizational-constraints">
+                <h3>Organizational constraints</h3>
+                <p>Organization policies can limit networking design by preventing external IPs, restricting VPC peering, or forcing governance around how projects and services can be connected. For the exam, know that policy constraints can override default design choices.</p>
+                <ul>
+                  <li>Review default restrictions and exceptions.</li>
+                  <li>Understand how project-level security controls affect network architecture.</li>
+                </ul>
+                <a href="https://cloud.google.com/resource-manager/docs/organization-policy/overview" target="_blank" rel="noreferrer">Read official documentation</a>
+              </article>
+
+              <article class="deep-dive-item" id="shared-vpc">
+                <h3>Shared VPC</h3>
+                <p>Shared VPC allows a host project to share a VPC network with other projects. This is important for centralized network administration, consistent firewall policies, and multi-project environments that need common network services.</p>
+                <ul>
+                  <li>Use it when multiple teams or services need a common VPC without duplicated network design.</li>
+                  <li>Know the difference between host project and service project responsibilities.</li>
+                </ul>
+                <a href="https://cloud.google.com/vpc/docs/shared-vpc" target="_blank" rel="noreferrer">Read official documentation</a>
+              </article>
+
+              <article class="deep-dive-item" id="private-connectivity">
+                <h3>Private Service Access and Private Google Access</h3>
+                <p>Private Service Access allows private, internal access to managed services such as Google APIs or internal services over private IP space. Private Google Access lets VMs without external IP addresses reach Google APIs and services over the VPC network.</p>
+                <ul>
+                  <li>Private access is critical for workload isolation and reduced exposure.</li>
+                  <li>Understand when private-only access is a better design than public egress.</li>
+                </ul>
+                <a href="https://cloud.google.com/vpc/docs/configure-private-services-access" target="_blank" rel="noreferrer">Private Service Access</a> ·
+                <a href="https://cloud.google.com/vpc/docs/configure-private-google-access-hybrid" target="_blank" rel="noreferrer">Private Google Access</a>
+              </article>
+
+              <article class="deep-dive-item" id="cloud-router">
+                <h3>Cloud Router</h3>
+                <p>Cloud Router is the BGP-enabled routing component used for dynamic route exchange with on-premises networks and partner networks. It is central to Hybrid Connectivity, Interconnect, and VPN design.</p>
+                <ul>
+                  <li>Understand how route propagation works and why dynamic routing matters.</li>
+                  <li>Know how Cloud Router integrates with VPN and Interconnect for redundancy and scalability.</li>
+                </ul>
+                <a href="https://cloud.google.com/network-connectivity/docs/router/concepts/overview" target="_blank" rel="noreferrer">Read official documentation</a>
+              </article>
+
+              <article class="deep-dive-item" id="dns-best-practices">
+                <h3>DNS best practices</h3>
+                <p>DNS is not just name resolution. In cloud networking, DNS design affects load balancing decisions, service discovery, private zone isolation, and cross-environment routing. Good DNS patterns improve resilience and reduce failed lookups.</p>
+                <ul>
+                  <li>Use private DNS for internal-only workloads.</li>
+                  <li>Keep authoritative names and split-horizon design clear and intentional.</li>
+                </ul>
+                <a href="https://cloud.google.com/dns/docs/best-practices" target="_blank" rel="noreferrer">Read official documentation</a>
+              </article>
+
+              <article class="deep-dive-item" id="load-balancing">
+                <h3>Choosing a load balancer</h3>
+                <p>Network engineering questions often test whether you know when to use Global HTTP(S), Regional TCP/UDP, Internal Load Balancing, or Ingress for Kubernetes. The decision is driven by protocol, exposure model, and traffic characteristics.</p>
+                <ul>
+                  <li>Use HTTP(S) load balancing for web traffic and global scale.</li>
+                  <li>Use internal TCP/UDP balancing for private service access and app tiers.</li>
+                </ul>
+                <a href="https://cloud.google.com/load-balancing/docs/choosing-load-balancer" target="_blank" rel="noreferrer">Choosing a load balancer</a> ·
+                <a href="https://cloud.google.com/kubernetes-engine/docs/tutorials/http-balancer" target="_blank" rel="noreferrer">Ingress</a>
+              </article>
+
+              <article class="deep-dive-item" id="internal-lb-next-hop">
+                <h3>Internal LB and next hop with NVA</h3>
+                <p>Internal load balancers are frequently used to expose services only inside a VPC or between networks. When paired with a Next-Hop firewall or NVA, they can be used to steer traffic through security appliances or centralized inspection layers.</p>
+                <ul>
+                  <li>Know when the architecture uses private frontends for internal apps.</li>
+                  <li>Understand how appliance routing can be used for centralized filtering.</li>
+                </ul>
+                <a href="https://cloud.google.com/load-balancing/docs/internal/setting-up-ilb-next-hop" target="_blank" rel="noreferrer">Read official documentation</a>
+              </article>
+
+              <article class="deep-dive-item" id="networking-on-gke">
+                <h3>Networking on GKE</h3>
+                <p>Google Kubernetes Engine networking includes cluster IP ranges, pod networking, node networking, and service exposure. VPC-native clusters are usually the default pattern for modern, scalable Kubernetes networking on GCP.</p>
+                <ul>
+                  <li>Understand alias IPs and VPC-native networking in cluster design.</li>
+                  <li>Know how ingress and services map to backend pods.</li>
+                </ul>
+                <a href="https://cloud.google.com/kubernetes-engine/docs/concepts/network-overview" target="_blank" rel="noreferrer">GKE networking overview</a> ·
+                <a href="https://cloud.google.com/kubernetes-engine/docs/concepts/alias-ips" target="_blank" rel="noreferrer">VPC-native clusters</a>
+              </article>
+
+              <article class="deep-dive-item" id="hybrid-connectivity-options">
+                <h3>Hybrid connectivity options</h3>
+                <p>Hybrid connectivity is the set of ways to connect on-prem environments to Google Cloud. The main choices are VPN, Interconnect, and Network Connectivity Center, depending on bandwidth, latency, and operational needs.</p>
+                <ul>
+                  <li>Choose VPN for lower complexity and cost.</li>
+                  <li>Use Dedicated Interconnect for high-performance private connectivity.</li>
+                </ul>
+                <a href="https://cloud.google.com/hybrid-connectivity/" target="_blank" rel="noreferrer">Read official documentation</a>
+              </article>
+
+              <article class="deep-dive-item" id="interconnect-dual-stack">
+                <h3>Dedicated Interconnect and dual stack</h3>
+                <p>Dedicated Interconnect provides private connectivity with predictable bandwidth and lower latency. Dual stack support matters for IPv4 + IPv6 workloads or mixed network environments that need both protocols.</p>
+                <ul>
+                  <li>Know the provisioning process and attachment design.</li>
+                  <li>Understand the business case for highly available and performance-sensitive paths.</li>
+                </ul>
+                <a href="https://cloud.google.com/network-connectivity/docs/interconnect/how-to/dedicated/provisioning-overview" target="_blank" rel="noreferrer">Dedicated Interconnect</a> ·
+                <a href="https://cloud.google.com/network-connectivity/docs/interconnect/how-to/dedicated/creating-vlan-attachments#unencrypted-attachments" target="_blank" rel="noreferrer">Dual stack support</a>
+              </article>
+
+              <article class="deep-dive-item" id="ha-vpn">
+                <h3>HA VPN</h3>
+                <p>HA VPN provides highly available VPN connectivity between Google Cloud and on-premises sites. It is the common solution when you want redundancy and a simpler setup than a full private connectivity design.</p>
+                <ul>
+                  <li>Good for resiliency and failover without the complexity of dedicated circuits.</li>
+                  <li>Easier to operate than full physical interconnect deployments.</li>
+                </ul>
+                <a href="https://cloud.google.com/network-connectivity/docs/vpn/concepts/topologies" target="_blank" rel="noreferrer">Read official documentation</a>
+              </article>
+
+              <article class="deep-dive-item" id="cross-cloud-network">
+                <h3>Cross-Cloud Network for distributed applications</h3>
+                <p>Cross-cloud patterns are used when applications span multiple public clouds or connect cloud environments with on-prem systems. The key design concerns are distributed routing, latency, and secure connectivity between domains.</p>
+                <ul>
+                  <li>Think about network segmentation, policy enforcement, and traffic paths.</li>
+                  <li>Use this pattern when global application reach and data locality matter.</li>
+                </ul>
+                <a href="https://cloud.google.com/architecture/ccn-distributed-apps-design/connectivity" target="_blank" rel="noreferrer">Read official documentation</a>
+              </article>
+
+              <article class="deep-dive-item" id="cloud-cdn">
+                <h3>Cloud CDN</h3>
+                <p>Cloud CDN accelerates content delivery by caching content at Google edge locations. It improves response time for static and some dynamic assets while reducing origin load.</p>
+                <ul>
+                  <li>Useful for frontend application acceleration and content-heavy workloads.</li>
+                  <li>Requires thought about cache invalidation and origin freshness.</li>
+                </ul>
+                <a href="https://cloud.google.com/cdn/docs/overview" target="_blank" rel="noreferrer">Read official documentation</a>
+              </article>
+
+              <article class="deep-dive-item" id="invalidations">
+                <h3>Invalidations</h3>
+                <p>Cache invalidation is the process of removing stale content from the edge cache so clients receive fresh data. For content-heavy and frequently updated services, this is a critical operational concept.</p>
+                <ul>
+                  <li>Understand how stale caches affect application behavior.</li>
+                  <li>Know the difference between purging and expiration strategies.</li>
+                </ul>
+                <a href="https://cloud.google.com/cdn/docs/cache-invalidation-overview" target="_blank" rel="noreferrer">Read official documentation</a>
+              </article>
+
+              <article class="deep-dive-item" id="ngfw">
+                <h3>NGFW</h3>
+                <p>Next-generation firewalls are often used for centralized network inspection in cloud environments. They sit at strategic control points where traffic inspection, filtering, and threat analysis are required.</p>
+                <ul>
+                  <li>Fits enterprise environments that need stronger perimeter controls.</li>
+                  <li>Common in hub-and-spoke models with centralized inspection.</li>
+                </ul>
+                <a href="https://cloud.google.com/architecture/architecture-centralized-network-appliances-on-google-cloud" target="_blank" rel="noreferrer">Read official documentation</a>
+              </article>
+
+              <article class="deep-dive-item" id="cloud-armor">
+                <h3>Cloud Armor</h3>
+                <p>Cloud Armor is a managed DDoS and application defense product that protects services from common web attacks and abusive traffic patterns. It is especially useful when front ends are public-facing.</p>
+                <ul>
+                  <li>Review rules for IP allowlists, rate limiting, and geo restrictions.</li>
+                  <li>Know how it complements load balancers and edge security controls.</li>
+                </ul>
+                <a href="https://cloud.google.com/armor/docs/cloud-armor-overview" target="_blank" rel="noreferrer">Read official documentation</a>
+              </article>
+
+              <article class="deep-dive-item" id="cloud-nat">
+                <h3>Cloud NAT</h3>
+                <p>Cloud NAT provides outbound internet access for private resources without assigning external IPs to each VM. It reduces public exposure and helps with egress design in private-only environments.</p>
+                <ul>
+                  <li>Use it when private instances need outbound internet access.</li>
+                  <li>It is different from inbound connectivity and should not be confused with public ingress.</li>
+                </ul>
+                <a href="https://cloud.google.com/nat/docs/overview" target="_blank" rel="noreferrer">Read official documentation</a>
+              </article>
+
+              <article class="deep-dive-item" id="vpc">
+                <h3>VPC</h3>
+                <p>VPC is the foundation of GCP network design. A well-built VPC uses segmentation, private IP planning, route control, and policy boundaries to support scalability, security, and service integration.</p>
+                <ul>
+                  <li>Know the relationship between global VPC design and regional subnet layout.</li>
+                  <li>Examine how firewall rules and custom routes shape network behavior.</li>
+                </ul>
+                <a href="https://cloud.google.com/vpc/docs/vpc" target="_blank" rel="noreferrer">Read official documentation</a>
+              </article>
+
+              <article class="deep-dive-item" id="vpc-service-controls">
+                <h3>VPC Service Controls</h3>
+                <p>VPC Service Controls create a security perimeter around GCP services to protect data from exfiltration or unauthorized access. This matters when you need to enforce service-level access boundaries for sensitive data workloads.</p>
+                <ul>
+                  <li>Useful for regulated or highly sensitive services.</li>
+                  <li>Important when securing data access across multiple services and project boundaries.</li>
+                </ul>
+                <a href="https://cloud.google.com/vpc-service-controls/docs/overview" target="_blank" rel="noreferrer">Read official documentation</a>
+              </article>
+
+              <article class="deep-dive-item" id="network-intelligence-centre">
+                <h3>Network Intelligence Centre</h3>
+                <p>Network Intelligence Centre provides insight into connectivity, performance, and service health across your Google Cloud network. It helps identify latency, topology issues, and service reachability concerns.</p>
+                <ul>
+                  <li>Useful for validating network health and troubleshooting complex topologies.</li>
+                  <li>Helps in network operations and performance review.</li>
+                </ul>
+                <a href="https://cloud.google.com/network-intelligence-center/docs" target="_blank" rel="noreferrer">Read official documentation</a>
+              </article>
+            </div>
+          </section>
+        </article>
+      </div>
+    </div>
+
+    <script src="../script.js"></script>
+  </body>
+</html>

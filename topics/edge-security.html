@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Edge Security and Traffic Protection</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../styles.css" />
+  </head>
+  <body>
+    <div class="topic-page">
+      <div class="topic-shell">
+        <header class="topic-header">
+          <nav class="topbar">
+            <div class="brand">GCP Study Hub</div>
+            <div class="nav-actions">
+              <button id="themeToggle" class="theme-toggle" type="button" aria-label="Toggle dark mode">🌙</button>
+              <a href="../index.html">Back to dashboard</a>
+            </div>
+          </nav>
+          <h1>Edge Security and Traffic Protection</h1>
+          <p>Edge security solutions protect public-facing services from abuse, DDoS traffic, and unwanted access. They are often used in front of load balancers and internet-facing applications.</p>
+          <div class="topic-nav">
+            <a href="../index.html">Home</a>
+            <a href="security-monitoring.html">Security</a>
+            <a href="network-deep-dives.html">Deep dives</a>
+          </div>
+        </header>
+
+        <article class="topic-content">
+          <section>
+            <h2>Key services</h2>
+            <ul>
+              <li>Cloud Armor provides policy-based traffic filtering and DDoS protection.</li>
+              <li>Cloud CDN improves latency by caching content closer to users.</li>
+              <li>Cloud NAT allows private resources to access the internet while avoiding public IP exposure.</li>
+            </ul>
+          </section>
+
+          <section>
+            <h2>Common design choices</h2>
+            <ul>
+              <li>Use Cloud Armor to enforce rate limits, geo restrictions, and allow/deny policies.</li>
+              <li>Use Cloud CDN for content-heavy front ends and better user experience.</li>
+              <li>Use Cloud NAT when private instances need outbound internet access without fixed public IPs.</li>
+            </ul>
+          </section>
+
+          <section>
+            <h2>Exam cues</h2>
+            <ul>
+              <li>“The app has public traffic and needs DDoS protection.”</li>
+              <li>“Private instances require outbound internet connectivity without public IPs.”</li>
+              <li>“Traffic shaping and geo filtering must be applied before origin servers.”</li>
+            </ul>
+          </section>
+
+          <section>
+            <h2>What to remember</h2>
+            <div class="topic-box">
+              <h3>Memory hook</h3>
+              <p><strong>Edge controls protect traffic before it reaches the app.</strong> Cloud Armor secures the public edge; Cloud NAT keeps private workloads outbound without public IP assignment.</p>
+            </div>
+            <ul>
+              <li>Security decisions are often about where the traffic should be filtered.</li>
+              <li>Cloud CDN and Cloud Armor are usually paired for performance and protection.</li>
+              <li>Cloud NAT is not for inbound access; it is for outbound internet egress from private resources.</li>
+            </ul>
+          </section>
+        </article>
+      </div>
+    </div>
+
+    <script src="../script.js"></script>
+  </body>
+</html>

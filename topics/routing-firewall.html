@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Routing and Firewall</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../styles.css" />
+  </head>
+  <body>
+    <div class="topic-page">
+      <div class="topic-shell">
+        <header class="topic-header">
+          <nav class="topbar">
+            <div class="brand">GCP Study Hub</div>
+            <div class="nav-actions">
+              <button id="themeToggle" class="theme-toggle" type="button" aria-label="Toggle dark mode">🌙</button>
+              <a href="../index.html">Back to dashboard</a>
+            </div>
+          </nav>
+          <h1>Routing and Firewall</h1>
+          <p>Routes decide where packets go, and firewall rules decide whether they are allowed to flow. In Google Cloud, the correct network design depends on both being intentional and aligned with the security model.</p>
+          <div class="topic-nav">
+            <a href="../index.html">Home</a>
+            <a href="vpc-fundamentals.html">VPC</a>
+            <a href="cidr-subnet-design.html">CIDR</a>
+            <a href="hybrid-connectivity.html">Hybrid</a>
+            <a href="load-balancing-dns.html">LB & DNS</a>
+            <a href="security-monitoring.html">Security</a>
+          </div>
+        </header>
+
+        <article class="topic-content">
+          <section>
+            <h2>Routes</h2>
+            <p>Routing defines the path traffic takes in and out of a VPC. Google Cloud automatically creates routes for local traffic and default internet egress. Custom routes are often used when traffic needs to go through a NAT gateway, a firewall appliance, or a VPN tunnel.</p>
+          </section>
+
+          <section>
+            <h2>Firewall rules</h2>
+            <ul>
+              <li>Firewall rules are stateful and evaluate based on direction, source/destination, protocol, and port.</li>
+              <li>Ingress is usually a common place to allow traffic from specific sources, such as load balancers or bastion hosts.</li>
+              <li>Egress is commonly restricted to reduce exfiltration risk or enforce private service access.</li>
+            </ul>
+          </section>
+
+          <section>
+            <h2>Design pattern</h2>
+            <p>A strong design is often “explicit allow, no broad default.” You permit only the required traffic between tiers, then rely on route policy and firewall policies to keep the environment predictable.</p>
+            <div class="topic-box">
+              <h3>Example</h3>
+              <p>App servers may allow only HTTP/HTTPS from the load balancer subnet, while database servers accept only database traffic from app subnets.</p>
+            </div>
+          </section>
+
+          <section>
+            <h2>Common exam outcomes</h2>
+            <ul>
+              <li>If a VM cannot reach another resource, check both firewall rules and route table behavior.</li>
+              <li>When traffic is unexpectedly blocked, check for incorrect source ranges or missing allow rules.</li>
+              <li>Private access patterns often require carefully designed routes and service traffic policies.</li>
+            </ul>
+          </section>
+        </article>
+      </div>
+    </div>
+
+    <script src="../script.js"></script>
+  </body>
+</html>

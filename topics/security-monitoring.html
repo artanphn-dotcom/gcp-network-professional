@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Security and Monitoring</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../styles.css" />
+  </head>
+  <body>
+    <div class="topic-page">
+      <div class="topic-shell">
+        <header class="topic-header">
+          <nav class="topbar">
+            <div class="brand">GCP Study Hub</div>
+            <div class="nav-actions">
+              <button id="themeToggle" class="theme-toggle" type="button" aria-label="Toggle dark mode">🌙</button>
+              <a href="../index.html">Back to dashboard</a>
+            </div>
+          </nav>
+          <h1>Security and Monitoring</h1>
+          <p>Networking security is not only about firewall rules. It is also about least privilege, logging, visibility, segmentation, and being able to diagnose traffic problems quickly when a system behaves unexpectedly.</p>
+          <div class="topic-nav">
+            <a href="../index.html">Home</a>
+            <a href="vpc-fundamentals.html">VPC</a>
+            <a href="cidr-subnet-design.html">CIDR</a>
+            <a href="routing-firewall.html">Routing</a>
+            <a href="hybrid-connectivity.html">Hybrid</a>
+            <a href="load-balancing-dns.html">LB & DNS</a>
+          </div>
+        </header>
+
+        <article class="topic-content">
+          <section>
+            <h2>Least privilege and segmentation</h2>
+            <p>Segment workloads into trust zones so that only required traffic is allowed. VPC boundaries, firewall rules, and service access controls reduce lateral movement and keep an application easier to secure.</p>
+          </section>
+
+          <section>
+            <h2>Monitoring and diagnostics</h2>
+            <ul>
+              <li>Use logs and flow data to validate whether traffic is reaching its destination.</li>
+              <li>Check whether an issue is route-related, firewall-related, or health-check-related.</li>
+              <li>Look at packet and connection patterns before changing policies in production.</li>
+            </ul>
+          </section>
+
+          <section>
+            <h2>What the exam tests</h2>
+            <p>Exam questions often focus on the correct security pattern, such as protecting a public frontend, restricting a private database tier, and using private service access or load balancer ingress paths appropriately.</p>
+            <div class="topic-box">
+              <h3>Good practice</h3>
+              <p>Keep internet exposure minimal, enforce policy by service role, and verify that the network path matches the intended trust model. Logging and monitoring make troubleshooting much easier when traffic unexpectedly fails.</p>
+            </div>
+          </section>
+        </article>
+      </div>
+    </div>
+
+    <script src="../script.js"></script>
+  </body>
+</html>

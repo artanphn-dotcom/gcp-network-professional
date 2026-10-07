@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>DNS Best Practices</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../styles.css" />
+  </head>
+  <body>
+    <div class="topic-page">
+      <div class="topic-shell">
+        <header class="topic-header">
+          <nav class="topbar">
+            <div class="brand">GCP Study Hub</div>
+            <div class="nav-actions">
+              <button id="themeToggle" class="theme-toggle" type="button" aria-label="Toggle dark mode">🌙</button>
+              <a href="../index.html">Back to dashboard</a>
+            </div>
+          </nav>
+          <h1>DNS Best Practices</h1>
+          <p>DNS is more than name resolution. In cloud architecture, DNS influences service discovery, private access, failover, and how traffic is routed among regions and applications.</p>
+          <div class="topic-nav">
+            <a href="../index.html">Home</a>
+            <a href="load-balancing-dns.html">LB & DNS</a>
+            <a href="network-deep-dives.html">Deep dives</a>
+          </div>
+        </header>
+
+        <article class="topic-content">
+          <section>
+            <h2>Key principles</h2>
+            <ul>
+              <li>Use private DNS for internal-only workloads and service discovery.</li>
+              <li>Keep public and private namespaces clearly separated to avoid confusion.</li>
+              <li>Align DNS records with your load-balancer and failover design.</li>
+            </ul>
+          </section>
+
+          <section>
+            <h2>Why it matters</h2>
+            <p>Choosing the wrong DNS pattern can point clients to the wrong region, create split-horizon confusion, or break internal service communication. In network design exams, DNS is often treated as part of the availability and routing strategy.</p>
+          </section>
+
+          <section>
+            <h2>Design checklist</h2>
+            <ul>
+              <li>Use health checks and weighted routing when designing resiliency.</li>
+              <li>Decide which domains are public vs private.</li>
+              <li>Ensure internal apps do not depend on public DNS when private connectivity is required.</li>
+            </ul>
+          </section>
+
+          <section>
+            <h2>What to remember</h2>
+            <div class="topic-box">
+              <h3>Memory hook</h3>
+              <p><strong>Private DNS keeps internal apps private; public DNS informs the internet.</strong> The right answer often depends on whether the client is internal or external.</p>
+            </div>
+            <ul>
+              <li>Use split-horizon patterns when the same service name has different internal and external answers.</li>
+              <li>DNS and load balancing must align to avoid traffic being sent to a dead or wrong region.</li>
+              <li>Remember: traffic direction and naming strategy are part of the design decision.</li>
+            </ul>
+          </section>
+        </article>
+      </div>
+    </div>
+
+    <script src="../script.js"></script>
+  </body>
+</html>
