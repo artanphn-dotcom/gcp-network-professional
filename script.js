@@ -131,7 +131,528 @@ const translations = {
   }
 };
 
+const pageSpecificTranslations = {
+  'vpc-fundamentals.html': {
+    title: { en: 'VPC Fundamentals', al: 'Themellet e VPC' },
+    description: {
+      en: 'A VPC is the foundation of Google Cloud networking. It is a global virtual network that lets you segment resources, define private IP space, control traffic with firewall rules, and connect services securely within a project or across projects.',
+      al: 'Një VPC është themeli i rrjetit të Google Cloud. Është një rrjet virtual global që ju lejon të ndajnë burimet, të përcaktojnë hapësirë private IP, të kontrolloni trafikun me rregulla firewall dhe të lidhni shërbimet në mënyrë të sigurt brenda një projekti ose midis projekteve.'
+    },
+    nav: {
+      '../index.html': { en: 'Home', al: 'Kreu' },
+      'cidr-subnet-design.html': { en: 'CIDR', al: 'CIDR' },
+      'routing-firewall.html': { en: 'Routing', al: 'Routing' },
+      'hybrid-connectivity.html': { en: 'Hybrid', al: 'Hibride' },
+      'load-balancing-dns.html': { en: 'LB & DNS', al: 'LB & DNS' },
+      'security-monitoring.html': { en: 'Security', al: 'Siguria' }
+    }
+  },
+  'cidr-subnet-design.html': {
+    title: { en: 'CIDR and Subnet Design', al: 'CIDR dhe Dizajni i Nënrrjeteve' },
+    description: {
+      en: 'CIDR is the way networks are named and sized. In real network design, the goal is to create clean, non-overlapping ranges that support scaling, segmentation, and hybrid connectivity without future conflicts.',
+      al: 'CIDR është mënyra se si emërtohen dhe madhësohen rrjetet. Në dizajnin real të rrjetit, qëllimi është krijimi i gamave të pastra, pa mbivendosje që mbështesin shkallëzimin, segmentimin dhe lidhjen hibride pa konflikte në të ardhmen.'
+    },
+    nav: {
+      '../index.html': { en: 'Home', al: 'Kreu' },
+      'vpc-fundamentals.html': { en: 'VPC', al: 'VPC' },
+      'routing-firewall.html': { en: 'Routing', al: 'Routing' },
+      'hybrid-connectivity.html': { en: 'Hybrid', al: 'Hibride' },
+      'load-balancing-dns.html': { en: 'LB & DNS', al: 'LB & DNS' },
+      'security-monitoring.html': { en: 'Security', al: 'Siguria' }
+    }
+  },
+  'routing-firewall.html': {
+    title: { en: 'Routing and Firewall', al: 'Routing dhe Firewall' },
+    description: {
+      en: 'Routes decide where packets go, and firewall rules decide whether they are allowed to flow. In Google Cloud, the correct network design depends on both being intentional and aligned with the security model.',
+      al: 'Rrugët përcaktojnë ku shkojnë paketat, ndërsa rregullat e firewall përcaktojnë nëse ato lejohen të rrjedhin. Në Google Cloud, dizajni i duhur i rrjetit varet nga fakti që të dyja të jenë të përqendruara dhe të përputhura me modelin e sigurisë.'
+    },
+    nav: {
+      '../index.html': { en: 'Home', al: 'Kreu' },
+      'vpc-fundamentals.html': { en: 'VPC', al: 'VPC' },
+      'cidr-subnet-design.html': { en: 'CIDR', al: 'CIDR' },
+      'hybrid-connectivity.html': { en: 'Hybrid', al: 'Hibride' },
+      'load-balancing-dns.html': { en: 'LB & DNS', al: 'LB & DNS' },
+      'security-monitoring.html': { en: 'Security', al: 'Siguria' }
+    }
+  },
+  'hybrid-connectivity.html': {
+    title: { en: 'Hybrid Connectivity', al: 'Lidhja Hibride' },
+    description: {
+      en: 'Hybrid connectivity is about extending private network reach between on-prem environments and Google Cloud. The choice depends on bandwidth, latency sensitivity, resilience, and operational complexity.',
+      al: 'Lidhja hibride ka të bëjë me zgjerimin e arritshmërisë së rrjetit privat midis mjediseve lokale dhe Google Cloud. Zgjedhja varet nga kapaciteti i brezit, ndjeshmëria ndaj vonesës, resilienca dhe kompleksiteti operativ.'
+    },
+    nav: {
+      '../index.html': { en: 'Home', al: 'Kreu' },
+      'vpc-fundamentals.html': { en: 'VPC', al: 'VPC' },
+      'cidr-subnet-design.html': { en: 'CIDR', al: 'CIDR' },
+      'routing-firewall.html': { en: 'Routing', al: 'Routing' },
+      'load-balancing-dns.html': { en: 'LB & DNS', al: 'LB & DNS' },
+      'security-monitoring.html': { en: 'Security', al: 'Siguria' }
+    }
+  },
+  'load-balancing-dns.html': {
+    title: { en: 'Load Balancing and DNS', al: 'Balancimi i Ngarkesës dhe DNS' },
+    description: {
+      en: 'Load balancing ensures traffic is distributed across healthy backends, while DNS routes users to the right service or region. Together, they help keep services available, fast, and resilient.',
+      al: 'Balancimi i ngarkesës siguron që trafiku të shpërndahet në backend të shëndetshëm, ndërsa DNS i drejton përdoruesit te shërbimi ose rajoni i duhur. Së bashku, ata ndihmojnë të mbahen shërbimet të disponueshme, të shpejta dhe të qëndrueshme.'
+    },
+    nav: {
+      '../index.html': { en: 'Home', al: 'Kreu' },
+      'vpc-fundamentals.html': { en: 'VPC', al: 'VPC' },
+      'cidr-subnet-design.html': { en: 'CIDR', al: 'CIDR' },
+      'routing-firewall.html': { en: 'Routing', al: 'Routing' },
+      'hybrid-connectivity.html': { en: 'Hybrid', al: 'Hibride' },
+      'security-monitoring.html': { en: 'Security', al: 'Siguria' }
+    }
+  },
+  'security-monitoring.html': {
+    title: { en: 'Security and Monitoring', al: 'Siguria dhe Monitorimi' },
+    description: {
+      en: 'Networking security is not only about firewall rules. It is also about least privilege, logging, visibility, segmentation, and being able to diagnose traffic problems quickly when a system behaves unexpectedly.',
+      al: 'Siguria e rrjetit nuk është vetëm rregullat e firewall. Është gjithashtu e lidhur me privilegjin minimal, logging, dukshmërinë, segmentimin dhe aftësinë për të diagnostikuar shpejt problemet e trafikut kur një sistem sillet në mënyrë të paparashikueshme.'
+    },
+    nav: {
+      '../index.html': { en: 'Home', al: 'Kreu' },
+      'vpc-fundamentals.html': { en: 'VPC', al: 'VPC' },
+      'cidr-subnet-design.html': { en: 'CIDR', al: 'CIDR' },
+      'routing-firewall.html': { en: 'Routing', al: 'Routing' },
+      'hybrid-connectivity.html': { en: 'Hybrid', al: 'Hibride' },
+      'load-balancing-dns.html': { en: 'LB & DNS', al: 'LB & DNS' }
+    }
+  },
+  'shared-vpc.html': {
+    title: { en: 'Shared VPC', al: 'VPC e Ndarë' },
+    description: {
+      en: 'Shared VPC lets one host project share a VPC network with multiple service projects. It is a common design for enterprise teams that want centralized networking while keeping workloads isolated by project.',
+      al: 'VPC e ndarë u lejon një projekti host të ndajë një rrjet VPC me projekte të shumta shërbimi. Është një dizajn i zakonshëm për ekipe të ndërmarrjeve që duan rrjetëzim të centralizuar ndërkohë që mbajnë workload-et të izoluara sipas projekti.'
+    }
+  },
+  'private-connectivity.html': {
+    title: { en: 'Private Connectivity', al: 'Lidhja Private' },
+    description: {
+      en: 'These technologies help workloads stay private by avoiding public exposure while still reaching managed Google services and internal applications.',
+      al: 'Këto teknologji i ndihmojnë workload-et të mbeten private duke shmangur ekspozimin publik, ndërkohë që arrihen shërbime të menaxhuara të Google dhe aplikacione të brendshme.'
+    }
+  },
+  'cloud-router.html': {
+    title: { en: 'Cloud Router', al: 'Cloud Router' },
+    description: {
+      en: 'Cloud Router is the BGP-enabled routing component used for dynamic route exchange between Google Cloud and outside networks. It is central to resilient hybrid connectivity and traffic control.',
+      al: 'Cloud Router është komponenti i routing me BGP i përdorur për shkëmbimin dinamik të rrugëve midis Google Cloud dhe rrjeteve të jashtme. Ai është thelbësor për lidhjen hibride të qëndrueshme dhe kontrollin e trafikut.'
+    }
+  },
+  'dns-best-practices.html': {
+    title: { en: 'DNS Best Practices', al: 'Praktikat më të mira të DNS' },
+    description: {
+      en: 'DNS is not just name resolution. In cloud networking, DNS design affects load balancing decisions, service discovery, private zone isolation, and cross-environment routing.',
+      al: 'DNS nuk është vetëm zgjidhja e emrave. Në rrjetëzimin e cloud, dizajni i DNS ndikon në vendimet e balancimit të ngarkesës, zbulimin e shërbimeve, izolimin e zonave private dhe routing midis mjediseve.'
+    }
+  },
+  'edge-security.html': {
+    title: { en: 'Edge Security', al: 'Siguria në Edge' },
+    description: {
+      en: 'Edge security protects the entry points of your services, filtering malicious traffic before it reaches the origin and helping keep workloads resilient and reliable.',
+      al: 'Siguria në edge mbron pikat e hyrjes të shërbimeve tuaja, duke filtruar trafikun e keqfilltë para se të arrijë në origjinë dhe duke ndihmuar që workload-et të mbeten të qëndrueshme dhe të besueshme.'
+    }
+  },
+  'network-deep-dives.html': {
+    title: { en: 'Network Deep Dives', al: 'Analiza të thelluara të rrjetit' },
+    description: {
+      en: 'These are the advanced networking topics most often tested in the Professional Cloud Network Engineer exam. Each one is a high-value area where architecture decisions matter.',
+      al: 'Këto janë temat e avancuara të rrjetit që shpesh testohen në provimin Professional Cloud Network Engineer. Secila është një zonë me vlerë të lartë ku vendimet e arkitekturës kanë rëndësi.'
+    }
+  },
+  'sandbox-labs.html': {
+    title: { en: 'Sandbox Lab Ideas', al: 'Ide për Lab në Sandbox' },
+    description: {
+      en: 'These labs are designed for a free-tier or sandbox Google Cloud setup. Each exercise gives you a realistic networking challenge, shows how to build it step by step, and explains the value after it is implemented.',
+      al: 'Këto lab janë projektuar për një mjedis Google Cloud me free-tier ose sandbox. Secili ushtrim ju jep një sfidë realiste të rrjetit, tregon se si ta ndërtoni hap pas hapi dhe shpjegon vlerën pas zbatimit.'
+    }
+  },
+  'whitepapers.html': {
+    title: { en: 'Whitepaper Library', al: 'Biblioteka e Whitepapers' },
+    description: {
+      en: 'Curated technical whitepapers and design references for networking, security, cloud migration, and data strategy.',
+      al: 'Whitepapers teknike dhe referenca dizajni të kuratuara për rrjetëzim, siguri, migrim cloud dhe strategji të të dhënave.'
+    }
+  }
+};
+
+const pageTextTranslations = {
+  'vpc-fundamentals.html': {
+    'What a VPC really is': 'Çfarë është në të vërtetë një VPC',
+    'Core concepts': 'Konceptet kryesore',
+    'Why this matters for the exam': 'Pse është e rëndësishme për provim',
+    'Exam traps to avoid': 'Gabuese të provimit për t\'i shmangur',
+    'In Google Cloud, a VPC network is a global resource, while subnets live in a specific region. This means you can create one VPC and then place regional subnets within it to support workloads in multiple locations without changing the design of the network itself.': 'Në Google Cloud, një rrjet VPC është një burim global, ndërsa nëndisjet jetojnë në një rajon të caktuar. Kjo do të thotë se mund të krijoni një VPC dhe pastaj të vendosni nëndisa rajonale brenda tij për të mbështetur workload-et në vende të shumta pa ndryshuar dizajnin e vetë rrjetit.',
+    'Key idea': 'Ide kryesore',
+    'Think of the VPC as the network boundary, and subnets as the regional building blocks inside that boundary. Firewalls and routes are what shape how traffic can move between those resources.': 'Mendoni për VPC-në si kufirin e rrjetit, dhe për nëndisjet si blloqet ndërtimore rajonale brenda atij kufiri. Firewall-et dhe rrugët janë ato që formësojnë mënyrën se si mund të lëvizë trafiku midis atyre burimeve.',
+    'Global network:': 'Rrjeti global:',
+    'One VPC can span multiple regions.': 'Një VPC mund të shtrihet në rajone të shumta.',
+    'Regional subnets:': 'Nëndisat rajonale:',
+    'Each subnet belongs to one region and has a CIDR block.': 'Secila nëndis i përket një rajoni dhe ka një bllok CIDR.',
+    'Firewall controls:': 'Kontrolli i firewall:',
+    'Ingress and egress rules determine which traffic is allowed.': 'Rregullat e ingress dhe egress përcaktojnë se cilin trafiku lejohet.',
+    'Routes:': 'Rrugët:',
+    'GCP automatically creates system routes, and custom routes can be added for special traffic patterns.': 'GCP krijon automatikisht rrugë sistemi, dhe rrugët e personalizuara mund të shtohen për modele të veçanta trafiku.',
+    'Most networking questions are really about choosing the right architecture pattern: private-only access, isolation by segment, east-west traffic control, and hybrid connectivity. A good VPC design makes route tables, firewall policies, and service access predictable and secure.': 'Shumica e pyetjeve të rrjetëzimit në fakt kanë të bëjnë me zgjedhjen e modelit të duhur të arkitekturës: qasje private-only, izolim sipas segmentit, kontrolli i trafikut east-west dhe lidhja hibride. Një dizajn i mirë i VPC bën tabelat e rrugëve, politikat e firewall dhe qasjen në shërbime të parashikueshme dhe të sigurta.',
+    'Confusing a VPC being global with a subnet being global. Subnets are regional.': 'Të ngatërrosh një VPC që është global me një subnet që është globale. Nëndisat janë rajonale.',
+    'Assuming all traffic is allowed by default. Firewall rules are the main access control mechanism.': 'Të supozohet se të gjithë trafiku lejohet si parazgjedhje. Rregullat e firewall janë mekanizmi kryesor i kontrollit të qasjes.',
+    'Forgetting that communication within a VPC may still require correct firewall and routing behavior.': 'Të harosh se komunikimi brenda një VPC ende mund të kërkojë sjellje të saktë të firewall dhe routing.'
+  },
+  'cidr-subnet-design.html': {
+    'Why CIDR matters': 'Pse CIDR është e rëndësishme',
+    'CIDR notation like 10.0.0.0/16 or 10.1.0.0/24 tells you how many bits are used for the network and how many bits remain for hosts. This determines the number of addresses available and how the network can be segmented.': 'Notacioni CIDR si 10.0.0.0/16 ose 10.1.0.0/24 ju tregon sa bit përdoren për rrjetin dhe sa mbeten për host-et. Kjo përcakton numrin e adresave të disponueshme dhe mënyrën se si mund të segmentohet rrjeti.',
+    'Quick examples': 'Shembuj të shpejtë',
+    '/16 gives a large block with many addresses; /24 is a smaller block usually used for a logical segment or subnet. In GCP, a subnet range should be planned carefully so it does not overlap with on-premises ranges or other VPC ranges.': '/16 jep një bllok të madh me shumë adresa; /24 është një bllok më i vogël që zakonisht përdoret për një segment logjik ose nëndis. Në GCP, një gamë nëndisi duhet të planifikohet me kujdes që të mos mbivendoset me gamat në mjediset lokale ose me gamat e tjera VPC.',
+    'Subnet design principles': 'Parimet e dizajnit të subnet',
+    'Use private RFC1918 ranges when possible: 10.0.0.0/8, 172.16.0.0/12, 192.168.0.0/16.': 'Përdorni gama private RFC1918 kur është e mundur: 10.0.0.0/8, 172.16.0.0/12, 192.168.0.0/16.',
+    'Avoid overlapping ranges between VPCs, on-prem networks, and peered networks.': 'Shmangni gamat që mbivendosen midis VPC-ve, rrjeteve lokale dhe rrjeteve të lidhura.',
+    'Group resources by function or environment: app tier, data tier, management, shared services.': 'Gruponi burimet sipas funksionit ose mjedisit: shtresa e aplikacioneve, shtresa e të dhënave, menaxhimi, shërbimet e ndara.',
+    'Leave room for growth by reserving headroom rather than exhausting a subnet too early.': 'Lini hapësirë për rritje duke rezervuar hapësirë ekstra, në vend që të shterni një nëndis shumë herët.',
+    'How this connects to Google Cloud': 'Si lidhet kjo me Google Cloud',
+    'In GCP, subnets are regional and must be part of a VPC. A common pattern is one VPC per environment or trust boundary, with multiple regional subnets inside it. This keeps routing predictable and makes firewall strategy easier to reason about.': 'Në GCP, nëndisat janë rajonale dhe duhet të jenë pjesë e një VPC. Një model i zakonshëm është një VPC për çdo mjedis ose kufi besimi, me një ose më shumë nëndisa rajonale brenda tij. Kjo e bën routing-un të parashikueshëm dhe e bën strategjinë e firewall-it më të lehtë për tu kuptuar.',
+    'Exam pitfalls': 'Betejat e provimit',
+    'Thinking a subnet can be global. It cannot.': 'Të mendosh se një nëndis mund të jetë globale. Nuk mund të jetë.',
+    'Forgetting that private IP ranges are usually preferred for internal traffic.': 'Të harosh se gamat private IP zakonisht preferohen për trafikun e brendshëm.',
+    'Ignoring overlap between VPC CIDR and customer-premises ranges, which can break connectivity in hybrid designs.': 'Të injorosh mbivendosjen midis CIDR të VPC dhe gamave të mjediseve të klientit, gjë që mund të prishë lidhshmërinë në dizajne hibride.'
+  },
+  'routing-firewall.html': {
+    'Routes': 'Rrugët',
+    'Firewall rules': 'Rregullat e firewall',
+    'Routing defines the path traffic takes in and out of a VPC. Google Cloud automatically creates routes for local traffic and default internet egress. Custom routes are often used when traffic needs to go through a NAT gateway, a firewall appliance, or a VPN tunnel.': 'Routing përcakton rrugën që ndjek trafiku brenda dhe jashtë një VPC. Google Cloud krijon automatikisht rrugë për trafikun lokal dhe egress-in e paracaktuar në internet. Rrugët e personalizuara përdoren shpesh kur trafiku duhet të kalojë përmes një NAT gateway, një appliance firewall ose një tunnel VPN.',
+    'Firewall rules are stateful and evaluate based on direction, source/destination, protocol, and port.': 'Rregullat e firewall janë stateful dhe vlerësohen bazuar në drejtim, burim/destinacion, protokoll dhe port.',
+    'Ingress is usually a common place to allow traffic from specific sources, such as load balancers or bastion hosts.': 'Ingress është zakonisht një vend i zakonshëm për leje të trafikut nga burime të caktuara, si balancerët e ngarkesës ose host-et bastion.',
+    'Egress rules help control outbound access and are important when workloads need to reach specific destinations or be kept private.': 'Rregullat e egress ndihmojnë në kontrollin e qasjes dalëse dhe janë të rëndësishme kur workload-et duan të arrijnë destinacione të caktuara ose të mbahen private.',
+    'Routing and firewall questions are common in the exam because they test how well you understand traffic flow and control boundaries.': 'Pyetjet e routing dhe firewall janë të zakonshme në provim sepse testojnë se sa mirë kuptoni rrjedhën e trafikut dhe kufijtë e kontrollit.',
+    'The key skill is to reason through which path traffic should take and which services should be reachable.': 'Aftësia kryesore është të arsyetosh se cili rrugë duhet të ndjekë trafiku dhe cilat shërbime duhet të jenë të arritshme.'
+  },
+  'security-monitoring.html': {
+    'Least privilege and segmentation': 'Privilegji minimal dhe segmentimi',
+    'Monitoring and diagnostics': 'Monitorimi dhe diagnostikimi',
+    'Networking security is not only about firewall rules. It is also about least privilege, logging, visibility, segmentation, and being able to diagnose traffic problems quickly when a system behaves unexpectedly.': 'Siguria e rrjetit nuk është vetëm rregullat e firewall. Është gjithashtu e lidhur me privilegjin minimal, logging, dukshmërinë, segmentimin dhe aftësinë për të diagnostikuar shpejt problemet e trafikut kur një sistem sillet në mënyrë të paparashikueshme.'
+  },
+  'shared-vpc.html': {
+    'What it is': 'Çfarë është',
+    'Why it matters': 'Pse është e rëndësishme',
+    'What to remember': 'Çfarë duhet të mbani mend'
+  },
+  'private-connectivity.html': {
+    'Private Google Access': 'Private Google Access',
+    'Private Service Access': 'Private Service Access',
+    'Design guidance': 'Udhëzime të dizajnit'
+  },
+  'cloud-router.html': {
+    'Why Cloud Router matters': 'Pse Cloud Router ka rëndësi',
+    'Exam focus': 'Fokus në provim',
+    'Typical design patterns': 'Modelet tipike të dizajnit',
+    'Best fit': 'Përshtatja më e mirë',
+    'What to remember': 'Çfarë duhet të mbani mend',
+    'Memory hook': 'Kujtesë hook',
+    'Cloud Router + BGP = dynamic cloud-to-on-prem routing.': 'Cloud Router + BGP = routing dinamik cloud-to-on-prem.',
+    'Cloud Router is the BGP-enabled routing component that lets Google Cloud exchange routes with your on-premises networks, partner networks, and VPN or Interconnect attachments.': 'Cloud Router është komponenti i routing me BGP që lejon Google Cloud të shkëmbejë rrugë me rrjetet tuaja lokale, rrjetet e partnerëve dhe lidhjet VPN ose Interconnect.',
+    'Static routes can work for simple topologies, but dynamic route exchange is the default pattern for resilient, scalable hybrid connections. Cloud Router enables BGP session management and route propagation between Google Cloud and outside networks.': 'Rrugët statike mund të funksionojnë për topologji të thjeshta, por shkëmbimi dinamik i rrugëve është modeli i parazgjedhur për lidhjet hibride të qëndrueshme dhe të shkallëzuara. Cloud Router aktivizon menaxhimin e sesioneve BGP dhe përhapjen e rrugëve midis Google Cloud dhe rrjeteve të jashtme.',
+    'Cloud Router is usually paired with Cloud VPN or Interconnect.': 'Cloud Router zakonisht shoqërohet me Cloud VPN ose Interconnect.',
+    'BGP is the protocol used to advertise and learn routes.': 'BGP është protokolli i përdorur për reklamimin dhe mësimin e rrugëve.',
+    'It supports dynamic route exchange and is essential in hybrid connectivity designs.': 'Ai mbështet shkëmbimin dinamik të rrugëve dhe është thelbësor në dizajnet e lidhjes hibride.',
+    'Choose Cloud Router when you need route propagation and redundancy for private connectivity between Google Cloud and external networks.': 'Zgjidhni Cloud Router kur keni nevojë për përhapje rrugësh dhe redundancë për lidhjen private midis Google Cloud dhe rrjeteve të jashtme.',
+    'HA VPN with BGP for resilient site-to-cloud connectivity.': 'HA VPN me BGP për lidhshmëri të qëndrueshme site-to-cloud.',
+    'Dedicated Interconnect for high-throughput, low-latency links.': 'Dedicated Interconnect për lidhje me kapacitet të lartë dhe vonesë të ulët.',
+    'Multiple regions and edge paths require dynamic route management.': 'Rajone të shumta dhe rrugë në edge kërkojnë menaxhim dinamik të rrugëve.',
+    'Use this for route advertisement and learning across hybrid connections.': 'Përdoreni për reklamimin dhe mësimin e rrugëve në lidhjet hibride.',
+    'It complements VPN and Interconnect, not replace them.': 'Ai plotëson VPN dhe Interconnect, nuk i zëvendëson ata.',
+    'In exam questions, route propagation is usually the clue.': 'Në pyetjet e provimit, përhapja e rrugëve është zakonisht pista.'
+  },
+  'dns-best-practices.html': {
+    'Key principles': 'Parimet kryesore',
+    'Why it matters': 'Pse është e rëndësishme',
+    'Design checklist': 'Lista e kontrollit të dizajnit',
+    'What to remember': 'Çfarë duhet të mbani mend',
+    'Memory hook': 'Kujtesë hook',
+    'Private DNS keeps internal apps private; public DNS informs the internet.': 'Private DNS e mban të fshehtë aplikacionet e brendshme; public DNS informon internetin.',
+    'DNS is more than name resolution. In cloud architecture, DNS influences service discovery, private access, failover, and how traffic is routed among regions and applications.': 'DNS nuk është vetëm zgjidhja e emrave. Në arkitekturën e cloud, DNS ndikon në zbulimin e shërbimeve, qasjen private, failover dhe mënyrën se si drejtohet trafiku midis rajoneve dhe aplikacioneve.',
+    'Use private DNS for internal-only workloads and service discovery.': 'Përdorni DNS private për workload-et dhe zbulimin e shërbimeve të brendshme.',
+    'Keep public and private namespaces clearly separated to avoid confusion.': 'Mbani hapësirat e emrave publike dhe private të ndara qartë për të shmangur konfuzionin.',
+    'Align DNS records with your load-balancer and failover design.': 'Përputhni regjistrat DNS me dizajnin tuaj të balancimit të ngarkesës dhe failover.',
+    'Choosing the wrong DNS pattern can point clients to the wrong region, create split-horizon confusion, or break internal service communication.': 'Zgjedhja e modelit të gabuar të DNS mund të drejtojë klientët në rajon të gabuar, të krijojë konfuzion split-horizon ose të prishë komunikimin e shërbimeve të brendshme.',
+    'Use health checks and weighted routing when designing resiliency.': 'Përdorni health checks dhe weighted routing kur dizajnoni resiliencën.',
+    'Decide which domains are public vs private.': 'Vendosni cilat domenë janë publike dhe cilat private.',
+    'Ensure internal apps do not depend on public DNS when private connectivity is required.': 'Sigurohuni që aplikacionet e brendshme të mos varen nga DNS publike kur kërkohet lidhshmëri private.'
+  },
+  'edge-security.html': {
+    'Key services': 'Shërbimet kryesore',
+    'Common design choices': 'Zgjedhje të zakonshme të dizajnit',
+    'Exam cues': 'Kujtimet e provimit',
+    'What to remember': 'Çfarë duhet të mbani mend',
+    'Memory hook': 'Kujtesë hook',
+    'Edge security solutions protect public-facing services from abuse, DDoS traffic, and unwanted access. They are often used in front of load balancers and internet-facing applications.': 'Zgjidhjet e sigurisë në edge mbrojnë shërbimet me ekspozim publik nga abuzimi, trafiku DDoS dhe qasja e padëshiruar. Ato përdoren shpesh para balancerëve të ngarkesës dhe aplikacioneve me ekspozim në internet.',
+    'Cloud Armor provides policy-based traffic filtering and DDoS protection.': 'Cloud Armor ofron filtrim të trafikut bazuar në politika dhe mbrojtje DDoS.',
+    'Cloud CDN improves latency by caching content closer to users.': 'Cloud CDN ul vonesën duke ruajtur përmbajtje më afër përdoruesve.',
+    'Cloud NAT allows private resources to access the internet while avoiding public IP exposure.': 'Cloud NAT lejon burime private të qasen në internet ndërsa shmang ekspozimin me IP publike.',
+    'Use Cloud Armor to enforce rate limits, geo restrictions, and allow/deny policies.': 'Përdorni Cloud Armor për të zbatuar rate limits, kufizime gjeografike dhe politika allow/deny.',
+    'Use Cloud CDN for content-heavy front ends and better user experience.': 'Përdorni Cloud CDN për front-end-et e mbingarkuara me përmbajtje dhe përvojë më të mirë të përdoruesit.',
+    'Use Cloud NAT when private instances need outbound internet access without fixed public IPs.': 'Përdorni Cloud NAT kur instancat private kanë nevojë për qasje dalëse në internet pa IP publike fikse.',
+    '“The app has public traffic and needs DDoS protection.”': '“Aplikacioni ka trafikun publik dhe ka nevojë për mbrojtje DDoS.”',
+    '“Private instances require outbound internet connectivity without public IPs.”': '“Instancat private kërkojnë lidhshmëri dalëse në internet pa IP publike.”',
+    '“Traffic shaping and geo filtering must be applied before origin servers.”': '“Formimi i trafikut dhe filtrimi gjeografik duhet të zbatohen para serverëve origjinë.”',
+    'Edge controls protect traffic before it reaches the app.': 'Kontrollet e edge mbrojnë trafikun para se të arrijë te aplikacioni.',
+    'Cloud Armor secures the public edge; Cloud NAT keeps private workloads outbound without public IP assignment.': 'Cloud Armor e siguron edge publik; Cloud NAT e mban trafikun dalës të workload-ëve private pa caktim IP publik.'
+  },
+  'hybrid-connectivity.html': {
+    'VPN': 'VPN',
+    'Cloud Interconnect': 'Cloud Interconnect',
+    'Network Connectivity Center': 'Network Connectivity Center',
+    'Decision framework': 'Frameworki i vendimmarrjes',
+    'Hybrid connectivity is about extending private network reach between on-prem environments and Google Cloud. The choice depends on bandwidth, latency sensitivity, resilience, and operational complexity.': 'Lidhja hibride ka të bëjë me zgjerimin e arritshmërisë së rrjetit privat midis mjediseve lokale dhe Google Cloud. Zgjedhja varet nga kapaciteti i brezit, ndjeshmëria ndaj vonesës, resilienca dhe kompleksiteti operativ.',
+    'Cloud VPN is a secure and flexible option that connects an on-prem network to GCP over the public internet or through a managed tunnel path. It is a good fit when you need connectivity, but do not require the highest throughput or strict SLA profiles.': 'Cloud VPN është një opsion i sigurt dhe fleksibël që lidh një rrjet lokal me GCP përmes internetit publik ose një rruge të menaxhuar tunel. Është i përshtatshëm kur keni nevojë për lidhshmëri, por nuk kërkoni kapacitetin më të lartë ose profile stricte SLA.',
+    'Cloud Interconnect provides private connectivity with better performance and predictable latency. It is often selected for enterprise workloads with large data transfer needs, stricter network performance needs, or higher availability requirements.': 'Cloud Interconnect ofron lidhshmëri private me performancë më të mirë dhe vonesë të parashikueshme. Zakonisht zgjidhet për workload-et e ndërmarrjeve me nevoja të mëdha transferimi të të dhënave, kërkesa stricte për performancën e rrjetit ose kërkesa më të larta për disponueshmëri.',
+    'NCC centralizes routing and connectivity across multiple networks. It is useful for large organizations with several on-prem or cloud environments that need central management and policy control.': 'NCC centralizon routing dhe lidhshmërinë nëpër rrjete të shumta. Është i dobishëm për organizata të mëdha me disa mjedise lokale ose cloud që kanë nevojë për menaxhim qendror dhe kontroll politikash.',
+    'Use VPN for simplicity and lower cost.': 'Përdorni VPN për thjeshtësi dhe kosto më të ulëta.',
+    'Use Interconnect for high bandwidth and predictable performance.': 'Përdorni Interconnect për bandwith të lartë dhe performancë të parashikueshme.',
+    'Use NCC when you need a hub-and-spoke or global network architecture model.': 'Përdorni NCC kur keni nevojë për një model arkitekturë rrjeti hub-and-spoke ose global.'
+  },
+  'load-balancing-dns.html': {
+    'Load balancing in GCP': 'Balancimi i ngarkesës në GCP',
+    'Why health checks matter': 'Pse health checks kanë rëndësi',
+    'DNS and traffic management': 'DNS dhe menaxhimi i trafikut',
+    'Exam perspective': 'Perspektiva e provimit',
+    'Load balancing ensures traffic is distributed across healthy backends, while DNS routes users to the right service or region. Together, they help keep services available, fast, and resilient.': 'Balancimi i ngarkesës siguron që trafiku të shpërndahet në backend të shëndetshëm, ndërsa DNS i drejton përdoruesit te shërbimi ose rajoni i duhur. Së bashku, ata ndihmojnë të mbahen shërbimet të disponueshme, të shpejta dhe të qëndrueshme.',
+    'Google Cloud offers several load balancer types for different traffic layers, such as HTTP(S), TCP/SSL, and UDP. The decision depends on whether the workload is internet-facing, internal-only, or needs global reach across regions.': 'Google Cloud ofron disa lloje balancerësh ngarkese për shtresa të ndryshme trafiku, si HTTP(S), TCP/SSL dhe UDP. Vendimi varet nga fakti nëse workload-i është i ekspozuar në internet, vetëm i brendshëm, ose ka nevojë për arritshmëri globale në rajone.',
+    'Health checks determine whether a backend is healthy and can receive traffic.': 'Health checks përcaktojnë nëse një backend është i shëndetshëm dhe mund të marrë trafikun.',
+    'Load balancers remove unhealthy backends automatically.': 'Balancerët largojnë backend-et e pasuksesshme automatikisht.',
+    'Traffic can be distributed by region, session affinity, or traffic splitting for gradual deployment.': 'Trafiku mund të shpërndahet sipas rajonit, session affinity ose traffic splitting për deployim gradual.',
+    'DNS allows you to map service names to IPs and often plays a role in global routing. For multi-region systems, you may combine DNS records with health checks and failover patterns to steer traffic to healthy endpoints.': 'DNS ju lejon të lidhni emrat e shërbimeve me IP-të dhe shpesh luan një rol në routing global. Për sistemet me shumë rajone, mund të kombinoni regjistrat DNS me health checks dhe modele failover për të drejtuar trafikun te endpoint-et e shëndetshme.',
+    'Many architecture questions are really about choosing between global load balancing, regional load balancing, and direct service routing based on latency and resilience requirements.': 'Shumë pyetje arkitekturore në fakt kanë të bëjnë me zgjedhjen midis global load balancing, regional load balancing dhe direct service routing bazuar në kërkesat për vonesë dhe resiliencë.'
+  },
+  'security-monitoring.html': {
+    'Least privilege and segmentation': 'Privilegji minimal dhe segmentimi',
+    'Monitoring and diagnostics': 'Monitorimi dhe diagnostikimi',
+    'What the exam tests': 'Çfarë teston provimi',
+    'Good practice': 'Praktikë e mirë',
+    'Segment workloads into trust zones so that only required traffic is allowed. VPC boundaries, firewall rules, and service access controls reduce lateral movement and keep an application easier to secure.': 'Segmentoni workload-et në zona besimi, kështu që të lejohet vetëm trafiku i kërkuar. Kufijtë VPC, rregullat e firewall dhe kontrollot e qasjes në shërbime reduktojnë lëvizjen anësore dhe e bëjnë një aplikacion më të lehtë për t’u siguruar.',
+    'Use logs and flow data to validate whether traffic is reaching its destination.': 'Përdorni log dhe të dhëna flow për të validuar nëse trafiku arrin në destinacionin e tij.',
+    'Check whether an issue is route-related, firewall-related, or health-check-related.': 'Kontrolloni nëse problemi lidhet me route, firewall ose health check.',
+    'Look at packet and connection patterns before changing policies in production.': 'Shikoni modelet e packet dhe lidhjeve para se të ndryshoni politika në prodhim.',
+    'Exam questions often focus on the correct security pattern, such as protecting a public frontend, restricting a private database tier, and using private service access or load balancer ingress paths appropriately.': 'Pyetjet e provimit shpesh fokusohen në modelin e duhur të sigurisë, si mbrojtja e një frontend publike, kufizimi i një shtrese private të bazës së të dhënave dhe përdorimi i private service access ose rrugëve ingress të balancerit në mënyrë të përshtatshme.'
+  },
+  'shared-vpc.html': {
+    'What it is': 'Çfarë është',
+    'Why it matters': 'Pse është e rëndësishme',
+    'What to remember': 'Çfarë duhet të mbani mend',
+    'Exam mindset': 'Mendësia e provimit',
+    'Typical exam cues': 'Kujtime tipike të provimit',
+    'Key design decision': 'Vendim kyç i dizajnit',
+    'Shared VPC = one network, many teams.': 'Shared VPC = një rrjet, shumë ekipe.',
+    'A Shared VPC network is created in a host project and attached to service projects. The host project owns the shared network and its subnets, while service projects consume those networks for their instances, GKE clusters, and managed services.': 'Një rrjet Shared VPC krijohet në një host project dhe bashkëngjitet me service projects. Host project zotëron rrjetin e ndarë dhe nëndisat e tij, ndërsa service projects përdorin ato rrjete për instancat, cluster-et GKE dhe shërbimet e menaxhuara.',
+    'Centralizes network design and firewall controls.': 'Centralizon dizajnin e rrjetit dhe kontrollin e firewall.',
+    'Allows multiple teams to use the same network without duplicating VPCs.': 'Lejon ekipe të shumta të përdorin të njëjtin rrjet pa dyfishuar VPC-të.',
+    'Supports common security boundaries and route control.': 'Mbështet kufij të përbashkët të sigurisë dhe kontroll të rrugëve.',
+    'Host project = network owner and admin.': 'Host project = pronar dhe admin i rrjetit.',
+    'Service project = workloads and resources using the shared network.': 'Service project = workload-et dhe burimet që përdorin rrjetin e ndarë.',
+    'Firewall, routing, and connectivity rules usually live in the host project’s network design.': 'Rregullat e firewall, routing dhe lidhshmërisë zakonisht ndodhen në dizajnin e rrjetit të host project-it.'
+  },
+  'private-connectivity.html': {
+    'Private Google Access': 'Private Google Access',
+    'Private Service Access': 'Private Service Access',
+    'Design guidance': 'Udhëzime të dizajnit',
+    'Typical exam cues': 'Kujtime tipike të provimit',
+    'What to remember': 'Çfarë duhet të mbani mend',
+    'Memory hook': 'Kujtesë hook',
+    'Private access = no public IP, still private connectivity.': 'Private access = pa IP publik, megjithatë lidhshmëri private.',
+    'Private Google Access allows VM instances without external IPs to reach Google APIs and services over private network paths. This is critical for security and for keeping workloads out of public routing.': 'Private Google Access lejon instancat VM pa IP të jashtme të arrijnë API dhe shërbime të Google përmes rrugëve private të rrjetit. Kjo është kritike për sigurinë dhe për mbajtjen e workload-ëve jashtë routing publik.',
+    'Private Service Access creates private connectivity between consumers and Google-managed or internal services, often using allocated private IP ranges. It helps services communicate without exposing them to the public internet.': 'Private Service Access krijon lidhshmëri private midis konsumatorëve dhe shërbimeve të menaxhuara nga Google ose të brendshme, shpesh duke përdorur gamat private IP të alokuara. Ai ndihmon shërbimet të komunikojnë pa i ekspozuar në internetin publik.',
+    'Private Google Access is for reaching Google APIs and services from private VMs.': 'Private Google Access është për arritjen e API dhe shërbimeve të Google nga VMs private.',
+    'Private Service Access is for private connectivity to managed services or internal endpoints.': 'Private Service Access është për lidhshmëri private me shërbime të menaxhuara ose endpoint-e të brendshme.',
+    'Use these patterns when security policy requires private-only communication.': 'Përdorni këto modele kur politika e sigurisë kërkon komunikim vetëm private.',
+    'Private Google Access keeps VMs private while reaching Google APIs.': 'Private Google Access e mban VMs private ndërsa arrin API të Google.',
+    'Private Service Access supports private reachability to managed or internal services.': 'Private Service Access mbështet arritshmëri private ndaj shërbimeve të menaxhuara ose të brendshme.'
+  },
+  'network-deep-dives.html': {
+    'High-value deep-dive topics': 'Tema me vlerë të lartë për analizë të thellë',
+    'Organizational constraints': 'Kufizimet organizative',
+    'Shared VPC': 'VPC e ndarë',
+    'Private Service Access and Private Google Access': 'Private Service Access dhe Private Google Access',
+    'Cloud Router': 'Cloud Router',
+    'DNS best practices': 'Praktikat më të mira të DNS',
+    'Choosing a load balancer': 'Zgjedhja e një balanceri të ngarkesës',
+    'Internal LB and next hop with NVA': 'Internal LB dhe next hop me NVA',
+    'Networking on GKE': 'Rrjetëzimi në GKE',
+    'Hybrid connectivity options': 'Opsionet e lidhjes hibride',
+    'Dedicated Interconnect and dual stack': 'Dedicated Interconnect dhe dual stack',
+    'HA VPN': 'HA VPN',
+    'Cross-Cloud Network for distributed applications': 'Cross-Cloud Network për aplikacione të shpërndara',
+    'Cloud CDN': 'Cloud CDN',
+    'Invalidations': 'Invalidations',
+    'NGFW': 'NGFW',
+    'Cloud Armor': 'Cloud Armor',
+    'Cloud NAT': 'Cloud NAT',
+    'VPC': 'VPC',
+    'These are the advanced networking topics most often tested in the Professional Cloud Network Engineer exam. Each one is a high-value area where architecture decisions, route behavior, hybrid connectivity, and security design matter.': 'Këto janë temat e avancuara të rrjetit që shpesh testohen në provimin Professional Cloud Network Engineer. Secila është një zonë me vlerë të lartë ku vendimet e arkitekturës, sjellja e rrugëve, lidhja hibride dhe dizajni i sigurisë kanë rëndësi.',
+    'Organization policies can limit networking design by preventing external IPs, restricting VPC peering, or forcing governance around how projects and services can be connected. For the exam, know that policy constraints can override default design choices.': 'Politikat e organizimit mund të kufizojnë dizajnin e rrjetit duke parandaluar IP-të e jashtme, duke kufizuar VPC peering ose duke imponuar governance rreth se si mund të lidhen projektet dhe shërbimet. Për provimin, dini që kufizimet e politikës mund të anulojnë zgjedhjet e paracaktuara të dizajnit.',
+    'Shared VPC allows a host project to share a VPC network with other projects. This is important for centralized network administration, consistent firewall policies, and multi-project environments that need common network services.': 'Shared VPC lejon që një host project të ndajë një rrjet VPC me projekte të tjera. Kjo është e rëndësishme për administrimin e centralizuar të rrjetit, politikat e përputhshme të firewall dhe mjediset me shumë projekte që kanë nevojë për shërbime të përbashkëta të rrjetit.',
+    'Private Service Access allows private, internal access to managed services such as Google APIs or internal services over private IP space. Private Google Access lets VMs without external IP addresses reach Google APIs and services over the VPC network.': 'Private Service Access lejon qasje private dhe të brendshme ndaj shërbimeve të menaxhuara si API të Google ose shërbime të brendshme përmes hapësirës private IP. Private Google Access i lejon VM-ve pa adresa IP të jashtme të arrijnë API dhe shërbime të Google përmes rrjetit VPC.',
+    'Cloud Router is the BGP-enabled routing component used for dynamic route exchange with on-premises networks and partner networks. It is central to Hybrid Connectivity, Interconnect, and VPN design.': 'Cloud Router është komponenti i routing me BGP i përdorur për shkëmbimin dinamik të rrugëve me rrjetet në vend dhe rrjetet e partnerëve. Ai është qendror për dizajnin e Hybrid Connectivity, Interconnect dhe VPN.',
+    'DNS is not just name resolution. In cloud networking, DNS design affects load balancing decisions, service discovery, private zone isolation, and cross-environment routing. Good DNS patterns improve resilience and reduce failed lookups.': 'DNS nuk është vetëm zgjidhja e emrave. Në rrjetëzimin e cloud, dizajni i DNS ndikon në vendimet e balancimit të ngarkesës, zbulimin e shërbimeve, izolimin e zonave private dhe routing-n e mjediseve të ndryshme. Modelet e mira të DNS rrisin resiliencën dhe reduktojnë kërkimet e dështuara.',
+    'Network engineering questions often test whether you know when to use Global HTTP(S), Regional TCP/UDP, Internal Load Balancing, or Ingress for Kubernetes. The decision is driven by protocol, exposure model, and traffic characteristics.': 'Pyetjet e inxhinierisë së rrjetit shpesh testojnë nëse dini kur të përdorni Global HTTP(S), Regional TCP/UDP, Internal Load Balancing ose Ingress për Kubernetes. Vendimi varet nga protokolli, modeli i ekspozimit dhe karakteristikat e trafikut.',
+    'Internal load balancers are frequently used to expose services only inside a VPC or between networks. When paired with a Next-Hop firewall or NVA, they can be used to steer traffic through security appliances or centralized inspection layers.': 'Balancerët e ngarkesës të brendshëm përdoren shpesh për të ekspozuar shërbime vetëm brenda një VPC ose midis rrjeteve. Kur kombinohen me një firewall Next-Hop ose NVA, mund të përdoren për të drejtuar trafikun nëpër appliance sigurie ose shtresa të centralizuara të inspektimit.',
+    'Google Kubernetes Engine networking includes cluster IP ranges, pod networking, node networking, and service exposure. VPC-native clusters are usually the default pattern for modern, scalable Kubernetes networking on GCP.': 'Rrjetëzimi i Google Kubernetes Engine përfshin gamat e IP-ve të cluster-it, rrjetëzimin e pod-ve, rrjetëzimin e node-ve dhe ekspozimin e shërbimeve. Cluster-et VPC-native zakonisht janë modeli i parazgjedhur për rrjetëzimin modern dhe të shkallëzuar të Kubernetes në GCP.',
+    'Hybrid connectivity is the set of ways to connect on-prem environments to Google Cloud. The main choices are VPN, Interconnect, and Network Connectivity Center, depending on bandwidth, latency, and operational needs.': 'Lidhja hibride është grupi i mënyrave për të lidhur mjediset lokale me Google Cloud. Zgjedhjet kryesore janë VPN, Interconnect dhe Network Connectivity Center, në varësi të bandwidth, vonesës dhe nevojave operative.',
+    'Dedicated Interconnect provides private connectivity with predictable bandwidth and lower latency. Dual stack support matters for IPv4 + IPv6 workloads or mixed network environments that need both protocols.': 'Dedicated Interconnect ofron lidhshmëri private me bandwidth të parashikueshëm dhe vonesë më të ulët. Mbështetja dual stack është e rëndësishme për workload-et IPv4 + IPv6 ose mjediset e përziera të rrjetit që kërkojnë të dy protokollet.',
+    'HA VPN provides highly available VPN connectivity between Google Cloud and on-premises sites. It is the common solution when you want redundancy and a simpler setup than a full private connectivity design.': 'HA VPN ofron lidhshmëri VPN me disponueshmëri të lartë midis Google Cloud dhe site-ve lokale. Është zgjidhja e zakonshme kur dëshironi redundancë dhe konfigurim më të thjeshtë se një dizajn i plotë i lidhshmërisë private.',
+    'Cross-cloud patterns are used when applications span multiple public clouds or connect cloud environments with on-prem systems. The key design concerns are distributed routing, latency, and secure connectivity between domains.': 'Modelet cross-cloud përdoren kur aplikacionet shtrihen në shumë cloud publike ose lidhin mjediset cloud me sisteme lokale. Çështjet kryesore të dizajnit janë routing i shpërndarë, vonesa dhe lidhshmëria e sigurt midis domenëve.',
+    'Cloud CDN accelerates content delivery by caching content at Google edge locations. It improves response time for static and some dynamic assets while reducing origin load.': 'Cloud CDN e përshpejton shpërndarjen e përmbajtjes duke ruajtur përmbajtje në vendet e edge të Google. Ai përmirëson kohën e përgjigjes për asset-et statike dhe disa dinamike ndërkohë që redukton ngarkesën në origjinë.',
+    'Cache invalidation is the process of removing stale content from the edge cache so clients receive fresh data. For content-heavy and frequently updated services, this is a critical operational concept.': 'Cache invalidation është procesi i heqjes së përmbajtjes së vjetëruar nga cache i edge, kështu që klientët të marrin të dhëna të freskëta. Për shërbimet e mbingarkuara me përmbajtje dhe të përditësuara shpesh, kjo është një koncept kritik operativ.',
+    'Next-generation firewalls are often used for centralized network inspection in cloud environments. They sit at strategic control points where traffic inspection, filtering, and threat analysis are required.': 'Firewall-et e brezit të ri përdoren shpesh për inspektim të centralizuar të rrjetit në mjediset cloud. Ato vendosen në pika strategjike kontrolli ku kërkohen inspektim i trafikut, filtrim dhe analizë e kërcënimeve.',
+    'Cloud Armor is a managed DDoS and application defense product that protects services from common web attacks and abusive traffic patterns. It is especially useful when front ends are public-facing.': 'Cloud Armor është një produkt i menaxhuar për mbrojtje DDoS dhe aplikacioni që mbron shërbimet nga sulmet e zakonshme web dhe modelet e trafikut abuziv. Është veçanërisht i dobishëm kur front-end-et janë me ekspozim publik.',
+    'Cloud NAT provides outbound internet access for private resources without assigning external IPs to each VM. It reduces public exposure and helps with egress design in private-only environments.': 'Cloud NAT ofron qasje dalëse në internet për burimet private pa caktuar IP të jashtme për çdo VM. Ai redukton ekspozimin publik dhe ndihmon në dizajnin e egress në mjedise private-only.',
+    'VPC is the foundation of GCP network design. A well-built VPC uses segmentation, private IP planning, route control, and policy boundaries to support scalability, security, and service integration.': 'VPC është themeli i dizajnit të rrjetit në GCP. Një VPC i ndërtuar mirë përdor segmentim, planifikim IP private, kontroll rrugësh dhe kufij politikash për të mbështetur shkallëzimin, sigurinë dhe integrimin e shërbimeve.'
+  },
+  'sandbox-labs.html': {
+    'Lab ideas': 'Ide për lab',
+    'Recommended order to study': 'Rendi i rekomanduar për studim',
+    '1. VPC segmentation and firewall lab': '1. Lab i segmentimit të VPC dhe firewall',
+    '2. Private Google Access lab': '2. Lab i Private Google Access',
+    '3. HA VPN and Cloud Router lab': '3. Lab i HA VPN dhe Cloud Router',
+    '4. Load balancer failover lab': '4. Lab i failover të balancerit të ngarkesës',
+    '5. Cloud NAT and edge protection lab': '5. Lab i Cloud NAT dhe mbrojtjes në edge',
+    '6. Network troubleshooting lab': '6. Lab i zgjidhjes së problemeve të rrjetit',
+    '7. Split-horizon DNS lab': '7. Lab i DNS split-horizon',
+    '8. Shared VPC and project access lab': '8. Lab i VPC të ndarë dhe qasjes së projekteve',
+    '9. Squid proxy lab for outbound filtering': '9. Lab i proxy Squid për filtrimin e trafikut dalës',
+    'What to do': 'Çfarë të bëni',
+    'What it does after implementation': 'Çfarë bën pas zbatimit',
+    'These labs are designed for a free-tier or sandbox Google Cloud setup. Each exercise gives you a realistic networking challenge, shows how to build it step by step, and explains the value after it is implemented.': 'Këto lab janë projektuar për një mjedis Google Cloud me free-tier ose sandbox. Secili ushtrim ju jep një sfidë realiste të rrjetit, tregon se si ta ndërtoni hap pas hapi dhe shpjegon vlerën pas zbatimit.',
+    'Each lab below is meant to be done in a sandbox account using a small number of resources. The focus is on understanding traffic flow, access control, connectivity, and troubleshooting rather than building a production-grade architecture.': 'Secili lab më poshtë synohet të bëhet në një llogari sandbox me një numër të vogël burimesh. Fokusimi është në kuptimin e rrjedhës së trafikut, kontrollin e qasjes, lidhshmërinë dhe zgjidhjen e problemeve, në vend të ndërtimit të një arkitekture prodhimi.',
+    'Start with VPC segmentation, firewall, and private access labs to build the core networking foundations.': 'Filloni me lab-et e segmentimit të VPC, firewall dhe qasjes private për të ndërtuar themelin bazë të rrjetëzimit.',
+    'Move to hybrid connectivity, routing, load balancing, and DNS so you understand traffic behavior across networks.': 'Kaloni te lidhja hibride, routing, balancimi i ngarkesës dhe DNS për të kuptuar sjelljen e trafikut në rrjete të ndryshme.',
+    'Practice troubleshooting, NAT, flow logs, and shared VPC patterns to strengthen operational thinking.': 'Ushtrohuni në zgjidhjen e problemeve, NAT, flow logs dhe modele shared VPC për të forcuar mendimin operational.',
+    'Finish with the advanced labs on Cloud Armor, CDN, and NCC to prepare for multi-service and enterprise scale designs.': 'Përfundoni me lab-et e avancuara në Cloud Armor, CDN dhe NCC për t’u përgatitur për dizajne multi-service dhe skala enterprise.',
+    'Shows how a VPC isolates workloads by segment.': 'Tregon se si një VPC izolon workload-et sipas segmentit.',
+    'Helps you learn why default deny and explicit allow patterns matter in exam design questions.': 'Ju ndihmon të kuptoni pse modelet default deny dhe explicit allow kanë rëndësi në pyetjet e dizajnit në provim.',
+    'Create a private subnet without external IP addresses.': 'Krijoni një subnet private pa adresa IP të jashtme.',
+    'Enable Private Google Access on the subnet.': 'Aktivizoni Private Google Access në subnet.',
+    'Shows how workloads can communicate with Google services without internet exposure.': 'Tregon se si workload-et mund të komunikojnë me shërbimet e Google pa ekspozim në internet.',
+    'Reinforces the difference between public access, private access, and NAT.': 'Forcon dallimin midis qasjes publike, qasjes private dhe NAT.',
+    'Creates a strong mental model for private-only architectures.': 'Krijon një model të fortë mental për arkitektura private-only.',
+    'Set up a Cloud Router and connect it to a VPN tunnel.': 'Konfigurojeni një Cloud Router dhe lidheni me një tunnel VPN.',
+    'Configure BGP on both sides using a private ASN.': 'Konfiguro BGP në të dy anët duke përdorur një ASN private.',
+    'Creates a working hybrid connection between a cloud network and an on-prem environment.': 'Krijon një lidhje hibride funksionale midis një rrjeti cloud dhe një mjedisi on-prem.',
+    'Shows how dynamic routing works with BGP and Cloud Router.': 'Tregon se si funksionon routing dinamik me BGP dhe Cloud Router.',
+    'Deploy an HTTP(S) load balancer in front of them.': 'Vendosni një HTTP(S) load balancer përpara tyre.',
+    'Showcases the difference between regional and global load balancing patterns.': 'Tregon dallimin midis modeleve të regional dhe global load balancing.',
+    'Builds confidence for questions about availability and resilience.': 'Ndihmon për të fituar besim për pyetjet mbi disponueshmërinë dhe resiliencën.',
+    'Create a private VM without an external IP.': 'Krijoni një VM private pa IP të jashtme.',
+    'If available, add a simple Cloud Armor rule or test policy in front of a load balancer.': 'Nëse është e disponueshme, shtoni një rregull të thjeshtë Cloud Armor ose një politikë testimi para një balanceri.',
+    'Shows how private workloads can still use outbound internet access safely.': 'Tregon se si workload-et private mund të përdorin ende qasje dalëse në internet në mënyrë të sigurt.',
+    'Introduces the idea of protecting public-facing services before traffic reaches origin workloads.': 'Prezanton idenë e mbrojtjes së shërbimeve me ekspozim publik para se trafiku të arrijë te workload-et origjinë.',
+    'Helps explain why NAT and edge security are different design decisions.': 'Ndihmon të shpjegohet pse NAT dhe siguria në edge janë vendime të ndryshme dizajni.',
+    'Validate routing, firewall, and health checks by testing traffic paths.': 'Validoni routing, firewall dhe health checks duke testuar rrugët e trafikut.',
+    'Teaches how to find the real failure point in a broken network path.': 'Mëson se si të gjendet pika reale e dështimit në një rrugë rrjeti të thyer.',
+    'Create a private DNS zone for an internal service name.': 'Krijoni një zonë private DNS për një emër shërbimi të brendshëm.',
+    'Create a public DNS zone for the same service name or a public front end.': 'Krijoni një zonë publike DNS për të njëjtin emër shërbimi ose një frontend publik.',
+    'Explains why split-horizon DNS is useful for enterprise environments.': 'Shpjegon pse DNS split-horizon është i dobishëm për mjediset enterprise.',
+    'Improves understanding of public/private naming strategies in cloud networking.': 'Përmirëson kuptimin e strategjive të emërtimit publik/private në rrjetëzimin cloud.',
+    'Create a host project with the shared VPC.': 'Krijoni një host project me VPC të ndarë.',
+    'Assign IAM roles so each project can use shared subnets and services.': 'Caktoni role IAM që secili projekt të mund të përdorë subnets dhe shërbime të ndara.',
+    'Builds a foundation for learning shared VPC and service networking patterns.': 'Ndërtimi bazën për të mësuar modelet e shared VPC dhe rrjetëzimit të shërbimeve.',
+    'Create a VM instance in a private subnet with no external IP.': 'Krijoni një instancë VM në një subnet private pa IP të jashtme.',
+    'Set up a Squid proxy to filter outbound traffic based on destination or content policy.': 'Konfigurojeni një proxy Squid për të filtruar trafikun dalës bazuar në destinacion ose politikë përmbajtjeje.',
+    'Shows how outbound traffic can be controlled before reaching the internet.': 'Tregon se si trafiku dalës mund të kontrollohet para se të arrijë në internet.',
+    'Reinforces security awareness around egress filtering and enterprise gateway patterns.': 'Forcon ndërgjegjësimin e sigurisë rreth filtrimit të egress dhe modeleve të gateway enterprise.'
+  },
+  'vpc-fundamentals.html': {
+    'What a VPC really is': 'Çfarë është në të vërtetë një VPC',
+    'Core concepts': 'Konceptet kryesore',
+    'Why this matters for the exam': 'Pse është e rëndësishme për provim',
+    'Exam traps to avoid': 'Gabuese të provimit për t\'i shmangur',
+    'In Google Cloud, a VPC network is a global resource, while subnets live in a specific region. This means you can create one VPC and then place regional subnets within it to support workloads in multiple locations without changing the design of the network itself.': 'Në Google Cloud, një rrjet VPC është një burim global, ndërsa nëndisjet jetojnë në një rajon të caktuar. Kjo do të thotë se mund të krijoni një VPC dhe pastaj të vendosni nëndisa rajonale brenda tij për të mbështetur workload-et në vende të shumta pa ndryshuar dizajnin e vetë rrjetit.',
+    'Key idea': 'Ide kryesore',
+    'Think of the VPC as the network boundary, and subnets as the regional building blocks inside that boundary. Firewalls and routes are what shape how traffic can move between those resources.': 'Mendoni për VPC-në si kufirin e rrjetit, dhe për nëndisjet si blloqet ndërtimore rajonale brenda atij kufiri. Firewall-et dhe rrugët janë ato që formësojnë mënyrën se si mund të lëvizë trafiku midis atyre burimeve.',
+    'Global network:': 'Rrjeti global:',
+    'One VPC can span multiple regions.': 'Një VPC mund të shtrihet në rajone të shumta.',
+    'Regional subnets:': 'Nëndisat rajonale:',
+    'Each subnet belongs to one region and has a CIDR block.': 'Secila nëndis i përket një rajoni dhe ka një bllok CIDR.',
+    'Firewall controls:': 'Kontrolli i firewall:',
+    'Ingress and egress rules determine which traffic is allowed.': 'Rregullat e ingress dhe egress përcaktojnë se cilin trafiku lejohet.',
+    'Routes:': 'Rrugët:',
+    'GCP automatically creates system routes, and custom routes can be added for special traffic patterns.': 'GCP krijon automatikisht rrugë sistemi, dhe rrugët e personalizuara mund të shtohen për modele të veçanta trafiku.',
+    'Most networking questions are really about choosing the right architecture pattern: private-only access, isolation by segment, east-west traffic control, and hybrid connectivity. A good VPC design makes route tables, firewall policies, and service access predictable and secure.': 'Shumica e pyetjeve të rrjetëzimit në fakt kanë të bëjnë me zgjedhjen e modelit të duhur të arkitekturës: qasje private-only, izolim sipas segmentit, kontrolli i trafikut east-west dhe lidhja hibride. Një dizajn i mirë i VPC bën tabelat e rrugëve, politikat e firewall dhe qasjen në shërbime të parashikueshme dhe të sigurta.',
+    'Confusing a VPC being global with a subnet being global. Subnets are regional.': 'Të ngatërrosh një VPC që është global me një subnet që është globale. Nëndisat janë rajonale.',
+    'Assuming all traffic is allowed by default. Firewall rules are the main access control mechanism.': 'Të supozohet se të gjithë trafiku lejohet si parazgjedhje. Rregullat e firewall janë mekanizmi kryesor i kontrollit të qasjes.',
+    'Forgetting that communication within a VPC may still require correct firewall and routing behavior.': 'Të harosh se komunikimi brenda një VPC ende mund të kërkojë sjellje të saktë të firewall dhe routing.'
+  }
+};
+
+const applyPageTextTranslations = () => {
+  const currentLanguage = getCurrentLanguage();
+  const pageKey = window.location.pathname.split('/').pop() || 'index.html';
+  const pageMap = pageTextTranslations[pageKey];
+  if (!pageMap) return;
+
+  const walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT, {
+    acceptNode: (node) => {
+      const parent = node.parentElement;
+      if (!parent || parent.closest('script, style, noscript')) return NodeFilter.FILTER_REJECT;
+      return node.textContent && node.textContent.trim() ? NodeFilter.FILTER_ACCEPT : NodeFilter.FILTER_REJECT;
+    }
+  });
+
+  const textNodes = [];
+  while (walker.nextNode()) {
+    textNodes.push(walker.currentNode);
+  }
+
+  textNodes.forEach((node) => {
+    if (!node.__originalText) {
+      node.__originalText = node.textContent;
+    }
+
+    const originalText = node.__originalText.trim();
+    if (currentLanguage === 'en') {
+      node.textContent = originalText;
+      return;
+    }
+
+    if (pageMap[originalText]) {
+      node.textContent = pageMap[originalText];
+    }
+  });
+};
+
 const getCurrentLanguage = () => localStorage.getItem('gcp-language') || 'en';
+
+const applyPageSpecificTranslations = () => {
+  const currentLanguage = getCurrentLanguage();
+  const pageKey = window.location.pathname.split('/').pop() || 'index.html';
+  const pageData = pageSpecificTranslations[pageKey];
+
+  if (!pageData) return;
+
+  const titleValue = pageData.title ? pageData.title[currentLanguage] || pageData.title.en : null;
+  if (titleValue) {
+    const pageTitle = document.querySelector('.topic-header h1, .page-header h1, h1');
+    if (pageTitle) pageTitle.textContent = titleValue;
+    document.title = titleValue;
+  }
+
+  const descriptionValue = pageData.description ? pageData.description[currentLanguage] || pageData.description.en : null;
+  const descriptionNode = document.querySelector('.topic-header > p, .page-intro, .hero-description');
+  if (descriptionNode && descriptionValue) {
+    descriptionNode.textContent = descriptionValue;
+  }
+
+  if (pageData.nav) {
+    document.querySelectorAll('.topic-nav a, .nav-actions a, .topbar a').forEach((link) => {
+      const href = link.getAttribute('href') || '';
+      const translated = pageData.nav[href];
+      if (translated) {
+        link.textContent = translated[currentLanguage] || translated.en;
+      }
+    });
+  }
+};
 
 const setupLanguage = () => {
   const languageToggle = document.getElementById('languageToggle');
@@ -148,6 +669,9 @@ const setupLanguage = () => {
         element.textContent = bundle[key];
       }
     });
+
+    applyPageSpecificTranslations();
+    applyPageTextTranslations();
 
     languageToggle.textContent = currentLanguage === 'en' ? 'AL' : 'EN';
     languageToggle.setAttribute('aria-label', currentLanguage === 'en' ? 'Switch to Albanian' : 'Switch to English');
