@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Whitepaper Library | GCP Study Hub</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header class="hero">
+      <nav class="topbar">
+        <div class="brand">GCP Study Hub</div>
+        <div class="nav-actions">
+          <button id="languageToggle" class="language-toggle" type="button" aria-label="Switch language">AL</button>
+          <button id="themeToggle" class="theme-toggle" type="button" aria-label="Toggle dark mode">🌙</button>
+          <a href="index.html">Home</a>
+          <a href="topics/vpc-fundamentals.html">Topics</a>
+        </div>
+      </nav>
+
+      <div class="hero-inner">
+        <div class="hero-copy">
+          <span class="eyebrow">Resource library</span>
+          <h1>Whitepapers & reference guides</h1>
+          <p>
+            Download curated Google Cloud documents covering migration, security, architecture,
+            AI, and operating model guidance for your study and design work.
+          </p>
+          <div class="hero-actions">
+            <a class="button primary" href="index.html">Back to dashboard</a>
+            <a class="button secondary" href="#whitepaperList">Browse all</a>
+          </div>
+        </div>
+
+        <aside class="hero-card">
+          <h3>Library snapshot</h3>
+          <ul>
+            <li><strong>Documents:</strong> <span id="whitepaperCount">0</span></li>
+            <li><strong>Coverage:</strong> security, migration, AI, analytics</li>
+            <li><strong>Format:</strong> PDF and HTML</li>
+          </ul>
+          <a class="link-button" href="whitepapers/readme.md" target="_blank" rel="noreferrer">Open source list</a>
+        </aside>
+      </div>
+    </header>
+
+    <main class="container">
+      <section class="section">
+        <div class="section-title with-actions">
+          <div>
+            <span class="small-tag">Downloads</span>
+            <h2>Whitepaper library</h2>
+          </div>
+        </div>
+
+        <div class="whitepaper-toolbar">
+          <div class="filters" aria-label="Whitepaper filters">
+            <button class="filter active" type="button" data-filter="all">All</button>
+            <button class="filter" type="button" data-filter="security">Security</button>
+            <button class="filter" type="button" data-filter="migration">Migration</button>
+            <button class="filter" type="button" data-filter="data-ai">Data & AI</button>
+            <button class="filter" type="button" data-filter="architecture">Architecture</button>
+            <button class="filter" type="button" data-filter="strategy">Strategy</button>
+          </div>
+          <input id="whitepaperSearch" class="whitepaper-search" type="search" placeholder="Search whitepapers..." aria-label="Search whitepapers" />
+        </div>
+      </section>
+
+      <section class="section">
+        <div id="whitepaperList" class="whitepaper-list"></div>
+      </section>
+    </main>
+
+    <footer class="footer">Google Cloud Network Engineer Study Hub</footer>
+
+    <script src="script.js"></script>
+    <script>
+      const whitepaperFiles = [
+        '2020_googlecloud_certification_impact_report.pdf',
+        '2021-02-25-shifting-left-on-security.pdf',
+        '24-7-explainer-sustainability-carbon-free-energy.pdf',
+        'AI Explanations Whitepaper.pdf',
+        'ai_adoption_framework_whitepaper.pdf',
+        'anthos_white_paper.pdf',
+        'bce-protected-profiles-whitepaper (beyond-corp-enterprise).pdf',
+        'beyond-business-continuity-three-it-strategies-for-navigating-change.html',
+        'BigQueryTechnicalWP.pdf',
+        'building_a_data_driven_culture_guide_2020_google.pdf',
+        'Building_a_Large-Scale_Migration_Program_with_Google_Cloud.pdf',
+        'building_secure_and_reliable_systems.pdf',
+        'cio_guide_app_modernization.pdf',
+        'cio_guide_to_application_migration.pdf',
+        'ciso-guide-to-security-transformation.pdf',
+        'cloud_center_of_excellence.pdf',
+        'cloud_finops_paper.pdf',
+        'Converging Architectures- Bringing Data Lakes and Data Warehouses Together.pdf',
+        'data-prep-checklist-ml-bd-wp-v2.pdf',
+        'databases_oracle_migration_whitepaper_2020_google_cloud.pdf',
+        'dataprocessingorganisationwhitepaper.pdf',
+        'data_analytics_decisions_2020_whitepaper_google_cloud.pdf',
+        'data_deletion_on_gcp.pdf',
+        'data_incident_response_2018.pdf',
+        'designing_and_deploying_data_security_strategy.pdf',
+        'Digital Business Ecosystems Executive Summary.pdf',
+        'digital_google_vmware_data_sheet_ga.pdf',
+        'ESG-Technical-Review-SAP-on-GCP-and-BigQuery-Mar-2020.pdf',
+        'esg_economic_validation_migrating_to_google_bigquery.pdf',
+        'esg_google_waap_wp.pdf',
+        'esg_technical_whitepaper_google_cloud_for_ecommerce.pdf',
+        'exploratory_data_analysis_for_feature_selection_in_machine_learning.pdf',
+        'five_ways_google_can_help_you_succeed_in_the_multicloud_world.pdf',
+        'forrester-google-cloud-migration-opportunity-snapshot-may-2020.pdf',
+        'gcloud-cheat-sheet.pdf',
+        'gcp-security_whitepapers_march2018.pdf',
+        'gcp-trust-whitepaper.pdf',
+        'GCPDDoSprotection-04122016.pdf',
+        'global_idg_it_leaders_research_report.pdf',
+        'google-cloud-security-and-compliance-whitepaper-gsuite.pdf',
+        'google-cloud-security-and-compliance-whitepaper-workspace.pdf',
+        'google-cloud-security-foundations-guide-april-2021.pdf',
+        'googlecloud_autonomicsecurityoperations_soc10x.pdf',
+        'GoogleCloud_Office of CISO_AutonomicSecurityOperations_10x.pdf',
+        'google_active_assist_forrester_opp_snap_study_final.pdf',
+        'google_cloud_adoption_framework_whitepaper.pdf',
+        'google_data_center_transformation.pdf',
+        'google_vmware_vdi_solutionbrief_ga.pdf',
+        'google_vmware_whitepaper.pdf',
+        'Google_Workspace_vs_O365_Impact_on_Business.pdf',
+        'guide-to-financial-governance.pdf',
+        'guide_to_innovation_2020_google_cloud.pdf',
+        'how-to-put-your-company-on-a-path-to-successful-migration-white-paper-june-2021.pdf',
+        'how_partners_are_winning_in_the_google_cloud_economy.pdf',
+        'IDC - How Partners Are Winning in the Google Cloud Economy-2020.pdf',
+        'idc_business_value_of_google_cloud_platform_whitepaper.pdf',
+        'learning_path_brochure_q1_2020.pdf',
+        'managing_change_in_the_cloud.pdf',
+        'migrate_workloads_checklist.pdf',
+        'Migrating to BeyondCorp.pdf',
+        'operational_efficiency_whitepaper.pdf',
+        'Oreilly-GCP A Practical Guide to Cloud Migration.pdf',
+        'practitioners_guide_to_mlops_whitepaper.pdf',
+        'readme.md',
+        'Redefining Security Analytics_Backstory Whitepaper-Chronicle.pdf',
+        're_architecting_to_cloud_native_whitepaper2.pdf',
+        'sap-capabilities-ebook.pdf',
+        'scaling_certificate_management_cas.pdf',
+        'secure-api-ebook.pdf',
+        'security-features-for-connect-for-anthos.pdf',
+        'sre-it-operations-whitepaper.pdf',
+        'State_of_API_Economy_2021_Retail.pdf',
+        'Take command of your security in the cloud-Dec2019.pdf',
+        'technical_guide_running_vmware_apps_in_google_cloud.pdf',
+        'The Forrester Wave™_ Infrastructure-As-A-Service Platform Native Security, Q4 2020.pdf',
+        'the_future_of_data_warehousing_2020_ebook_google_cloud.pdf',
+        'the_total_economic_impact_of_anthos.pdf',
+        'understanding_the_principles_of_cost_optimization_2020_whitepaper_google_cloud.pdf',
+        'Unlocking-business-acceleration-in-a-hybrid-cloud-world-Report-McKinsey.pdf',
+        'up-out-how-to-evaluate-your-cloud-migration-options-octo-final-5-19-2021.pdf',
+        'whitepaper_anthos_under_the_hood_2020.pdf',
+        'whitepaper_roi_of_devops_transformation_2020_google_cloud.pdf',
+        'YARA-L Overview White Paper.pdf'
+      ];
+
+      const categoryMap = { security: ['security', 'trust', 'compliance', 'secure', 'beyondcorp', 'waf', 'cyber', 'privacy'], migration: ['migration', 'migrate', 'modernization', 'cloud', 'adoption', 'transform', 'incident'], 'data-ai': ['data', 'analytics', 'ai', 'machine', 'bigquery', 'ml', 'warehouse', 'feature'], architecture: ['anthos', 'network', 'vmware', 'infrastructure', 'architecture', 'connect', 'gcp'], strategy: ['guide', 'strategy', 'framework', 'economy', 'roi', 'innovation', 'business', 'governance', 'path', 'learning'] };
+
+      const normalizeName = (value) => value
+        .replace(/\.[^.]+$/, '')
+        .replace(/[_-]+/g, ' ')
+        .replace(/\s+/g, ' ')
+        .trim();
+
+      const makeTitle = (fileName) => {
+        const raw = normalizeName(fileName);
+        const cleaned = raw
+          .replace(/\b(?:pdf|html|docx|pptx)\b/gi, '')
+          .replace(/\b(?:google|cloud|gcp)\b/gi, (match) => match.toUpperCase())
+          .replace(/\s+/g, ' ')
+          .trim();
+
+        return cleaned
+          .split(' ')
+          .map((word) => {
+            if (!word) return word;
+            if (['AI', 'GCP', 'IDC', 'SAP', 'SRE', 'VPN', 'VPC', 'VMware', 'CISO', 'LDAP', 'BGP', 'IaaS', 'IoT', 'DNS', 'DDoS', 'Anthos', 'BigQuery', 'GKE', 'CI', 'CDO', 'O365', 'API', 'YARA'].includes(word)) {
+              return word;
+            }
+            return word.charAt(0).toUpperCase() + word.slice(1);
+          })
+          .join(' ');
+      };
+
+      const detectCategory = (fileName) => {
+        const haystack = fileName.toLowerCase();
+        for (const [category, keywords] of Object.entries(categoryMap)) {
+          if (keywords.some((keyword) => haystack.includes(keyword))) {
+            return category;
+          }
+        }
+        return 'strategy';
+      };
+
+      const whitepaperList = document.getElementById('whitepaperList');
+      const whitepaperCount = document.getElementById('whitepaperCount');
+      const filters = document.querySelectorAll('.filter');
+      const whitepaperSearch = document.getElementById('whitepaperSearch');
+      let activeFilter = 'all';
+
+      const renderCards = () => {
+        const searchTerm = (whitepaperSearch?.value || '').trim().toLowerCase();
+
+        document.querySelectorAll('.whitepaper-card').forEach((card) => {
+          const title = (card.dataset.title || '').toLowerCase();
+          const category = card.dataset.category || '';
+          const matchesFilter = activeFilter === 'all' || category === activeFilter;
+          const matchesSearch = !searchTerm || title.includes(searchTerm);
+          card.classList.toggle('hidden', !(matchesFilter && matchesSearch));
+        });
+      };
+
+      whitepaperFiles.forEach((fileName) => {
+        const title = makeTitle(fileName);
+        const href = 'whitepapers/' + encodeURI(fileName);
+        const category = detectCategory(fileName);
+        const article = document.createElement('article');
+        article.className = 'whitepaper-card';
+        article.dataset.category = category;
+        article.dataset.title = title;
+        article.innerHTML = `
+          <div class="whitepaper-badge">${category}</div>
+          <h3>${title}</h3>
+          <p>Download the original document or reference from this curated Google Cloud resource library.</p>
+          <a href="${href}" target="_blank" rel="noreferrer" download>Download</a>
+        `;
+        whitepaperList.appendChild(article);
+      });
+
+      whitepaperCount.textContent = whitepaperFiles.length;
+
+      const applyFilter = (selectedFilter) => {
+        activeFilter = selectedFilter;
+        filters.forEach((item) => item.classList.toggle('active', item.dataset.filter === selectedFilter));
+        renderCards();
+      };
+
+      filters.forEach((button) => {
+        button.addEventListener('click', () => applyFilter(button.dataset.filter));
+      });
+
+      whitepaperSearch?.addEventListener('input', renderCards);
+
+      setupTheme();
+      setupLanguage();
+    </script>
+  </body>
+</html>
