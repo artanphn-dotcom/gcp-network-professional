@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sandbox Lab Ideas</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../styles.css" />
+  </head>
+  <body>
+    <div class="topic-page">
+      <div class="topic-shell">
+        <header class="topic-header">
+          <nav class="topbar">
+            <div class="brand">GCP Study Hub</div>
+            <div class="nav-actions">
+              <button id="languageToggle" class="language-toggle" type="button" aria-label="Switch language">AL</button>
+              <button id="themeToggle" class="theme-toggle" type="button" aria-label="Toggle dark mode">🌙</button>
+              <a href="../index.html" data-i18n="backToDashboard">Back to dashboard</a>
+            </div>
+          </nav>
+          <h1>Sandbox Lab Ideas</h1>
+          <p>These labs are designed for a free-tier or sandbox Google Cloud setup. Each exercise gives you a realistic networking challenge, shows how to build it step by step, and explains the value after it is implemented.</p>
+          <div class="topic-nav">
+            <a href="../index.html">Home</a>
+            <a href="vpc-fundamentals.html">VPC</a>
+            <a href="cidr-subnet-design.html">CIDR</a>
+            <a href="hybrid-connectivity.html">Hybrid</a>
+            <a href="load-balancing-dns.html">LB & DNS</a>
+            <a href="security-monitoring.html">Security</a>
+          </div>
+        </header>
+
+        <article class="topic-content">
+          <section>
+            <h2>Lab ideas</h2>
+            <p>Each lab below is meant to be done in a sandbox account using a small number of resources. The focus is on understanding traffic flow, access control, connectivity, and troubleshooting rather than building a production-grade architecture.</p>
+          </section>
+
+          <section class="lab-list">
+            <article class="lab-card">
+              <span class="topic-tag">Networking</span>
+              <h2>1. VPC segmentation and firewall lab</h2>
+              <h3>What to do</h3>
+              <ol>
+                <li>Create one VPC with at least three regional subnets: app, db, and management.</li>
+                <li>Deploy a VM in each subnet.</li>
+                <li>Create firewall rules that allow only specific ports and source ranges.</li>
+                <li>Test traffic between the VM groups using SSH or ping from allowed and blocked sources.</li>
+              </ol>
+              <h3>What it does after implementation</h3>
+              <ul>
+                <li>Shows how a VPC isolates workloads by segment.</li>
+                <li>Demonstrates how firewall rules control east-west traffic.</li>
+                <li>Helps you learn why default deny and explicit allow patterns matter in exam design questions.</li>
+              </ul>
+            </article>
+
+            <article class="lab-card">
+              <span class="topic-tag">Private access</span>
+              <h2>2. Private Google Access lab</h2>
+              <h3>What to do</h3>
+              <ol>
+                <li>Create a private subnet without external IP addresses.</li>
+                <li>Launch a VM in that subnet.</li>
+                <li>Enable Private Google Access on the subnet.</li>
+                <li>Test whether the VM can reach Google APIs such as Cloud Storage or BigQuery without a public IP.</li>
+              </ol>
+              <h3>What it does after implementation</h3>
+              <ul>
+                <li>Shows how workloads can communicate with Google services without internet exposure.</li>
+                <li>Reinforces the difference between public access, private access, and NAT.</li>
+                <li>Creates a strong mental model for private-only architectures.</li>
+              </ul>
+            </article>
+
+            <article class="lab-card">
+              <span class="topic-tag">Hybrid</span>
+              <h2>3. HA VPN and Cloud Router lab</h2>
+              <h3>What to do</h3>
+              <ol>
+                <li>Set up a Cloud Router and connect it to a VPN tunnel.</li>
+                <li>Configure BGP on both sides using a private ASN.</li>
+                <li>Advertise a simple on-prem CIDR range to Google Cloud.</li>
+                <li>Check route propagation and confirm traffic can flow between the networks.</li>
+              </ol>
+              <h3>What it does after implementation</h3>
+              <ul>
+                <li>Creates a working hybrid connection between a cloud network and an on-prem environment.</li>
+                <li>Shows how dynamic routing works with BGP and Cloud Router.</li>
+                <li>Helps you understand which connectivity pattern fits different enterprise scenarios.</li>
+              </ul>
+            </article>
+
+            <article class="lab-card">
+              <span class="topic-tag">Traffic</span>
+              <h2>4. Load balancer failover lab</h2>
+              <h3>What to do</h3>
+              <ol>
+                <li>Create two backend VMs in different zones or regions.</li>
+                <li>Deploy an HTTP(S) load balancer in front of them.</li>
+                <li>Configure health checks and make one backend unhealthy.</li>
+                <li>Test whether traffic automatically shifts to the healthy instance.</li>
+              </ol>
+              <h3>What it does after implementation</h3>
+              <ul>
+                <li>Validates how traffic is distributed and how health checks affect failover.</li>
+                <li>Showcases the difference between regional and global load balancing patterns.</li>
+                <li>Builds confidence for questions about availability and resilience.</li>
+              </ul>
+            </article>
+
+            <article class="lab-card">
+              <span class="topic-tag">Security</span>
+              <h2>5. Cloud NAT and edge protection lab</h2>
+              <h3>What to do</h3>
+              <ol>
+                <li>Create a private VM without an external IP.</li>
+                <li>Configure Cloud NAT so the instance can access the internet for outbound traffic.</li>
+                <li>Apply firewall rules to allow only required ports.</li>
+                <li>If available, add a simple Cloud Armor rule or test policy in front of a load balancer.</li>
+              </ol>
+              <h3>What it does after implementation</h3>
+              <ul>
+                <li>Shows how private workloads can still use outbound internet access safely.</li>
+                <li>Introduces the idea of protecting public-facing services before traffic reaches origin workloads.</li>
+                <li>Helps explain why NAT and edge security are different design decisions.</li>
+              </ul>
+            </article>
+
+            <article class="lab-card">
+              <span class="topic-tag">Operations</span>
+              <h2>6. Network troubleshooting lab</h2>
+              <h3>What to do</h3>
+              <ol>
+                <li>Create a VPC with a few subnets and firewall rules.</li>
+                <li>Intentionally misconfigure one route or firewall rule.</li>
+                <li>Use logs, flow logs, and connectivity checks to diagnose the issue.</li>
+                <li>Fix the path and verify successful communication.</li>
+              </ol>
+              <h3>What it does after implementation</h3>
+              <ul>
+                <li>Teaches a structured troubleshooting process for network problems.</li>
+                <li>Shows how route and firewall mismatch issues can impact connectivity.</li>
+                <li>Develops the practical thinking needed for exam scenario questions.</li>
+              </ul>
+            </article>
+
+            <article class="lab-card">
+              <span class="topic-tag">DNS</span>
+              <h2>7. Split-horizon DNS lab</h2>
+              <h3>What to do</h3>
+              <ol>
+                <li>Create a private DNS zone for an internal service name.</li>
+                <li>Create a public DNS zone for the same service name or a public front end.</li>
+                <li>Configure different answers depending on whether the client is internal or external.</li>
+                <li>Validate the records from both internal and public clients.</li>
+              </ol>
+              <h3>What it does after implementation</h3>
+              <ul>
+                <li>Demonstrates how internal and external users can resolve the same hostname differently.</li>
+                <li>Explains why split-horizon DNS is useful for enterprise environments.</li>
+                <li>Improves understanding of public/private naming strategies in cloud networking.</li>
+              </ul>
+            </article>
+
+            <article class="lab-card">
+              <span class="topic-tag">Policy</span>
+              <h2>8. Shared VPC and project access lab</h2>
+              <h3>What to do</h3>
+              <ol>
+                <li>Create a host project with the shared VPC.</li>
+                <li>Create one or two service projects.</li>
+                <li>Assign IAM roles so each project can use shared subnets and services.</li>
+                <li>Test instance connectivity across projects and verify network policy behavior.</li>
+              </ol>
+              <h3>What it does after implementation</h3>
+              <ul>
+                <li>Shows how centralizing network resources can simplify governance.</li>
+                <li>Helps you understand multi-project network design in real organizations.</li>
+                <li>Builds a foundation for learning shared VPC and service networking patterns.</li>
+              </ul>
+            </article>
+
+            <article class="lab-card">
+              <span class="topic-tag">Proxy</span>
+              <h2>9. Squid proxy lab for outbound filtering</h2>
+              <h3>What to do</h3>
+              <ol>
+                <li>Create a VM instance in a private subnet with no external IP.</li>
+                <li>Deploy a Squid proxy server on another VM in a different subnet or client network.</li>
+                <li>Configure the client VM to use the Squid proxy for HTTP and HTTPS traffic.</li>
+                <li>Use a whitelist or ACL rule to only allow selected domains or destinations.</li>
+                <li>Test that allowed sites work and restricted sites are blocked.</li>
+              </ol>
+              <h3>What it does after implementation</h3>
+              <ul>
+                <li>Demonstrates how traffic can be centrally inspected and filtered before leaving the network.</li>
+                <li>Shows why proxy services are useful for compliance, content control, and outbound security.</li>
+                <li>Helps you connect real-world proxy design with firewall, routing, and private access concepts.</li>
+              </ul>
+            </article>
+
+            <article class="lab-card">
+              <span class="topic-tag">Resilience</span>
+              <h2>10. Multi-region failover lab</h2>
+              <h3>What to do</h3>
+              <ol>
+                <li>Deploy the same web app in two regions with separate VMs or backends.</li>
+                <li>Use a global load balancer and health checks for both regions.</li>
+                <li>Force one region to fail by stopping or blocking its backend health.</li>
+                <li>Confirm traffic is redirected to the healthy region and the app stays reachable.</li>
+              </ol>
+              <h3>What it does after implementation</h3>
+              <ul>
+                <li>Shows how multi-region design improves resilience and business continuity.</li>
+                <li>Helps explain global load balancing, health checks, and failover decisions.</li>
+                <li>Builds the exam mindset for choosing the correct design under outage scenarios.</li>
+              </ul>
+            </article>
+
+            <article class="lab-card">
+              <span class="topic-tag">Observability</span>
+              <h2>11. VPC flow logs and traffic analysis lab</h2>
+              <h3>What to do</h3>
+              <ol>
+                <li>Enable VPC flow logs on one subnet or VPC.</li>
+                <li>Send traffic between VMs using allowed and denied firewall patterns.</li>
+                <li>Review the flow log records and identify source, destination, protocol, and action.</li>
+                <li>Look for dropped packets, blocked connections, or unexpected routes.</li>
+              </ol>
+              <h3>What it does after implementation</h3>
+              <ul>
+                <li>Gives you direct visibility into what traffic is entering and leaving the network.</li>
+                <li>Shows how logs help diagnose access issues and verify firewall effectiveness.</li>
+                <li>Creates a practical foundation for investigations and incident response.</li>
+              </ul>
+            </article>
+
+            <article class="lab-card">
+              <span class="topic-tag">Security</span>
+              <h2>12. Private Service Access and Internal LB lab</h2>
+              <h3>What to do</h3>
+              <ol>
+                <li>Create a service that must stay private and not be exposed to the public internet.</li>
+                <li>Configure Private Service Access or an internal-only access pattern.</li>
+                <li>Place an Internal TCP/UDP Load Balancer in front of the service.</li>
+                <li>Test connectivity from another internal VM and confirm it is not reachable from the public internet.</li>
+              </ol>
+              <h3>What it does after implementation</h3>
+              <ul>
+                <li>Demonstrates how private services remain internal while still being reachable by trusted workloads.</li>
+                <li>Shows the difference between public exposure and internal-only service design.</li>
+                <li>Helps with exam questions involving private access patterns and internal application delivery.</li>
+              </ul>
+            </article>
+
+            <article class="lab-card">
+              <span class="topic-tag">Cloud NAT</span>
+              <h2>13. Egress-only internet access lab</h2>
+              <h3>What to do</h3>
+              <ol>
+                <li>Create private VMs without external IP addresses.</li>
+                <li>Configure Cloud NAT to allow only outbound internet access.</li>
+                <li>Open only the required outbound destinations or ports.</li>
+                <li>Confirm that the VMs can reach the internet for updates or external APIs but are not directly exposed.</li>
+              </ol>
+              <h3>What it does after implementation</h3>
+              <ul>
+                <li>Shows a secure pattern for outbound-only internet access from private workloads.</li>
+                <li>Helps you understand NAT in real-world design decisions for private infrastructure.</li>
+                <li>Reinforces why public IP assignment is often unnecessary for private application tiers.</li>
+              </ul>
+            </article>
+
+            <article class="lab-card">
+              <span class="topic-tag">Routing</span>
+              <h2>14. Custom route and next-hop lab</h2>
+              <h3>What to do</h3>
+              <ol>
+                <li>Set up a VM acting as a NAT or forwarding appliance in a dedicated subnet.</li>
+                <li>Create a custom route directing a specific CIDR range to the appliance.</li>
+                <li>Send traffic to that destination and verify the route path.</li>
+                <li>Compare the result with a default route and explain the difference.</li>
+              </ol>
+              <h3>What it does after implementation</h3>
+              <ul>
+                <li>Builds a strong understanding of custom routing and next-hop behavior.</li>
+                <li>Shows how traffic is redirected when a specific path is needed.</li>
+                <li>Prepares you for route-based exam questions involving traffic engineering and hybrid connectivity.</li>
+              </ul>
+            </article>
+          </section>
+        </article>
+      </div>
+    </div>
+
+    <script src="../script.js"></script>
+  </body>
+</html>
+
+    <script src="../script.js"></script>
+  </body>
+</html>
