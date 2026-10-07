@@ -14,34 +14,35 @@
       <nav class="topbar">
         <div class="brand">GCP Study Hub</div>
         <div class="nav-actions">
+          <button id="languageToggle" class="language-toggle" type="button" aria-label="Switch language">AL</button>
           <button id="themeToggle" class="theme-toggle" type="button" aria-label="Toggle dark mode">🌙</button>
-          <a href="professional-cloud-network-engineer.md">Source list</a>
+          <a href="professional-cloud-network-engineer.md" data-i18n="sourceList">Source list</a>
         </div>
       </nav>
 
       <div class="hero-inner">
         <div class="hero-copy">
-          <span class="eyebrow">Professional Certification</span>
-          <h1>Google Cloud Professional Network Engineer</h1>
-          <p>
+          <span class="eyebrow" data-i18n="certificationLabel">Professional Certification</span>
+          <h1 data-i18n="heroTitle">Google Cloud Professional Network Engineer</h1>
+          <p data-i18n="heroDescription">
             Learn faster with a structured study plan, curated references, and a built-in practice exam bank for
             VPC, hybrid connectivity, routing, security, and troubleshooting.
           </p>
           <div class="hero-actions">
-            <a class="button primary" href="https://cloud.google.com/certification/cloud-network-engineer/" target="_blank" rel="noreferrer">Official exam page</a>
-            <a class="button secondary" href="https://medium.com/google-cloud/prepare-for-the-google-professional-cloud-network-engineer-exam-2026-prep-sheet-2c7bc591f3ff" target="_blank" rel="noreferrer">2026 prep sheet</a>
+            <a class="button primary" href="https://cloud.google.com/certification/cloud-network-engineer/" target="_blank" rel="noreferrer" data-i18n="officialExamPage">Official exam page</a>
+            <a class="button secondary" href="https://medium.com/google-cloud/prepare-for-the-google-professional-cloud-network-engineer-exam-2026-prep-sheet-2c7bc591f3ff" target="_blank" rel="noreferrer" data-i18n="prepSheet">2026 prep sheet</a>
           </div>
         </div>
 
         <aside class="hero-card">
-          <h3>Exam at a glance</h3>
+          <h3 data-i18n="examAtAGlance">Exam at a glance</h3>
           <ul>
             <li><strong>Length:</strong> 2 hours</li>
             <li><strong>Questions:</strong> ~50</li>
             <li><strong>Level:</strong> Professional</li>
             <li><strong>Type:</strong> Specialization</li>
           </ul>
-          <a class="link-button" href="https://cloud.google.com/certification/practice-exam/cloud-network-engineer" target="_blank" rel="noreferrer">Official practice test</a>
+          <a class="link-button" href="https://cloud.google.com/certification/practice-exam/cloud-network-engineer" target="_blank" rel="noreferrer" data-i18n="officialPracticeTest">Official practice test</a>
         </aside>
       </div>
     </header>
@@ -50,8 +51,8 @@
       <section class="section dashboard-grid">
         <div class="summary-panel card">
           <div class="section-title compact">
-            <span class="small-tag">Progress</span>
-            <h2>Study tracker</h2>
+            <span class="small-tag" data-i18n="progress">Progress</span>
+            <h2 data-i18n="studyTracker">Study tracker</h2>
           </div>
           <div class="progress-ring-wrap">
             <div class="progress-ring">
@@ -61,11 +62,11 @@
           <div class="stat-row">
             <div>
               <strong id="checkedCount">0</strong>
-              <span>Topics complete</span>
+              <span data-i18n="topicsComplete">Topics complete</span>
             </div>
             <div>
               <strong id="totalTopics">0</strong>
-              <span>Total topics</span>
+              <span data-i18n="totalTopics">Total topics</span>
             </div>
           </div>
         </div>
@@ -73,21 +74,21 @@
         <div class="summary-panel card">
           <div class="section-title compact">
             <span class="small-tag">Practice</span>
-            <h2>Question bank</h2>
+            <h2 data-i18n="questionBank">Question bank</h2>
           </div>
           <div class="question-bank-meta">
             <div>
               <strong id="bankCount">150</strong>
-              <span>Total questions</span>
+              <span data-i18n="totalQuestions">Total questions</span>
             </div>
             <div>
               <strong id="examModeLabel">30 Q</strong>
-              <span>Simulation size</span>
+              <span data-i18n="simulationSize">Simulation size</span>
             </div>
           </div>
           <div class="exam-actions">
-            <button class="button primary small" id="generate30Btn" type="button">Generate 30Q</button>
-            <button class="button secondary small" id="generate50Btn" type="button">Generate 50Q</button>
+            <button class="button primary small" id="generate30Btn" type="button" data-i18n="generate30">Generate 30Q</button>
+            <button class="button secondary small" id="generate50Btn" type="button" data-i18n="generate50">Generate 50Q</button>
           </div>
         </div>
       </section>

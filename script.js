@@ -1,3 +1,174 @@
+const translations = {
+  en: {
+    sourceList: 'Source list',
+    certificationLabel: 'Professional Certification',
+    heroTitle: 'Google Cloud Professional Network Engineer',
+    heroDescription: 'Learn faster with a structured study plan, curated references, and a built-in practice exam bank for VPC, hybrid connectivity, routing, security, and troubleshooting.',
+    officialExamPage: 'Official exam page',
+    prepSheet: '2026 prep sheet',
+    examAtAGlance: 'Exam at a glance',
+    officialPracticeTest: 'Official practice test',
+    studyTracker: 'Study tracker',
+    progress: 'Progress',
+    topicsComplete: 'Topics complete',
+    totalTopics: 'Total topics',
+    questionBank: 'Question bank',
+    totalQuestions: 'Total questions',
+    simulationSize: 'Simulation size',
+    generate30: 'Generate 30Q',
+    generate50: 'Generate 50Q',
+    whatToLearnFirst: 'What to learn first',
+    studyPath: 'Study path',
+    learningChecklist: 'Learning checklist',
+    examFlow: 'Exam flow',
+    studyFlowByStage: 'Study flow by stage',
+    quickRecall: 'Quick recall',
+    examChecklist: 'Exam checklist by topic',
+    learnInsideThisRepo: 'Learn inside this repo',
+    deepDiveTitle: 'High-value network topics',
+    priorityResources: 'Priority resources',
+    startHere: 'Start here',
+    learningResources: 'Learning resources',
+    curatedStudyLibrary: 'Curated study library',
+    practiceExam: 'Practice exam',
+    mockExam: 'Mock exam simulator',
+    ready: 'Ready',
+    startExam: 'Start exam',
+    revealAnswer: 'Reveal answer',
+    reset: 'Reset',
+    previous: 'Previous',
+    next: 'Next',
+    all: 'All',
+    posts: 'Posts',
+    videos: 'Videos',
+    books: 'Books',
+    training: 'Training',
+    backToDashboard: 'Back to dashboard',
+    home: 'Home',
+    openArticle: 'Open article',
+    watch: 'Watch',
+    viewBook: 'View book',
+    viewLab: 'View lab',
+    checklistTopics: [
+      'VPC fundamentals',
+      'CIDR and subnet design',
+      'Routing and firewall rules',
+      'Shared VPC and service networking',
+      'Cloud NAT and private access',
+      'Hybrid connectivity: VPN',
+      'Cloud Interconnect',
+      'Network Connectivity Center',
+      'Load balancing',
+      'DNS and traffic management',
+      'Security and IAM for networking',
+      'Monitoring and troubleshooting'
+    ]
+  },
+  al: {
+    sourceList: 'Lista e burimeve',
+    certificationLabel: 'Certifikim Profesional',
+    heroTitle: 'Inxhinier Rrjeti Profesionist i Google Cloud',
+    heroDescription: 'Mësoni më shpejt me një plan studimi të strukturuar, referenca të kuratuara dhe një bank pyetjesh praktikash në VPC, lidhje hibride, routing, siguri dhe zgjidhje probleme.',
+    officialExamPage: 'Faqja zyrtare e provimit',
+    prepSheet: 'Fletë përgatitëse 2026',
+    examAtAGlance: 'Provimi në një shikim',
+    officialPracticeTest: 'Testi praktik zyrtar',
+    studyTracker: 'Ndjekja e studimit',
+    progress: 'Përparimi',
+    topicsComplete: 'Tema të kompletuara',
+    totalTopics: 'Totali i temave',
+    questionBank: 'Banka e pyetjeve',
+    totalQuestions: 'Pyetje totale',
+    simulationSize: 'Madhësia e simulimit',
+    generate30: 'Krijo 30Q',
+    generate50: 'Krijo 50Q',
+    whatToLearnFirst: 'Çfarë të mësohet së pari',
+    studyPath: 'Rruga e studimit',
+    learningChecklist: 'Lista e kontrollit',
+    examFlow: 'Fluksi i provimit',
+    studyFlowByStage: 'Fluksi i studimit sipas fazave',
+    quickRecall: 'Memorizim i shpejtë',
+    examChecklist: 'Lista e kontrollit të provimit sipas temave',
+    learnInsideThisRepo: 'Mëso brenda këtij repo',
+    deepDiveTitle: 'Tema të rëndësishme të rrjetit',
+    priorityResources: 'Burimet me prioritet',
+    startHere: 'Fillo këtu',
+    learningResources: 'Burimet e të mësuarit',
+    curatedStudyLibrary: 'Bibliotekë e kuratuar e studimit',
+    practiceExam: 'Provim praktik',
+    mockExam: 'Simuluesi i provimit praktik',
+    ready: 'Gati',
+    startExam: 'Fillo provimin',
+    revealAnswer: 'Trego përgjigjen',
+    reset: 'Rivendos',
+    previous: 'I mëparshmi',
+    next: 'Tjetër',
+    all: 'Të gjitha',
+    posts: 'Postime',
+    videos: 'Video',
+    books: 'Libra',
+    training: 'Trajnim',
+    backToDashboard: 'Kthehu te paneli',
+    home: 'Kreu',
+    openArticle: 'Hape artikullin',
+    watch: 'Shiko',
+    viewBook: 'Shiko librin',
+    viewLab: 'Shiko laboratorin',
+    checklistTopics: [
+      'Themellet e VPC',
+      'Dizajni i CIDR dhe nëndisave',
+      'Rregullat e routing dhe firewall',
+      'VPC e ndarë dhe rrjetëzimi i shërbimeve',
+      'Cloud NAT dhe qasja private',
+      'Lidhja hibride: VPN',
+      'Cloud Interconnect',
+      'Network Connectivity Center',
+      'Balancimi i ngarkesës',
+      'DNS dhe menaxhimi i trafikut',
+      'Siguria dhe IAM për rrjetet',
+      'Monitorimi dhe zgjidhja e problemeve'
+    ]
+  }
+};
+
+const getCurrentLanguage = () => localStorage.getItem('gcp-language') || 'en';
+
+const setupLanguage = () => {
+  const languageToggle = document.getElementById('languageToggle');
+  if (!languageToggle) return;
+
+  const applyLanguage = () => {
+    const currentLanguage = getCurrentLanguage();
+    const bundle = translations[currentLanguage] || translations.en;
+    document.documentElement.lang = currentLanguage === 'al' ? 'sq' : 'en';
+
+    document.querySelectorAll('[data-i18n]').forEach((element) => {
+      const key = element.dataset.i18n;
+      if (bundle[key]) {
+        element.textContent = bundle[key];
+      }
+    });
+
+    languageToggle.textContent = currentLanguage === 'en' ? 'AL' : 'EN';
+    languageToggle.setAttribute('aria-label', currentLanguage === 'en' ? 'Switch to Albanian' : 'Switch to English');
+  };
+
+  languageToggle.addEventListener('click', () => {
+    const nextLanguage = getCurrentLanguage() === 'en' ? 'al' : 'en';
+    localStorage.setItem('gcp-language', nextLanguage);
+    applyLanguage();
+    if (typeof setupChecklist === 'function') {
+      const checklist = document.getElementById('topicChecklist');
+      if (checklist && checklist.children.length) {
+        checklist.innerHTML = '';
+        setupChecklist();
+      }
+    }
+  });
+
+  applyLanguage();
+};
+
 const setupTheme = () => {
   const themeToggle = document.getElementById('themeToggle');
   if (!themeToggle) return;
@@ -21,20 +192,8 @@ const setupChecklist = () => {
   const checklist = document.getElementById('topicChecklist');
   if (!checklist) return;
 
-  const topics = [
-    "VPC fundamentals",
-    "CIDR and subnet design",
-    "Routing and firewall rules",
-    "Shared VPC and service networking",
-    "Cloud NAT and private access",
-    "Hybrid connectivity: VPN",
-    "Cloud Interconnect",
-    "Network Connectivity Center",
-    "Load balancing",
-    "DNS and traffic management",
-    "Security and IAM for networking",
-    "Monitoring and troubleshooting"
-  ];
+  const currentLanguage = getCurrentLanguage();
+  const topics = translations[currentLanguage].checklistTopics;
 
   const totalTopicsEl = document.getElementById('totalTopics');
   const checkedCountEl = document.getElementById('checkedCount');
@@ -570,6 +729,7 @@ const setupExam = () => {
   generate50Btn.addEventListener('click', () => generatePracticeExam(50));
 };
 
+setupLanguage();
 setupTheme();
 setupChecklist();
 setupResourceFilters();
