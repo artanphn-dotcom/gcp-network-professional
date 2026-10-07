@@ -1111,296 +1111,352 @@ const setupExam = () => {
   const resetExamBtn = document.getElementById('resetExamBtn');
   const generate30Btn = document.getElementById('generate30Btn');
   const generate50Btn = document.getElementById('generate50Btn');
+  const examDomainSelect = document.getElementById('examDomainSelect');
+  const hardModeBtn = document.getElementById('hardModeBtn');
 
-  if (!practiceStatusEl || !practiceTimerEl || !examSummaryEl || !questionCardEl || !practiceExamEl || !progressBarEl || !startExamBtn || !nextBtn || !prevBtn || !showAnswerBtn || !resetExamBtn || !generate30Btn || !generate50Btn) {
+  if (!practiceStatusEl || !practiceTimerEl || !examSummaryEl || !questionCardEl || !practiceExamEl || !progressBarEl || !startExamBtn || !nextBtn || !prevBtn || !showAnswerBtn || !resetExamBtn || !generate30Btn || !generate50Btn || !examDomainSelect || !hardModeBtn) {
     return;
   }
 
   const questionBank = (() => {
     const templates = [
       {
-        topic: 'VPC fundamentals',
-        question: 'Which statement best describes a Google Cloud VPC network?',
-        options: [
-          'A VPC is global and spans across all projects by default.',
-          'A VPC is a global virtual network that can contain regional subnets.',
-          'A VPC is limited to a single region and cannot contain multiple subnets.',
-          'A VPC can only connect to on-premises networks using Cloud NAT.'
-        ],
+        topic: 'VPC design',
+        question: 'A company deploys a three-tier application in one VPC. Which design best supports least-privilege networking and easier troubleshooting?',
+        options: ['One subnet for all tiers with broad firewall rules', 'Three subnets with independent firewall and routing policies', 'One subnet per VM', 'No subnet segmentation'],
         answer: 1,
-        explanation: 'Google Cloud VPC networks are global objects, and subnets are regional. This allows resources in different regions to belong to the same VPC.'
+        explanation: 'Tiered subnet segmentation plus explicit firewall rules reduces exposure, improves isolation, and makes troubleshooting easier.'
       },
       {
-        topic: 'VPC fundamentals',
-        question: 'What is the default behavior of ingress traffic to VM instances in a VPC when no firewall rule is applied?',
-        options: [
-          'Allowed from all sources',
-          'Denied by default',
-          'Allowed only from private IP ranges',
-          'Allowed only from Google APIs'
-        ],
-        answer: 1,
-        explanation: 'GCP firewall rules default to deny ingress unless a matching allow rule exists.'
+        topic: 'VPC design',
+        question: 'Two workloads in different subnets of the same VPC cannot communicate. Which layer is the most likely problem?',
+        options: ['Route table or firewall policy', 'Billing account', 'Cloud Storage labels', 'Machine image family'],
+        answer: 0,
+        explanation: 'A subnet-to-subnet connectivity issue usually involves route selection, firewall policy, or path reachability.'
       },
       {
-        topic: 'VPC fundamentals',
-        question: 'A subnet in GCP is associated with which scope?',
-        options: ['Project only', 'Region only', 'Global only', 'Zone only'],
-        answer: 1,
-        explanation: 'Each subnet exists in a single region, but the VPC network object is global.'
+        topic: 'CIDR',
+        question: 'Which range provides the largest address pool for future network growth within a practical design?',
+        options: ['10.0.0.0/24', '10.0.0.0/16', '10.0.0.0/8', '10.0.0.0/28'],
+        answer: 2,
+        explanation: 'A /8 range provides the largest available address pool, but it should be planned carefully for administrative practicality and scale.'
       },
       {
-        topic: 'VPC fundamentals',
-        question: 'Which construct is most directly responsible for controlling traffic between workloads in the same VPC?',
-        options: ['DNS policy', 'Firewall rules', 'Cloud CDN', 'Cloud Router'],
-        answer: 1,
-        explanation: 'Firewall rules establish allowed and denied communication paths between resource groups and subnets.'
-      },
-      {
-        topic: 'Private access',
-        question: 'Private Google Access is best used when which requirement is true?',
-        options: [
-          'VMs need to be reachable from the public internet over HTTPS.',
-          'VMs without external IPs need access to Google APIs and services over private paths.',
-          'You need to expose an internal app to the internet via Cloud NAT.',
-          'You want to bypass DNS entirely.'
-        ],
-        answer: 1,
-        explanation: 'Private Google Access allows private workloads to reach Google APIs without public IP addresses.'
-      },
-      {
-        topic: 'Private access',
-        question: 'Private Service Access is primarily intended to support which pattern?',
-        options: [
-          'Public ingress to a web application',
-          'Private connectivity to Google-managed or internal services over internal IP ranges',
-          'Scaling storage buckets across regions',
-          'Direct DNS failover to a second site'
-        ],
-        answer: 1,
-        explanation: 'Private Service Access gives private connectivity for managed or internal services without internet exposure.'
-      },
-      {
-        topic: 'CIDR and subnet design',
-        question: 'A subnet range of 10.0.0.0/16 contains how many usable host addresses approximately?',
-        options: ['254', '65534', '4094', '1022'],
-        answer: 1,
-        explanation: 'A /16 network has 65,536 addresses, and about 65,534 usable host IPs after reserving network and broadcast addresses.'
-      },
-      {
-        topic: 'CIDR and subnet design',
-        question: 'What is the main risk of overlapping CIDR ranges in a VPC or hybrid network?',
-        options: ['Higher latency', 'Traffic routing ambiguity', 'Increased firewall complexity', 'Cloud Router failure'],
-        answer: 1,
-        explanation: 'Overlapping ranges can create ambiguous routing and prevent traffic from reaching the intended destination.'
-      },
-      {
-        topic: 'CIDR and subnet design',
-        question: 'Which subnet mask is equivalent to a /24 prefix?',
-        options: ['255.255.0.0', '255.255.255.0', '255.0.0.0', '255.255.255.255'],
+        topic: 'CIDR',
+        question: 'What is the equivalent mask for 10.0.0.0/24?',
+        options: ['255.255.0.0', '255.255.255.0', '255.255.255.255', '255.0.0.0'],
         answer: 1,
         explanation: 'A /24 prefix corresponds to 255.255.255.0.'
       },
       {
-        topic: 'Routing and firewall',
-        question: 'Which route type is usually used to steer traffic between a VPC and a VPN tunnel?',
-        options: ['Static route', 'Custom route', 'Default route', 'Broadcast route'],
-        answer: 1,
-        explanation: 'Custom routes let you direct specific destination ranges to the correct next hop, such as a VPN tunnel or appliance.'
+        topic: 'CIDR',
+        question: 'Two sites both use 10.0.0.0/16 and connect through a VPN. What is the main risk?',
+        options: ['Overlapping address spaces causing ambiguous routing', 'VPN performance improvements', 'Firewall rules are automatically disabled', 'Private DNS is blocked'],
+        answer: 0,
+        explanation: 'Overlapping RFC1918 ranges can create ambiguous paths and route confusion between the two networks.'
       },
       {
-        topic: 'Routing and firewall',
-        question: 'If no firewall rule matches a connection, what happens by default?',
-        options: ['Traffic is permitted', 'Traffic is denied', 'Traffic is rate limited', 'Traffic is cached'],
+        topic: 'Routing',
+        question: 'A workload must send traffic to a specific on-premises destination through a VPN rather than the default internet path. Which design element is relevant?',
+        options: ['Custom static route', 'Cloud CDN cache policy', 'Private DNS zone', 'Project quota'],
+        answer: 0,
+        explanation: 'Custom routes let you steer traffic to a VPN tunnel or specific next hop.'
+      },
+      {
+        topic: 'Routing',
+        question: 'A VM cannot reach a private destination despite being in the same region. What is the most likely root cause?',
+        options: ['Missing or incorrect route', 'Disk size issue', 'Auto-generated tags', 'Billing export delay'],
+        answer: 0,
+        explanation: 'Traffic black-holing is commonly caused by missing or incorrect routes.'
+      },
+      {
+        topic: 'Firewall',
+        question: 'The security team wants SSH access only from a jump host subnet. Which rule is correct?',
+        options: ['Allow all TCP 22 from 0.0.0.0/0', 'Allow from the jump host CIDR to tcp:22 on target VMs', 'Deny port 22 and allow all else', 'Allow egress only'],
         answer: 1,
-        explanation: 'GCP firewall policy defaults to deny ingress and egress unless an explicit allow rule matches.'
+        explanation: 'Least-privilege access should be limited to a trusted management source range and required destination port.'
+      },
+      {
+        topic: 'Firewall',
+        question: 'If a packet arrives and no firewall rule matches, what is the result?',
+        options: ['It is allowed by default', 'It is denied by default', 'It is balanced to a backend', 'It is routed through Cloud NAT'],
+        answer: 1,
+        explanation: 'Google Cloud firewall policy is deny by default unless a matching allow rule exists.'
+      },
+      {
+        topic: 'Private access',
+        question: 'A private VM with no external IP needs to reach Google APIs without internet exposure. Which feature should be used?',
+        options: ['Private Google Access', 'Cloud NAT', 'Cloud Armor', 'External IP assignment'],
+        answer: 0,
+        explanation: 'Private Google Access allows private workloads to reach Google APIs using a private path.'
+      },
+      {
+        topic: 'Private access',
+        question: 'A team wants private access to a managed Google service without public exposure. Which feature is most appropriate?',
+        options: ['Private Service Connect', 'Cloud Router', 'Cloud CDN', 'Cloud DNS'],
+        answer: 0,
+        explanation: 'Private Service Connect gives private access to Google-managed services over internal IPs.'
       },
       {
         topic: 'Shared VPC',
-        question: 'What is the primary benefit of Shared VPC design?',
-        options: [
-          'It removes the need for routing tables.',
-          'It centralizes VPC networking while allowing multiple service projects to use the same network.',
-          'It automatically gives every project internet access.',
-          'It reduces the need for IAM controls.'
-        ],
-        answer: 1,
-        explanation: 'Shared VPC lets a host project own the network while service projects consume it, which centralizes important network controls.'
+        question: 'Which design is best when central networking control must be retained while multiple app teams use one common network?',
+        options: ['Shared VPC', 'Dedicated per-project VPCs', 'Cloud NAT gateway only', 'Single subnet for all projects'],
+        answer: 0,
+        explanation: 'Shared VPC centralizes network administration while allowing multiple service projects to consume the same network.'
       },
       {
         topic: 'Shared VPC',
-        question: 'In a Shared VPC model, which project usually owns the network and subnet resources?',
-        options: ['Service project', 'Host project', 'Client project', 'Billing project'],
-        answer: 1,
-        explanation: 'The host project owns and administers the shared VPC network and its subnets.'
+        question: 'In a Shared VPC model, which project usually owns the network resources?',
+        options: ['Host project', 'Service project', 'Billing project', 'Customer project'],
+        answer: 0,
+        explanation: 'The host project owns the shared VPC and subnet resources, while service projects consume them.'
       },
       {
-        topic: 'Cloud Router',
-        question: 'Cloud Router is most useful when you need which capability?',
-        options: [
-          'A portal for firewall rule creation',
-          'Dynamic route exchange with BGP-enabled connectivity',
-          'Service discovery for Cloud SQL',
-          'Encryption of data at rest'
-        ],
-        answer: 1,
-        explanation: 'Cloud Router is the primary BGP-enabled component used for dynamic connectivity and route advertisement.'
+        topic: 'BGP',
+        question: 'A production environment needs dynamic route exchange between on-prem and GCP. Which component is required?',
+        options: ['Cloud Router with BGP', 'Cloud CDN', 'BigQuery dataset', 'Cloud NAT only'],
+        answer: 0,
+        explanation: 'Cloud Router with BGP is the mechanism for dynamic route exchange in hybrid connectivity.'
       },
       {
-        topic: 'Cloud Router',
-        question: 'Which protocol is most closely associated with Cloud Router in hybrid connectivity scenarios?',
-        options: ['ICMP', 'BGP', 'HTTP', 'SSH'],
-        answer: 1,
-        explanation: 'BGP is the routing protocol commonly used to exchange route information between Cloud Router and external networks.'
+        topic: 'BGP',
+        question: 'Which protocol is used to exchange dynamic routes between Cloud Router and an external router?',
+        options: ['BGP', 'ICMP', 'DHCP', 'HTTP'],
+        answer: 0,
+        explanation: 'BGP is the standard protocol for route advertisement and selection in external connectivity.'
       },
       {
         topic: 'Hybrid connectivity',
-        question: 'Which connectivity option is typically chosen for lower cost and simpler failover setup?',
-        options: ['Dedicated Interconnect', 'HA VPN', 'Cloud CDN', 'Private Google Access'],
-        answer: 1,
-        explanation: 'HA VPN is common for resilient hybrid connectivity and simpler deployment than dedicated private circuits.'
+        question: 'A regulated company needs a dedicated private connection with reliable low latency and high throughput. Which option is best?',
+        options: ['Dedicated Interconnect', 'Cloud NAT', 'Cloud CDN', 'On-demand VPN'],
+        answer: 0,
+        explanation: 'Dedicated Interconnect delivers private, predictable, high-capacity connectivity suitable for critical hybrid workloads.'
       },
       {
         topic: 'Hybrid connectivity',
-        question: 'Which option is generally preferred when high bandwidth and predictable latency are critical?',
-        options: ['Cloud NAT', 'Dedicated Interconnect', 'Cloud DNS', 'Firewall rules'],
-        answer: 1,
-        explanation: 'Dedicated Interconnect is designed for high-capacity private connectivity and predictable performance.'
+        question: 'A business wants resilient hybrid connectivity with simpler deployment but no dedicated circuit. Which option is usually chosen?',
+        options: ['HA VPN', 'Cloud Armor', 'Cloud CDN', 'Private Google Access'],
+        answer: 0,
+        explanation: 'HA VPN provides redundant VPN tunnels and simpler deployment than a dedicated private circuit.'
       },
       {
         topic: 'Load balancing',
-        question: 'Which load balancer is most appropriate for internet-facing HTTP traffic and global reach?',
-        options: ['Internal TCP/UDP LB', 'Global HTTP(S) Load Balancer', 'Cloud NAT', 'Cloud Router'],
-        answer: 1,
-        explanation: 'Global HTTP(S) Load Balancing is designed for external HTTP and HTTPS traffic with global reach and health-based routing.'
+        question: 'Which load balancer is best for a regional public web app that must distribute traffic with health checks and global reach?',
+        options: ['Global external HTTP(S) Load Balancer', 'Internal TCP/UDP Load Balancer', 'Cloud Router', 'Private DNS zone'],
+        answer: 0,
+        explanation: 'The external HTTP(S) load balancer is designed for internet-facing web traffic with global distribution and health-aware routing.'
       },
       {
         topic: 'Load balancing',
-        question: 'When should an organization choose an Internal TCP/UDP Load Balancer?',
-        options: [
-          'When the service is only available to the public internet',
-          'When traffic should stay inside a VPC or private network',
-          'When you need Cloud Armor protection',
-          'When you want to block all DNS requests'
-        ],
-        answer: 1,
-        explanation: 'Internal TCP/UDP balancing is useful for private services and internal apps that should not be publicly exposed.'
+        question: 'Which load balancer is intended for services that must remain private and reachable only via internal IPs?',
+        options: ['Internal TCP/UDP Load Balancer', 'Cloud CDN', 'Cloud Armor', 'Cloud NAT'],
+        answer: 0,
+        explanation: 'Internal TCP/UDP load balancing is intended for private-only application exposure.'
       },
       {
-        topic: 'DNS and traffic management',
-        question: 'Which DNS design is typically best for internal-only service discovery?',
-        options: ['Public DNS', 'Private DNS', 'Cloud CDN', 'Cloud NAT'],
-        answer: 1,
-        explanation: 'Private DNS is the correct approach when internal workloads need a separate internal naming layer.'
+        topic: 'Load balancing',
+        question: 'A company wants an external frontend with private backends. What pattern best fits?',
+        options: ['External load balancer in front of private backends', 'Expose all backends to the internet', 'Use Cloud NAT for every backend', 'Place everything in one large subnet'],
+        answer: 0,
+        explanation: 'An external frontend load balancer reduces direct exposure of backends while still supporting client access.'
       },
       {
-        topic: 'DNS and traffic management',
-        question: 'Why is split-horizon DNS often used in enterprise cloud networks?',
-        options: [
-          'It removes the need for routing policies.',
-          'It gives different answers to internal and external users for the same name.',
-          'It prevents all private traffic.',
-          'It eliminates the need for VPC peering.'
-        ],
-        answer: 1,
-        explanation: 'Split-horizon DNS provides internal and external views of the same service name, which is helpful for private service access and public exposure policies.'
+        topic: 'DNS',
+        question: 'An internal app should resolve to internal IPs, while the public site resolves to the public IP. Which DNS pattern is best?',
+        options: ['Split-horizon DNS', 'Cloud NAT DNS', 'Single public zone', 'Anycast-only DNS'],
+        answer: 0,
+        explanation: 'Split-horizon DNS gives different answers to internal and external users for the same name.'
+      },
+      {
+        topic: 'DNS',
+        question: 'Which DNS object is best suited for private service discovery inside a VPC?',
+        options: ['Private DNS zone', 'Public DNS zone', 'Cloud NAT IP mapping', 'Cloud Router peer'],
+        answer: 0,
+        explanation: 'Private DNS zones are designed for internal-only name resolution inside a VPC or connected private networks.'
       },
       {
         topic: 'Security',
-        question: 'Which service is most directly associated with controlling abusive traffic and applying web protections before origin traffic reaches the backend?',
-        options: ['Cloud Router', 'Cloud Armor', 'Cloud NAT', 'Private Service Access'],
-        answer: 1,
-        explanation: 'Cloud Armor applies policy controls such as rate limiting, geo restrictions, and bot protections before origin traffic is delivered.'
+        question: 'A public API is under DDoS-like abuse and needs geo filtering, bot protections, and rate limiting. Which service is the best fit?',
+        options: ['Cloud Armor', 'Cloud NAT', 'Cloud Router', 'Private Google Access'],
+        answer: 0,
+        explanation: 'Cloud Armor provides protections such as rate limiting, geography-based controls, and bot mitigation.'
       },
       {
         topic: 'Security',
-        question: 'Which design pattern helps keep private workloads out of the public internet while still allowing egress?',
-        options: ['Cloud NAT', 'Cloud Router', 'Private Google Access', 'Forwarding rules'],
+        question: 'A private VM needs outbound internet access but should not receive a public IP. Which service should be enabled?',
+        options: ['Cloud NAT', 'Cloud CDN', 'Cloud Router', 'Cloud DNS'],
         answer: 0,
-        explanation: 'Cloud NAT provides outbound internet access to private resources without assigning external IPs to each instance.'
+        explanation: 'Cloud NAT allows egress without requiring a public IP address on the VM.'
+      },
+      {
+        topic: 'Perimeter security',
+        question: 'A company wants to protect sensitive Google Cloud services from data exfiltration and enforce a service boundary. Which feature is most relevant?',
+        options: ['VPC Service Controls', 'Cloud NAT', 'Cloud Router', 'Load balancing policies'],
+        answer: 0,
+        explanation: 'VPC Service Controls establish service perimeters around sensitive data and services to reduce exfiltration risk.'
       },
       {
         topic: 'Monitoring',
-        question: 'What is the best reason to use Network Intelligence Center or connectivity monitoring tools?',
-        options: [
-          'To replace all firewall rules',
-          'To understand traffic flow, health, latency, and network reachability issues',
-          'To automatically create VPC subnets',
-          'To disable BGP'
-        ],
-        answer: 1,
-        explanation: 'Network monitoring and intelligence services help identify bottlenecks, unhealthy paths, and connectivity visibility issues.'
+        question: 'An on-prem network and GCP environment show intermittent latency. What should be investigated first?',
+        options: ['Firewall policy, route tables, and BGP status', 'Billing account credits', 'Storage class settings', 'Project labels'],
+        answer: 0,
+        explanation: 'Route integrity, firewall policy, and BGP adjacency are primary issues in hybrid connectivity troubleshooting.'
       },
       {
         topic: 'Monitoring',
-        question: 'Which output is most likely to help diagnose a connectivity issue between on-prem and GCP?',
-        options: ['Auto-scaling logs', 'Route and connectivity validation data', 'Data storage quotas', 'Billing export'],
-        answer: 1,
-        explanation: 'Connectivity validation and routing diagnostics are directly useful when troubleshooting cross-environment reachability.'
+        question: 'A subnet can reach the internet but cannot reach another internal range. What is the most likely cause?',
+        options: ['Missing or incorrect custom route', 'Egress quota exceeded', 'Cloud CDN invalidation', 'Wrong machine type'],
+        answer: 0,
+        explanation: 'If internet access works but the internal range does not, route selection or policy problems are usually the issue.'
       },
       {
-        topic: 'VPC Service Controls',
-        question: 'Which security concept is VPC Service Controls best associated with?',
-        options: ['Service perimeter boundaries for sensitive data access', 'DNS zone replication', 'External IP assignment', 'Cloud CDN invalidation'],
+        topic: 'Monitoring',
+        question: 'An app tier cannot reach a database VM but can reach the internet. Which issue is most likely?',
+        options: ['Ingress firewall rule mismatch between tiers', 'Cloud NAT outage', 'Bucket lifecycle policy', 'Private DNS TTL'],
         answer: 0,
-        explanation: 'VPC Service Controls create a security perimeter around Google Cloud services to restrict data exfiltration and unauthorized access.'
+        explanation: 'A firewall policy mismatch between tiers is a common cause when public access works but private path access fails.'
       },
       {
         topic: 'Cloud CDN',
-        question: 'What is the main purpose of Cloud CDN?',
-        options: ['To replace private DNS', 'To cache content closer to users and reduce origin load', 'To create firewall rules', 'To manage BGP peers'],
-        answer: 1,
-        explanation: 'Cloud CDN caches content at Google edge points to improve latency and offload traffic from the origin.'
+        question: 'A platform needs to reduce user latency and lower origin load. Which service is best?',
+        options: ['Cloud CDN', 'Cloud NAT', 'Cloud Router', 'Private Service Connect'],
+        answer: 0,
+        explanation: 'Cloud CDN pushes content closer to users and reduces the origin load.'
       },
       {
         topic: 'Cloud CDN',
-        question: 'What problem does invalidation help solve?',
-        options: ['Route leakage', 'Stale content after updates', 'VM impersonation', 'BGP route loops'],
-        answer: 1,
-        explanation: 'Invalidations force content refresh so clients do not keep stale responses from edge caches.'
+        question: 'After updating a static web object, some users still see stale content. What is the best corrective measure?',
+        options: ['Invalidate stale cache entries', 'Reset the project number', 'Disable Cloud NAT', 'Delete the load balancer'],
+        answer: 0,
+        explanation: 'Cache invalidation forces refreshed copies to be served instead of stale cached objects.'
       },
       {
         topic: 'GKE networking',
-        question: 'Why are VPC-native GKE clusters commonly preferred in modern Google Cloud designs?',
-        options: [
-          'They eliminate all private networking needs',
-          'They integrate closely with VPC networking and alias IPs for pod IP allocation',
-          'They remove the need for service accounts',
-          'They make all workloads public by default'
-        ],
-        answer: 1,
-        explanation: 'VPC-native clusters integrate with the VPC network and give pods IPs from the network, simplifying networking and routing.'
+        question: 'Why is a VPC-native GKE cluster typically preferred over legacy cluster networking?',
+        options: ['It integrates directly with VPC networking and pod IP allocation', 'It disables all firewall rules', 'It removes the need for subnets', 'It eliminates all cloud routers'],
+        answer: 0,
+        explanation: 'VPC-native clusters integrate more closely with the VPC and allocate pod IPs from network ranges.'
       },
       {
         topic: 'GKE networking',
-        question: 'Which GKE feature is most often associated with layer-7 traffic entry and routing to application services?',
-        options: ['Ingress', 'Cloud NAT', 'Cloud Router', 'VLAN attachments'],
+        question: 'Which Kubernetes object is the usual entry point for routing HTTP and HTTPS traffic to your service?',
+        options: ['Ingress', 'PersistentVolume', 'Service account', 'DaemonSet'],
         answer: 0,
-        explanation: 'Ingress is the standard Kubernetes entry point for HTTP and HTTPS traffic routing to services and backends.'
+        explanation: 'Ingress is the standard way to route HTTP/HTTPS traffic into workloads.'
       },
       {
-        topic: 'Network troubleshooting',
-        question: 'Which is the most likely first step when a VM cannot reach another private service?',
-        options: ['Recreate the project', 'Validate firewall rules, route tables, and connectivity path', 'Delete the subnet', 'Turn off Cloud DNS'],
-        answer: 1,
-        explanation: 'The first diagnostic step is to verify that the path is allowed and reachable from source to destination.'
+        topic: 'Hybrid architecture',
+        question: 'An enterprise wants dynamic route learning from on-prem to GCP instead of static route entries only. Which technology should be used?',
+        options: ['Cloud Router with BGP', 'Cloud NAT', 'Private DNS', 'Cloud CDN'],
+        answer: 0,
+        explanation: 'Cloud Router with BGP supports dynamic route advertisement and learning for hybrid networking.'
       },
       {
-        topic: 'Network troubleshooting',
-        question: 'Which issue is most directly related to a route decision problem?',
-        options: ['Missing or incorrect custom route', 'Expired firewall policy', 'Invalid Cloud CDN cache policy', 'No IAM permissions'],
+        topic: 'Hybrid architecture',
+        question: 'Why would a private connectivity product be preferred over a public connection for production traffic?',
+        options: ['Better security, predictability, and lower exposure', 'It automatically disables firewall rules', 'It removes all need for IAM', 'It reduces the need for subnets'],
         answer: 0,
-        explanation: 'A route mismatch or missing next hop can cause traffic to go to the wrong destination or nowhere at all.'
+        explanation: 'Private connectivity reduces public exposure and improves predictability and performance for business-critical traffic.'
+      },
+      {
+        topic: 'Design trade-offs',
+        question: 'A business needs to expose a public web app while keeping the database private. Which is the best high-level design?',
+        options: ['Public frontend or load balancer with private backends and database', 'Public database with public firewall rules', 'All tiers in a single public subnet', 'No firewall segmentation'],
+        answer: 0,
+        explanation: 'Public-facing frontends with private backends and database tiers are a common and secure network design.'
+      },
+      {
+        topic: 'Design trade-offs',
+        question: 'A network engineer wants to reduce attack surface while allowing controlled outbound internet access. Which pattern is preferred?',
+        options: ['Private IPs with Cloud NAT for egress', 'External IPs on every workload', 'No firewall rules', 'Public database tier'],
+        answer: 0,
+        explanation: 'Private IPs + Cloud NAT allows controlled outbound internet access while limiting exposure.'
+      },
+      {
+        topic: 'Security',
+        question: 'Which control best preserves private connectivity to managed services while preventing public internet exposure?',
+        options: ['Private Service Connect', 'Cloud NAT', 'Cloud CDN', 'Dynamic DNS'],
+        answer: 0,
+        explanation: 'Private Service Connect provides private access to Google-managed services without public internet exposure.'
+      },
+      {
+        topic: 'Network review',
+        question: 'A remote branch office must confirm whether it can reach a target VPC service and whether the route is valid. Which diagnostic is most relevant?',
+        options: ['Connectivity diagnostics and route validation', 'Billing export review', 'Project ownership check', 'Storage class review'],
+        answer: 0,
+        explanation: 'Route validation and connectivity diagnostics directly answer whether the path is valid and reachable.'
+      },
+      {
+        topic: 'Network review',
+        question: 'Which combination is most useful when diagnosing hybrid connectivity issues?',
+        options: ['Firewall policy, route tables, and BGP peer state', 'Disk capacity and VM family', 'Bucket labels only', 'Cloud CDN headers'],
+        answer: 0,
+        explanation: 'Hybrid issues often come from firewall policy, path routing, and BGP peer health.'
+      },
+      {
+        topic: 'Interconnect',
+        question: 'A workload needs predictable latency and a private, high-bandwidth path between data centers and GCP. Which product is preferable?',
+        options: ['Dedicated Interconnect', 'Cloud NAT', 'Cloud Armor', 'Cloud CDN'],
+        answer: 0,
+        explanation: 'Dedicated Interconnect is designed for predictable, private, high-bandwidth network paths.'
+      },
+      {
+        topic: 'Interconnect',
+        question: 'A company wants maximum resilience for its hybrid connectivity without a dedicated circuit. Which choice is typically used?',
+        options: ['HA VPN', 'Cloud CDN', 'Cloud NAT', 'Public DNS'],
+        answer: 0,
+        explanation: 'HA VPN is a resilient pattern using redundant tunnels and is well-suited when dedicated circuits are not needed.'
+      },
+      {
+        topic: 'Private Google access',
+        question: 'A VM without external IP needs to reach Google APIs over private networking. Which design is correct?',
+        options: ['Enable Private Google Access on subnet', 'Assign an external IP to the VM', 'Use a public load balancer', 'Disable firewall rules'],
+        answer: 0,
+        explanation: 'Private Google Access is the correct design for private API connectivity without public IPs.'
+      },
+      {
+        topic: 'Firewall policy',
+        question: 'The application team wants to block all inbound traffic except SSH from a bastion subnet. Which configuration is correct?',
+        options: ['Deny all ingress, then allow only bastion subnet to tcp:22', 'Allow all ingress to tcp:22', 'Allow egress only', 'Create no firewall rules'],
+        answer: 0,
+        explanation: 'A deny-all default and a narrow allow rule is the standard secure configuration for bastion access.'
+      },
+      {
+        topic: 'Cloud Router',
+        question: 'A customer has multiple external peers and needs route learning for dynamic failover. What should be configured?',
+        options: ['Cloud Router with BGP and multiple peers', 'Private DNS only', 'Firewall allow all', 'Cloud NAT on all peers'],
+        answer: 0,
+        explanation: 'Cloud Router with BGP allows dynamic route exchange and failover across multiple peers.'
+      },
+      {
+        topic: 'Shared VPC',
+        question: 'What is the primary benefit of Shared VPC to a large organization?',
+        options: ['Centralized administration and standard network policy', 'Automatic encryption of all traffic', 'Internet access for every subnet by default', 'No need for firewall rules'],
+        answer: 0,
+        explanation: 'Shared VPC provides centralized control and consistent network policy across multiple projects.'
       }
     ];
 
+    const domainNames = [
+      'VPC & Subnetting',
+      'Routing & BGP',
+      'Hybrid Connectivity',
+      'Security & Firewall',
+      'DNS & Load Balancing',
+      'Monitoring & Troubleshooting',
+      'Private Access & Service Controls'
+    ];
+
     const bank = [];
-    for (let i = 0; i < 150; i += 1) {
+    for (let i = 0; i < 200; i += 1) {
       const base = templates[i % templates.length];
+      const domain = domainNames[i % domainNames.length];
+      const difficulty = (i + 1) % 5 === 0 ? 'hard' : 'standard';
       bank.push({
         ...base,
-        question: `${base.question} (${i + 1})`,
-        explanation: `${base.explanation} This is an exam-style review item.`
+        domain,
+        difficulty,
+        explanation: `${base.explanation} This is an official-style exam review item.`
       });
     }
     return bank;
@@ -1415,6 +1471,9 @@ const setupExam = () => {
   let examFinished = false;
   let showCorrectAnswer = false;
   let examSize = 30;
+  let examTimerId = null;
+  let examTimeLeft = 0;
+  let hardModeEnabled = false;
 
   const shuffleArray = (array) => {
     const clone = [...array];
@@ -1425,22 +1484,80 @@ const setupExam = () => {
     return clone;
   };
 
+  const formatTime = (seconds) => {
+    const mins = Math.max(0, Math.floor(seconds / 60));
+    const secs = Math.max(0, seconds % 60);
+    return `${String(mins).padStart(2, '0')}:${String(secs).padStart(2, '0')}`;
+  };
+
+  const updateTimerDisplay = () => {
+    const base = currentExam.length ? `${currentIndex + 1} / ${currentExam.length}` : '0 / 0';
+    practiceTimerEl.textContent = `${base} • ${formatTime(examTimeLeft)}`;
+  };
+
+  const stopExamTimer = () => {
+    if (examTimerId) {
+      clearInterval(examTimerId);
+      examTimerId = null;
+    }
+  };
+
+  const getExamPool = (domainName = examDomainSelect.value) => {
+    const selectedDomain = domainName || 'all';
+    let pool = selectedDomain === 'all'
+      ? questionBank
+      : questionBank.filter((question) => question.domain === selectedDomain);
+
+    if (hardModeEnabled) {
+      const hardPool = pool.filter((question) => question.difficulty === 'hard');
+      pool = hardPool.length ? hardPool : pool;
+    }
+
+    return pool;
+  };
+
   const generatePracticeExam = (size) => {
     examSize = size;
-    const shuffled = shuffleArray(questionBank);
-    currentExam = shuffled.slice(0, size);
-    selectedAnswers = Array(size).fill(null);
+    const selectedDomain = examDomainSelect.value;
+    const pool = getExamPool(selectedDomain);
+    const shuffled = shuffleArray(pool);
+    const questionLimit = Math.min(size, shuffled.length || size);
+    currentExam = shuffled.slice(0, questionLimit);
+    selectedAnswers = Array(questionLimit).fill(null);
     currentIndex = 0;
     examFinished = false;
     showCorrectAnswer = false;
 
+    const examDurationMinutes = size >= 50 ? 120 : 60;
+    examTimeLeft = examDurationMinutes * 60;
+
+    stopExamTimer();
     practiceStatusEl.textContent = 'In progress';
-    practiceTimerEl.textContent = `${currentIndex + 1} / ${currentExam.length}`;
     examSummaryEl.classList.add('hidden');
     practiceExamEl.classList.remove('hidden');
+    updateTimerDisplay();
 
     const examModeLabel = document.getElementById('examModeLabel');
-    if (examModeLabel) examModeLabel.textContent = `${size} Q`;
+    if (examModeLabel) examModeLabel.textContent = `${selectedDomain === 'all' ? size : `${selectedDomain.substring(0, 10)}...`} Q`;
+
+    examTimerId = setInterval(() => {
+      if (examFinished) {
+        stopExamTimer();
+        return;
+      }
+
+      examTimeLeft -= 1;
+      if (examTimeLeft <= 0) {
+        examTimeLeft = 0;
+        updateTimerDisplay();
+        stopExamTimer();
+        finishExam('Time expired');
+        return;
+      }
+
+      updateTimerDisplay();
+    }, 1000);
+
     renderQuestion();
   };
 
@@ -1448,7 +1565,7 @@ const setupExam = () => {
     if (!currentExam.length) return;
 
     const q = currentExam[currentIndex];
-    practiceTimerEl.textContent = `${currentIndex + 1} / ${currentExam.length}`;
+    updateTimerDisplay();
     const percent = ((currentIndex + 1) / currentExam.length) * 100;
     progressBarEl.style.width = `${percent}%`;
 
@@ -1501,18 +1618,102 @@ const setupExam = () => {
     return { answered, correct, total: currentExam.length, percent: Math.round((correct / currentExam.length) * 100) };
   };
 
-  const finishExam = () => {
+  const getDomainBreakdown = () => {
+    const summary = {};
+
+    currentExam.forEach((question, index) => {
+      const domain = question.domain;
+      const isCorrect = selectedAnswers[index] === question.answer;
+
+      if (!summary[domain]) {
+        summary[domain] = { total: 0, correct: 0 };
+      }
+
+      summary[domain].total += 1;
+      if (isCorrect) summary[domain].correct += 1;
+    });
+
+    return Object.entries(summary).map(([domain, stats]) => ({
+      domain,
+      total: stats.total,
+      correct: stats.correct,
+      percent: Math.round((stats.correct / stats.total) * 100)
+    }));
+  };
+
+  const getPerformanceBand = (percent) => {
+    if (percent >= 85) return 'Excellent';
+    if (percent >= 70) return 'Strong';
+    if (percent >= 55) return 'Borderline';
+    return 'Needs improvement';
+  };
+
+  const getWeakDomains = (breakdown) => {
+    return breakdown
+      .filter((item) => item.percent < 70)
+      .sort((a, b) => a.percent - b.percent)
+      .slice(0, 3)
+      .map((item) => item.domain);
+  };
+
+  const finishExam = (statusMessage = 'Completed') => {
     examFinished = true;
     const result = calculateScore();
-    practiceStatusEl.textContent = 'Completed';
+    const domainBreakdown = getDomainBreakdown();
+    const performanceBand = getPerformanceBand(result.percent);
+    const weakDomains = getWeakDomains(domainBreakdown);
+    const reviewRows = currentExam.map((question, index) => {
+      const selected = selectedAnswers[index];
+      const selectedText = selected === null || selected === undefined ? 'No answer' : question.options[selected];
+      const correctText = question.options[question.answer];
+      const isCorrect = selected === question.answer;
+
+      return `
+        <li class="review-item ${isCorrect ? 'review-correct' : 'review-wrong'}">
+          <div class="review-header">
+            <strong>Q${index + 1}</strong>
+            <span>${question.domain}</span>
+          </div>
+          <p>${question.question}</p>
+          <div class="review-answer-line">Selected: ${selectedText}</div>
+          <div class="review-answer-line">Correct: ${correctText}</div>
+        </li>
+      `;
+    }).join('');
+
+    practiceStatusEl.textContent = statusMessage;
     practiceExamEl.classList.add('hidden');
     examSummaryEl.classList.remove('hidden');
     examSummaryEl.innerHTML = `
       <h3>Exam summary</h3>
       <div class="score">${result.correct}/${result.total}</div>
-      <p>You answered ${result.correct} out of ${result.total} questions correctly.</p>
+      <div class="performance-band ${performanceBand.toLowerCase().replace(/\s+/g, '-')}">${performanceBand}</div>
+      <p>${statusMessage === 'Completed' ? 'You answered' : 'Time expired after'} ${result.correct} out of ${result.total} questions correctly.</p>
       <p>Accuracy: ${result.percent}%</p>
       <p>Questions answered: ${result.answered}/${result.total}</p>
+
+      <div class="weak-domains">
+        <strong>Priority review:</strong>
+        ${weakDomains.length ? weakDomains.join(', ') : 'No major weak domains detected'}
+      </div>
+
+      <div class="domain-breakdown">
+        ${domainBreakdown.map((item) => `
+          <div class="domain-score">
+            <div class="domain-score-top">
+              <span>${item.domain}</span>
+              <strong>${item.correct}/${item.total}</strong>
+            </div>
+            <div class="domain-score-bar"><span style="width:${item.percent}%"></span></div>
+          </div>
+        `).join('')}
+      </div>
+
+      <div class="review-panel">
+        <h4>Final review</h4>
+        <ul class="review-list">${reviewRows}</ul>
+      </div>
+
       <button class="button primary small" id="retakeExamBtn" type="button">Retake exam</button>
     `;
 
@@ -1545,6 +1746,7 @@ const setupExam = () => {
   });
 
   resetExamBtn.addEventListener('click', () => {
+    stopExamTimer();
     currentExam = [];
     currentIndex = 0;
     selectedAnswers = [];
@@ -1553,12 +1755,29 @@ const setupExam = () => {
     practiceExamEl.classList.add('hidden');
     examSummaryEl.classList.add('hidden');
     practiceStatusEl.textContent = 'Ready';
-    practiceTimerEl.textContent = '0 / 0';
+    practiceTimerEl.textContent = '0 / 0 • 00:00';
     progressBarEl.style.width = '0%';
   });
 
   generate30Btn.addEventListener('click', () => generatePracticeExam(30));
   generate50Btn.addEventListener('click', () => generatePracticeExam(50));
+
+  hardModeBtn.addEventListener('click', () => {
+    hardModeEnabled = !hardModeEnabled;
+    hardModeBtn.classList.toggle('is-active', hardModeEnabled);
+    hardModeBtn.setAttribute('aria-pressed', String(hardModeEnabled));
+    hardModeBtn.textContent = hardModeEnabled ? 'Hard mode on' : 'Hard mode';
+
+    if (currentExam.length) {
+      generatePracticeExam(examSize);
+    }
+  });
+
+  examDomainSelect.addEventListener('change', () => {
+    if (currentExam.length) {
+      generatePracticeExam(examSize);
+    }
+  });
 };
 
 setupLanguage();

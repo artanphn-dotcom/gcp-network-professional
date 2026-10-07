@@ -209,6 +209,23 @@
       const whitepaperSearch = document.getElementById('whitepaperSearch');
       let activeFilter = 'all';
 
+      const categoryLabels = {
+        en: {
+          security: 'Security',
+          migration: 'Migration',
+          'data-ai': 'Data & AI',
+          architecture: 'Architecture',
+          strategy: 'Strategy'
+        },
+        al: {
+          security: 'Siguria',
+          migration: 'Migrimi',
+          'data-ai': 'Të dhëna & AI',
+          architecture: 'Arkitektura',
+          strategy: 'Strategjia'
+        }
+      };
+
       const renderCards = () => {
         const searchTerm = (whitepaperSearch?.value || '').trim().toLowerCase();
 
@@ -221,24 +238,44 @@
         });
       };
 
-      whitepaperFiles.forEach((fileName) => {
-        const title = makeTitle(fileName);
-        const href = 'whitepapers/' + encodeURI(fileName);
-        const category = detectCategory(fileName);
-        const article = document.createElement('article');
-        article.className = 'whitepaper-card';
-        article.dataset.category = category;
-        article.dataset.title = title;
-        article.innerHTML = `
-          <div class="whitepaper-badge">${category}</div>
-          <h3>${title}</h3>
-          <p>Download the original document or reference from this curated Google Cloud resource library.</p>
-          <a href="${href}" target="_blank" rel="noreferrer" download>Download</a>
-        `;
-        whitepaperList.appendChild(article);
-      });
+      const localizedCategoryText = (category, language) => categoryLabels[language]?.[category] || categoryLabels.en[category] || 'Strategy';
 
-      whitepaperCount.textContent = whitepaperFiles.length;
+      const renderWhitepapers = () => {
+        const language = localStorage.getItem('gcp-language') || 'en';
+        whitepaperList.innerHTML = '';
+
+        whitepaperFiles.forEach((fileName) => {
+          const title = makeTitle(fileName);
+          const href = 'whitepapers/' + encodeURI(fileName);
+          const category = detectCategory(fileName);
+          const categoryLabel = localizedCategoryText(category, language);
+          const description = language === 'al'
+            ? `Referencë e kuratuar për planifikimin, arkitekturën dhe zbatimin e ${categoryLabel.toLowerCase()}.`
+            : `Curated reference for ${categoryLabel.toLowerCase()} planning, architecture, and implementation guidance.`;
+          const buttonText = language === 'al' ? 'Hap dokumentin' : 'Open document';
+
+          const article = document.createElement('article');
+          article.className = 'whitepaper-card';
+          article.dataset.category = category;
+          article.dataset.title = title;
+          article.innerHTML = `
+            <div class="whitepaper-meta">
+              <span class="whitepaper-badge">${categoryLabel}</span>
+              <span class="whitepaper-format">PDF / HTML</span>
+            </div>
+            <h3>${title}</h3>
+            <p>${description}</p>
+            <a href="${href}" target="_blank" rel="noreferrer" download>${buttonText}</a>
+          `;
+          whitepaperList.appendChild(article);
+        });
+
+        whitepaperCount.textContent = whitepaperFiles.length;
+        if (whitepaperSearch) {
+          whitepaperSearch.placeholder = language === 'al' ? 'Kërkoni whitepapers...' : 'Search whitepapers...';
+        }
+        renderCards();
+      };
 
       const applyFilter = (selectedFilter) => {
         activeFilter = selectedFilter;
@@ -246,14 +283,31 @@
         renderCards();
       };
 
+      renderWhitepapers();
+
       filters.forEach((button) => {
         button.addEventListener('click', () => applyFilter(button.dataset.filter));
       });
 
       whitepaperSearch?.addEventListener('input', renderCards);
 
-      setupTheme();
-      setupLanguage();
+      const languageToggle = document.getElementById('languageToggle');
+      const themeToggle = document.getElementById('themeToggle');
+
+      languageToggle?.addEventListener('click', () => {
+        const nextLanguage = (localStorage.getItem('gcp-language') || 'en') === 'en' ? 'al' : 'en';
+        localStorage.setItem('gcp-language', nextLanguage);
+        languageToggle.textContent = nextLanguage === 'en' ? 'AL' : 'EN';
+        languageToggle.setAttribute('aria-label', nextLanguage === 'en' ? 'Switch to Albanian' : 'Switch to English');
+        setTimeout(renderWhitepapers, 0);
+      });
+
+      themeToggle?.addEventListener('click', () => {
+        const nextTheme = (localStorage.getItem('gcp-theme') || 'light') === 'dark' ? 'light' : 'dark';
+        localStorage.setItem('gcp-theme', nextTheme);
+        document.body.classList.toggle('dark-mode', nextTheme === 'dark');
+        themeToggle.textContent = nextTheme === 'dark' ? '☀️' : '🌙';
+      });
     </script>
   </body>
 </html>
