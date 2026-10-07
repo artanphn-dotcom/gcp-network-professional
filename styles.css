@@ -831,6 +831,28 @@ body.dark-mode .resource-type {
   font-size: 1.05rem;
 }
 
+.difficulty-badge {
+  display: inline-flex;
+  align-items: center;
+  margin: 8px 0 16px;
+  border-radius: 999px;
+  padding: 6px 10px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.difficulty-advanced {
+  background: rgba(255, 193, 7, 0.14);
+  color: #b67a00;
+}
+
+.difficulty-expert {
+  background: rgba(220, 53, 69, 0.12);
+  color: #b42318;
+}
+
 .lab-card ol,
 .lab-card ul {
   margin: 0;

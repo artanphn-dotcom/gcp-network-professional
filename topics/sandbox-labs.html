@@ -39,6 +39,16 @@
             <p>Each lab below is meant to be done in a sandbox account using a small number of resources. The focus is on understanding traffic flow, access control, connectivity, and troubleshooting rather than building a production-grade architecture.</p>
           </section>
 
+          <section class="topic-box">
+            <h3>Recommended order to study</h3>
+            <ol>
+              <li>Start with VPC segmentation, firewall, and private access labs to build the core networking foundations.</li>
+              <li>Move to hybrid connectivity, routing, load balancing, and DNS so you understand traffic behavior across networks.</li>
+              <li>Practice troubleshooting, NAT, flow logs, and shared VPC patterns to strengthen operational thinking.</li>
+              <li>Finish with the advanced labs on Cloud Armor, CDN, and NCC to prepare for multi-service and enterprise scale designs.</li>
+            </ol>
+          </section>
+
           <section class="lab-list">
             <article class="lab-card">
               <span class="topic-tag">Networking</span>
@@ -290,6 +300,89 @@
                 <li>Builds a strong understanding of custom routing and next-hop behavior.</li>
                 <li>Shows how traffic is redirected when a specific path is needed.</li>
                 <li>Prepares you for route-based exam questions involving traffic engineering and hybrid connectivity.</li>
+              </ul>
+            </article>
+          </section>
+
+          <section>
+            <h2>Advanced labs</h2>
+            <p>These labs are designed for students who already understand the basics and want to practice enterprise-grade traffic management, edge protection, and global connectivity patterns.</p>
+          </section>
+
+          <section class="lab-list advanced-lab-list">
+            <article class="lab-card advanced-card">
+              <span class="topic-tag">Edge Security</span>
+              <span class="difficulty-badge difficulty-advanced">Difficulty: Advanced</span>
+              <h2>1. Cloud Armor WAF policy lab</h2>
+              <h3>What to do</h3>
+              <ol>
+                <li>Deploy a public web app behind a global HTTP load balancer.</li>
+                <li>Configure Cloud Armor with IP allowlists, rate-based rules, and geographic restrictions.</li>
+                <li>Test a normal request, a blocked request from a denied IP, and a rate-limited burst of traffic.</li>
+                <li>Review logs and explain which rule matched the request.</li>
+              </ol>
+              <h3>What it does after implementation</h3>
+              <ul>
+                <li>Shows how edge-layer protections reduce bot traffic, abuse, and attack surface before requests reach the origin.</li>
+                <li>Helps you understand how Layer 7 protection differs from firewall and network access controls.</li>
+                <li>Prepares you for architecture decisions involving DDoS protection, abuse filtering, and public app exposure.</li>
+              </ul>
+            </article>
+
+            <article class="lab-card advanced-card">
+              <span class="topic-tag">CDN</span>
+              <span class="difficulty-badge difficulty-expert">Difficulty: Expert</span>
+              <h2>2. Cloud CDN caching and origin failover lab</h2>
+              <h3>What to do</h3>
+              <ol>
+                <li>Deploy a backend service with static and dynamic content.</li>
+                <li>Place Cloud CDN in front of the backend and configure cache behavior for cacheable vs. uncached routes.</li>
+                <li>Test repeated requests for the same asset to confirm caching.</li>
+                <li>Simulate a backend failure and confirm whether cache or failover logic keeps the service available.</li>
+              </ol>
+              <h3>What it does after implementation</h3>
+              <ul>
+                <li>Shows how CDN improves latency, reduces origin load, and adds resilience for content delivery.</li>
+                <li>Highlights the difference between static caching and dynamic request handling.</li>
+                <li>Builds a strong base for questions related to performance optimization and global user experience.</li>
+              </ul>
+            </article>
+
+            <article class="lab-card advanced-card">
+              <span class="topic-tag">NCC</span>
+              <span class="difficulty-badge difficulty-advanced">Difficulty: Advanced</span>
+              <h2>3. NCC hub-and-spoke routing lab</h2>
+              <h3>What to do</h3>
+              <ol>
+                <li>Create a hub VPC and connect multiple spoke networks using Network Connectivity Center.</li>
+                <li>Integrate on-prem networks or separate cloud projects into the same connectivity model.</li>
+                <li>Route traffic between spokes and validate that reachability follows the expected path.</li>
+                <li>Introduce a route change or a new spoke and observe how connectivity and policy updates propagate.</li>
+              </ol>
+              <h3>What it does after implementation</h3>
+              <ul>
+                <li>Demonstrates how large organizations simplify cross-network connectivity with a centralized design.</li>
+                <li>Helps explain how policy, routing, and interconnectivity are managed in multi-site enterprise environments.</li>
+                <li>Connects classic hub-and-spoke patterns to more modern global enterprise architecture decisions.</li>
+              </ul>
+            </article>
+
+            <article class="lab-card advanced-card">
+              <span class="topic-tag">Hybrid + Security</span>
+              <span class="difficulty-badge difficulty-expert">Difficulty: Expert</span>
+              <h2>4. Global secure access with Cloud Armor, CDN, and hybrid backbone lab</h2>
+              <h3>What to do</h3>
+              <ol>
+                <li>Place a public-facing app behind a global load balancer with CDN enabled.</li>
+                <li>Add Cloud Armor policies to restrict user access and block attack patterns.</li>
+                <li>Connect the origin to a private hybrid network using Cloud Interconnect or HA VPN.</li>
+                <li>Validate that users reach the app through the edge while backend services remain private.</li>
+              </ol>
+              <h3>What it does after implementation</h3>
+              <ul>
+                <li>Models a realistic enterprise design where performance, security, and private connectivity are combined.</li>
+                <li>Shows why edge protection and private backends are often implemented together in production.</li>
+                <li>Builds the architectural mindset needed for advanced network engineering exam scenarios.</li>
               </ul>
             </article>
           </section>
